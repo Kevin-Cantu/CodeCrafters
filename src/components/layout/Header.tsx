@@ -23,7 +23,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Cerrar menú móvil cuando cambie la ruta
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
@@ -44,8 +43,18 @@ export function Header() {
         <nav className="flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Code2 className="h-6 w-6 text-purple-600" />
-            <span className="text-xl font-bold text-gray-800">CodeCrafters</span>
+            <Code2
+              className={`h-6 w-6 transition-colors duration-300 ${
+                scrolled ? "text-purple-600" : "text-purple-600"
+              }`}
+            />
+            <span
+              className={`text-xl font-bold transition-colors duration-300 ${
+                scrolled ? "text-gray-800" : "text-gray-200"
+              }`}
+            >
+              CodeCrafters
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -54,16 +63,20 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-lg font-semibold transition-colors duration-200 ${
+                className={`text-lg font-semibold transition-colors duration-300 ${
                   pathname === item.href
-                    ? 'text-purple-600'
-                    : 'text-gray-700 hover:text-purple-700'
+                    ? scrolled
+                      ? "text-purple-600"
+                      : "text-gray-200"
+                    : scrolled
+                      ? "text-gray-700 hover:text-purple-700"
+                      : "text-gray-200 hover:text-purple-400"
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            
+
             {/* CTA Button */}
             <InteractiveHoverButton>
               <Link href="/contacto">
@@ -76,7 +89,9 @@ export function Header() {
           <div className="md:hidden">
             <button
               type="button"
-              className="text-gray-700 hover:text-purple-600 transition-colors"
+              className={`transition-colors duration-300 ${
+                scrolled ? "text-gray-700 hover:text-purple-600" : "text-white hover:text-purple-200"
+              }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">
@@ -109,7 +124,7 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
-              
+
               {/* Mobile CTA */}
               <div className="pt-2 border-t border-gray-200">
                 <InteractiveHoverButton>

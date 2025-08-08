@@ -12,9 +12,7 @@ export default function HomePage() {
 
       {/* Services Section */}
       <section className="py-20 bg-gray-50">
-        <div className="container-custom">
-          {/* Contenido de servicios aquí */}
-        </div>
+        
       </section>
 
       {/* About Section */}
