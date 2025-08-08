@@ -1,3 +1,5 @@
+import { AnimatedHome } from "@/components/magicui/animated-home";
+
 export default function HomePage() {
   return (
     <div className="min-h-screen">
@@ -5,7 +7,7 @@ export default function HomePage() {
       <section className="py-20">
         <div className="container-custom">
           <div className="text-center">
-            {/* Contenido del hero aquí */}
+<AnimatedHome/>
           </div>
         </div>
       </section>
