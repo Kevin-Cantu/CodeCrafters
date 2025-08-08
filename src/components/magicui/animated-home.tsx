@@ -4,7 +4,7 @@ import { VideoText } from "@/components/magicui/video-text";
 import Link from "next/link";
 export function AnimatedHome() {
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg border-none bg-background  sm:p-10 md:p-20 lg:p-20 -mt-6">
+    <div className="relative flex  items-center justify-center overflow-hidden  border-none bg-background p-6 sm:p-10 md:p-20 lg:p-40 -mt-6">
       <AnimatedGridPattern
         numSquares={30}
         maxOpacity={0.1}
@@ -16,15 +16,15 @@ export function AnimatedHome() {
         )}
       />
 
-      <div className="relative w-full flex flex-col items-center text-center">
+      <div className="items-center animate-in fade-in duration-500">
         <VideoText
           src="/assets/video.mp4"
-          className="w-full h-[300px] "
-          fontSize={15}
+          className="h-[250px] animate-in fade-in duration-500 ease-in-out"
+          fontSize={16}
         >
           CodeCrafters
         </VideoText>
-        <div className="mt-4 text-base sm:text-lg md:text-xl text-muted-foreground max-w-xs sm:max-w-lg md:max-w-2xl leading-relaxed">
+        <div className=" sm:text-lg md:text-xl text-muted-foreground max-w-xs sm:max-w-lg md:max-w-2xl leading-relaxed">
           Somos{" "}
           <span className="font-semibold text-foreground">CodeCrafters</span>,
           una consultora especializada en el desarrollo de software a medida y

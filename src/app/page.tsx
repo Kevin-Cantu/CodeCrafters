@@ -4,11 +4,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="container-custom">
-          <div className="text-center">
-<AnimatedHome/>
-          </div>
+      <section className="py-4">
+          <div className="text-center ">
+            <AnimatedHome />
         </div>
       </section>
 
@@ -28,10 +26,8 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="py-20 bg-primary-600">
-        <div className="container-custom">
-          {/* Call to action aquí */}
-        </div>
+        <div className="container-custom">{/* Call to action aquí */}</div>
       </section>
     </div>
-  )
+  );
 }
