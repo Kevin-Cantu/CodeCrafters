@@ -1,11 +1,10 @@
-import { AnimatedHome } from "@/components/magicui/animated-home";
 import { AnimatedHomeProfessional } from "@/components/magicui/animated-home-professional";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-6">
+      <section className="py-4">
           <div className="text-center ">
             <AnimatedHomeProfessional />
         </div>
