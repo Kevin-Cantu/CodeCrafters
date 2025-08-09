@@ -1,5 +1,6 @@
 import { AnimatedHome } from "@/components/magicui/animated-home";
 import { AnimatedHomeProfessional } from "@/components/magicui/animated-home-professional";
+import { WhatWeDoCarousel } from "./customized/carousel-we-do";
 
 export default function HomePage() {
   return (
@@ -12,8 +13,8 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gray-50">
-        
+      <section className="py-10 bg-gray-50">
+        <WhatWeDoCarousel/>
       </section>
 
       {/* About Section */}
