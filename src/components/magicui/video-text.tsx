@@ -27,7 +27,7 @@ export function VideoText({
   muted = true,
   loop = true,
   preload = "auto",
-  fontSize = 15,
+  fontSize = 30,
   fontWeight = "bold",
   textAnchor = "middle",
   dominantBaseline = "middle",
@@ -55,7 +55,7 @@ export function VideoText({
   )}")`;
 
   return (
-    <Component className={cn(`relative size-full`, className)}>
+    <Component className={cn(`relative `, className)}>
       {/* Create a container that masks the video to only show within text */}
       <div
         className="absolute inset-0 flex items-center  "
