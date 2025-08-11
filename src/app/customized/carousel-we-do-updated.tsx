@@ -3,7 +3,7 @@
 import React from "react";
 import { Carousel, Card } from "@/components/magicui/apple-cards-carousel";
 import CarouselTech from "@/components/magicui/carousel-tech";
-import { techWeb } from "@/data/carousel-data";
+import { techWeb, techMovil, techFront, techBack, techIOS } from "@/data/carousel-data";
 
 export function WhatWeDoCarousel() {
   const cards = data.map((card, index) => (
@@ -97,8 +97,8 @@ const DummyContent = ({
 
       {/* Technology Carousel */}
       {carousel && (
-        <div className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-gray-100 dark:border-neutral-700 shadow-lg">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
+        <div className=" rounded-2xl p-6  ">
+          <h3 className="text-lg font-semibold mb-4 text-center">
             Stack Tecnológico
           </h3>
           <div className="relative">
@@ -140,19 +140,14 @@ const data = [
         heading="Desarrollo Móvil Multiplataforma"
         description="Creamos aplicaciones móviles nativas e híbridas con experiencias de usuario excepcionales."
         features={[
-          "Apps nativas para iOS y Android",
+          "Apps nativas para Android",
           "Desarrollo híbrido con React Native",
           "Integración con servicios nativos",
           "Push notifications inteligentes",
-          "Offline-first architecture",
+          "Offline-first arquitectura",
           "App Store optimization"
         ]}
-        carousel={
-          <div className="text-center py-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl">
-            <div className="text-gray-500 mb-2">📱</div>
-            <p className="text-gray-600 font-medium">Stack móvil próximamente disponible</p>
-          </div>
-        }
+        carousel={<CarouselTech items={techMovil} />}
       />
     ),
   },
@@ -172,12 +167,7 @@ const data = [
           "Accesibilidad web (WCAG)",
           "Progressive Web Apps (PWA)"
         ]}
-        carousel={
-          <div className="text-center py-8 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl">
-            <div className="text-gray-500 mb-2">🎨</div>
-            <p className="text-gray-600 font-medium">Showcase de interfaces próximamente</p>
-          </div>
-        }
+        carousel={<CarouselTech items={techFront} />}
       />
     ),
   },
@@ -197,12 +187,7 @@ const data = [
           "Caching inteligente",
           "Monitoreo y logging avanzado"
         ]}
-        carousel={
-          <div className="text-center py-8 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl">
-            <div className="text-gray-500 mb-2">⚙️</div>
-            <p className="text-gray-600 font-medium">Diagrama de arquitectura próximamente</p>
-          </div>
-        }
+        carousel={<CarouselTech items={techBack} />}
       />
     ),
   },
@@ -222,12 +207,7 @@ const data = [
           "Apple Pay y In-App Purchases",
           "TestFlight y App Store Connect"
         ]}
-        carousel={
-          <div className="text-center py-8 bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl">
-            <div className="text-gray-500 mb-2">📱</div>
-            <p className="text-gray-600 font-medium">Mockups iOS próximamente disponibles</p>
-          </div>
-        }
+        carousel={<CarouselTech items={techIOS} />}
       />
     ),
   },

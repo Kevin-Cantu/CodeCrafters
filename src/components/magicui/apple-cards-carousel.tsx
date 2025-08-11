@@ -44,7 +44,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll;
+      // Asegura que el scroll siempre inicie completamente a la izquierda
+      carouselRef.current.scrollLeft = initialScroll ?? 0;
       checkScrollability();
     }
   }, [initialScroll]);
@@ -75,7 +76,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   };
 
-  const isMobile = () => window && window.innerWidth < 768;
+  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
 
   return (
     <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
@@ -87,7 +88,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div className="absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
 
-          <div className={cn("flex flex-row justify-start gap-4 pl-4", "mx-auto max-w-7xl")}> 
+          {/* Quitamos centrado y padding izquierdo para empezar al borde en este caso aumento el pl si quiero mas hacia un lado */}
+          <div className="flex flex-row justify-start gap-4 pl-3">
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
