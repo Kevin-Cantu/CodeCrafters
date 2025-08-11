@@ -114,7 +114,8 @@ const data = [
   {
     category: "Desarrollo Web",
     title: "Sitios modernos y responsivos",
-    src: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556",
+    // Web: landing oscura local (siempre visible)
+    src: "/assets/web-landing-dark.svg",
     content: (
       <DummyContent
         heading="Stack Web Moderno"
@@ -133,14 +134,15 @@ const data = [
   },
   {
     category: "Desarrollo Móvil",
-    title: "Apps intuitivas para Android y iOS",
-    src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387",
+    title: "Apps intuitivas para Android ",
+    // Móvil: teléfono con bokeh en negro (URL válida)
+    src: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=3387&auto=format&fit=crop",
     content: (
       <DummyContent
         heading="Desarrollo Móvil Multiplataforma"
         description="Creamos aplicaciones móviles nativas e híbridas con experiencias de usuario excepcionales."
         features={[
-          "Apps nativas para Android",
+          "Apps nativas para iOS y Android",
           "Desarrollo híbrido con React Native",
           "Integración con servicios nativos",
           "Push notifications inteligentes",
@@ -154,7 +156,7 @@ const data = [
   {
     category: "Frontend",
     title: "Interfaces atractivas y dinámicas",
-    src: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515",
+    src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2515&auto=format&fit=crop",
     content: (
       <DummyContent
         heading="Frontend de Nueva Generación"
@@ -174,7 +176,7 @@ const data = [
   {
     category: "Backend",
     title: "APIs robustas y seguras",
-    src: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793",
+    src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2793&auto=format&fit=crop",
     content: (
       <DummyContent
         heading="Arquitectura Backend Escalable"
@@ -194,7 +196,7 @@ const data = [
   {
     category: "iOS Apps",
     title: "Experiencias nativas en Apple",
-    src: "https://images.unsplash.com/photo-1511984804822-e16ba72f5848?q=80&w=2048",
+    src: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=2048&auto=format&fit=crop",
     content: (
       <DummyContent
         heading="Desarrollo Nativo iOS"

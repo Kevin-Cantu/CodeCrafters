@@ -57,7 +57,7 @@ const data = [
   },
   {
     category: "Desarrollo Móvil",
-    title: "Apps intuitivas para Android y iOS",
+    title: "Apps intuitivas para Android",
     src: "https://images.unsplash.com/photo-1531554694128-c4c6665f59c2?q=80&w=3387",
     content: (
       <DummyContent
