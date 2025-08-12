@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
+const easeOutCubic = [0.16, 1, 0.3, 1] as const;
+
 interface CarouselProps {
   items: JSX.Element[];
   initialScroll?: number;
@@ -68,9 +70,10 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = isMobile() ? 230 : 384;
-      const gap = isMobile() ? 4 : 8;
-      const scrollPosition = (cardWidth + gap) * (index + 1);
+      // Ajustado a los nuevos tamaños y separación de las cards
+      const cardWidth = isMobile() ? 256 : 384; // w-64 (256px) y md:w-96 (384px)
+      const gap = isMobile() ? 24 : 32; // gap-6 (24px) y md:gap-8 (32px)
+      const scrollPosition = (cardWidth + gap) * index; // alinea el card con el borde izquierdo visible
       carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
       setCurrentIndex(index);
     }
@@ -82,20 +85,20 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
       <div className="relative w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
+          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 md:py-20 [scrollbar-width:none] snap-x snap-mandatory"
           ref={carouselRef}
           onScroll={checkScrollability}
         >
           <div className="absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
 
-          {/* Quitamos centrado y padding izquierdo para empezar al borde en este caso aumento el pl si quiero mas hacia un lado */}
-          <div className="flex flex-row justify-start gap-4 pl-3">
+          {/* Inicia al borde izquierdo, padding simétrico y snap para ver cada card completa */}
+          <div className="flex w-full flex-row justify-start gap-6 md:gap-8 pl-4 md:pl-8 pr-4 md:pr-8">
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: "easeOut", once: true } }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: easeOutCubic } }}
                 key={"card" + index}
-                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                className="flex-none snap-start"
               >
                 {item}
               </motion.div>
@@ -197,7 +200,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="relative z-10 flex h-56 w-56 md:h-80 md:w-80 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
+        className="relative z-10 flex h-64 w-64 md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         <div className="relative z-40 p-6 md:p-8">
