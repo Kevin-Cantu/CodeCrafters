@@ -1,4 +1,7 @@
+"use client";
+
 import { Brain, Bot, Cloud, Palette, Workflow, BarChart3, Link as LinkIcon, ShieldCheck, ShoppingCart, LifeBuoy } from "lucide-react"
+import { motion } from "motion/react"
 
 const stats = [
   { id: 1, name: 'Proyectos Completados', value: '50+' },
@@ -77,45 +80,103 @@ export function AboutSection() {
         {/* Bloque: ¿Por qué elegirnos? */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <motion.h2
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               ¿Por qué elegirnos?
-            </h2>
-            <p className="mt-6 text-lg text-gray-600">
+            </motion.h2>
+            <motion.p
+              className="mt-6 text-lg text-gray-600"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               Somos un equipo de desarrolladores apasionados por crear soluciones tecnológicas que marquen la diferencia.
               Nos especializamos en frameworks modernos y metodologías ágiles para entregar proyectos de alta calidad.
-            </p>
-            <p className="mt-4 text-lg text-gray-600">
+            </motion.p>
+            <motion.p
+              className="mt-4 text-lg text-gray-600"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               Nuestro enfoque se centra en entender las necesidades específicas de cada cliente y traducirlas en soluciones técnicas eficientes y escalables.
-            </p>
+            </motion.p>
           </div>
           <div>
-            <dl className="grid grid-cols-2 gap-8">
+            <motion.dl
+              className="grid grid-cols-2 gap-8"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+                },
+              }}
+            >
               {stats.map((stat) => (
-                <div key={stat.id} className="text-center">
+                <motion.div
+                  key={stat.id}
+                  className="text-center"
+                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
                   <dt className="text-sm font-medium text-gray-600">{stat.name}</dt>
                   <dd className="mt-2 text-3xl font-bold text-primary-600">{stat.value}</dd>
-                </div>
+                </motion.div>
               ))}
-            </dl>
+            </motion.dl>
           </div>
         </div>
 
         {/* Bloque: Servicios profesionales */}
         <div className="mt-20">
           <div className="text-center max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <motion.h3
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               Soluciones profesionales
-            </h3>
-            <p className="mt-4 text-lg text-gray-600">
+            </motion.h3>
+            <motion.p
+              className="mt-4 text-lg text-gray-600"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               De la estrategia al delivery: tecnología, diseño y negocio trabajando juntos para impulsar tu crecimiento.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map(({ title, description, Icon }) => (
-              <div
+          <motion.div
+            className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            variants={{
+              hidden: { opacity: 1 },
+              show: { transition: { staggerChildren: 0.08 } },
+            }}
+          >
+            {services.map(({ title, description, Icon }, idx) => (
+              <motion.div
                 key={title}
                 className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+                variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: idx * 0.03 }}
               >
                 <div className="flex items-start gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-50 text-primary-600 ring-1 ring-primary-100">
@@ -128,10 +189,16 @@ export function AboutSection() {
                     <p className="mt-2 text-sm text-gray-600">{description}</p>
                   </div>
                 </div>
-                <div className="pointer-events-none absolute -bottom-6 -right-6 h-24 w-24 rounded-full bg-primary-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </div>
+                <motion.div
+                  className="pointer-events-none absolute -bottom-6 -right-6 h-16 w-16 rounded-full bg-primary-50 translate-x-3/4"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
