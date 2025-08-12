@@ -31,14 +31,14 @@ export function AnimatedHomeProfessional() {
             <VideoText 
               src="/assets/video.mp4" 
               fontSize={16} 
-              className="h-[200px] sm:h-[240px] md:h-[280px] transition-all duration-700 group-hover:scale-[1.02]"
+              className="h-[200px] sm:h-[240px] md:h-[280px] transition-all duration-700 "
             >
               CodeCrafters
             </VideoText>
             
             {/* Elegant glow effect */}
             <div className="absolute inset-0 -z-10 blur-2xl opacity-20 transition-opacity duration-700 group-hover:opacity-30">
-              <div className="w-full h-full bg-gradient-to-r from-blue-400/60 via-purple-400/60 to-cyan-400/60 rounded-full" />
+              <div className="w-full h-full bg-gradient-to-r from-blue-400/90 via-purple-400/60 to-cyan-400/90 rounded-full" />
             </div>
           </div>
 
