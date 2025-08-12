@@ -4,6 +4,14 @@ import React from "react";
 import { Carousel, Card } from "@/components/magicui/apple-cards-carousel";
 import CarouselTech from "@/components/magicui/carousel-tech";
 import { techWeb, techMovil, techFront, techBack, techIOS } from "@/data/carousel-data";
+import { motion } from "motion/react";
+
+const easeOutCubic = [0.16, 1, 0.3, 1] as const;
+
+const fadeInUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: easeOutCubic } },
+});
 
 export function WhatWeDoCarousel() {
   const cards = data.map((card, index) => (
@@ -18,31 +26,55 @@ export function WhatWeDoCarousel() {
       {/* Header Section */}
       <div className="container-custom relative">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-sm font-medium mb-6 shadow-sm">
+          <motion.div
+            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-sm font-medium mb-6 shadow-sm"
+            variants={fadeInUp(0)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
             </svg>
             Nuestros Servicios
-          </div>
+          </motion.div>
           
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6"
+            variants={fadeInUp(0.05)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             Tecnologías que{' '}
             <span className="bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
               dominamos
             </span>
-          </h2>
+          </motion.h2>
           
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <motion.p
+            className="text-xl text-gray-600 leading-relaxed"
+            variants={fadeInUp(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             Explorá nuestras especialidades y las tecnologías de vanguardia que utilizamos 
             para crear soluciones digitales excepcionales.
-          </p>
+          </motion.p>
         </div>
       </div>
 
       {/* Carousel */}
-      <div className="relative">
+      <motion.div
+        className="relative pl-3"
+        variants={fadeInUp(0.15)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+      >
         <Carousel items={cards} />
-      </div>
+      </motion.div>
     </div>
   );
 }

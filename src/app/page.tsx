@@ -1,6 +1,7 @@
 import { AnimatedHomeProfessional } from "@/components/magicui/animated-home-professional";
 import { WhatWeDoCarousel } from "./customized/carousel-we-do-updated";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
   return (
@@ -20,10 +21,8 @@ export default function HomePage() {
       {/* About + Servicios profesionales (nueva sección dentro de AboutSection) */}
       <AboutSection />
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary-600">
-        <div className="container-custom">{/* Call to action aquí */}</div>
-      </section>
+      {/* CTA Section animada */}
+      <CTASection />
     </div>
   );
 }
