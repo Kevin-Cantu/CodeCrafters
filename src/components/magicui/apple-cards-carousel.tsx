@@ -132,6 +132,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") handleClose();
     }
+    // Bloquear scroll del body detrás del modal
     if (open) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
 
@@ -151,7 +152,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     <>
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-50 h-screen overflow-auto">
+          <div className="fixed inset-0 z-50 h-screen overflow-hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -164,27 +165,31 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
+              className="relative z-[60] mx-auto h-screen max-w-5xl w-full rounded-none md:rounded-3xl bg-white p-4 md:p-10 font-sans dark:bg-neutral-900 overflow-hidden"
             >
               <button
-                className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black dark:bg-white"
+                className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-black dark:bg-white"
                 onClick={handleClose}
               >
                 <IconX className="h-6 w-6 text-neutral-100 dark:text-neutral-900" />
               </button>
-              <motion.p
-                layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-black dark:text-white"
-              >
-                {card.category}
-              </motion.p>
-              <motion.p
-                layoutId={layout ? `title-${card.title}` : undefined}
-                className="mt-4 text-2xl font-semibold text-neutral-700 md:text-5xl dark:text-white"
-              >
-                {card.title}
-              </motion.p>
-              <div className="py-10">{card.content}</div>
+              <div className="h-full flex flex-col">
+                <motion.p
+                  layoutId={layout ? `category-${card.title}` : undefined}
+                  className="pt-10 text-base font-medium text-black dark:text-white"
+                >
+                  {card.category}
+                </motion.p>
+                <motion.p
+                  layoutId={layout ? `title-${card.title}` : undefined}
+                  className="mt-2 text-2xl md:text-5xl font-semibold text-neutral-700 dark:text-white"
+                >
+                  {card.title}
+                </motion.p>
+                <div className="mt-6 flex-1">
+                  {card.content}
+                </div>
+              </div>
             </motion.div>
           </div>
         )}
