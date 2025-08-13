@@ -4,7 +4,7 @@ import React from "react";
 import { Carousel, Card } from "@/components/magicui/apple-cards-carousel";
 import CarouselTech from "@/components/magicui/carousel-tech";
 import { techWeb, techMovil, techFront, techBack, techIOS } from "@/data/carousel-data";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
 

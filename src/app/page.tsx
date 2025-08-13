@@ -1,5 +1,5 @@
 import { AnimatedHomeProfessional } from "@/components/magicui/animated-home-professional";
-import { WhatWeDoCarousel } from "./customized/carousel-we-do-updated";
+import { WhatWeDoCarousel } from "@/components/sections/WhatWeDoCarousel";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CTASection } from "@/components/sections/CTASection";
 

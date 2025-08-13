@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+
+const easeOutCubic = [0.16, 1, 0.3, 1] as const
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -22,9 +25,7 @@ export function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí implementarías la lógica para enviar el formulario
     console.log('Form submitted:', formData)
-    // Reset form
     setFormData({
       name: '',
       email: '',
@@ -36,122 +37,148 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        Cuéntanos sobre tu proyecto
-      </h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Nombre *
+    <motion.div
+      id="contacto-form"
+      className="relative group"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: easeOutCubic }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-cyan-600/30 opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />
+      <div className="relative bg-slate-900/60 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur p-8">
+        <motion.h2 className="text-2xl font-semibold text-white mb-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: easeOutCubic }} viewport={{ once: true }}>
+          Cuéntanos sobre tu proyecto
+        </motion.h2>
+        <motion.p className="text-slate-300 text-sm mb-6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05, ease: easeOutCubic }} viewport={{ once: true }}>
+          Respuesta en menos de 24h. Tu información está segura con nosotros.
+        </motion.p>
+        
+        <motion.form onSubmit={handleSubmit} className="space-y-6" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={{ hidden: { opacity: 1 }, show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                Nombre *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Juan Pérez"
+                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                Email *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="tu@email.com"
+                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+            <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
+              Empresa
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              required
-              value={formData.name}
+              id="company"
+              name="company"
+              value={formData.company}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+              placeholder="Nombre de tu empresa"
+              className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
             />
-          </div>
-          
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email *
+          </motion.div>
+
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+            <div>
+              <label htmlFor="projectType" className="block text-sm font-medium text-slate-300 mb-2">
+                Tipo de Proyecto
+              </label>
+              <select
+                id="projectType"
+                name="projectType"
+                value={formData.projectType}
+                onChange={handleChange}
+                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
+              >
+                <option value="">Seleccionar...</option>
+                <option value="web">Desarrollo Web</option>
+                <option value="mobile">Aplicación Móvil</option>
+                <option value="api">API/Backend</option>
+                <option value="consulting">Consultoría</option>
+                <option value="other">Otro</option>
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor="budget" className="block text-sm font-medium text-slate-300 mb-2">
+                Presupuesto Estimado
+              </label>
+              <select
+                id="budget"
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
+              >
+                <option value="">Seleccionar...</option>
+                <option value="5k-10k">$5,000 - $10,000</option>
+                <option value="10k-25k">$10,000 - $25,000</option>
+                <option value="25k-50k">$25,000 - $50,000</option>
+                <option value="50k+">$50,000+</option>
+              </select>
+            </div>
+          </motion.div>
+
+          <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+            <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+              Mensaje *
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
               required
-              value={formData.email}
+              value={formData.message}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+              placeholder="Cuéntanos más detalles sobre tu proyecto, objetivos y plazos..."
+              className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
             />
-          </div>
-        </div>
+          </motion.div>
 
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-            Empresa
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          />
-        </div>
+          <motion.button
+            type="submit"
+            className="w-full group relative inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 border border-blue-500/30 shadow-lg shadow-blue-600/10 hover:from-blue-700 hover:to-purple-700 transition-all"
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
+          >
+            <span className="relative z-10">Enviar Mensaje</span>
+            <svg className="ml-2 h-5 w-5 absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </motion.button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-              Tipo de Proyecto
-            </label>
-            <select
-              id="projectType"
-              name="projectType"
-              value={formData.projectType}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-            >
-              <option value="">Seleccionar...</option>
-              <option value="web">Desarrollo Web</option>
-              <option value="mobile">Aplicación Móvil</option>
-              <option value="api">API/Backend</option>
-              <option value="consulting">Consultoría</option>
-              <option value="other">Otro</option>
-            </select>
-          </div>
-          
-          <div>
-            <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-              Presupuesto Estimado
-            </label>
-            <select
-              id="budget"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-            >
-              <option value="">Seleccionar...</option>
-              <option value="5k-10k">$5,000 - $10,000</option>
-              <option value="10k-25k">$10,000 - $25,000</option>
-              <option value="25k-50k">$25,000 - $50,000</option>
-              <option value="50k+">$50,000+</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            Mensaje *
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={4}
-            required
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Cuéntanos más detalles sobre tu proyecto..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full btn-primary text-center"
-        >
-          Enviar Mensaje
-        </button>
-      </form>
-    </div>
+          <motion.p className="text-xs text-slate-400 text-center" variants={{ hidden: { opacity: 0, y: 6 }, show: { opacity: 1, y: 0 } }}>
+            Al enviar, aceptas nuestra política de privacidad.
+          </motion.p>
+        </motion.form>
+      </div>
+    </motion.div>
   )
 }

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { RouteTransition } from '@/components/layout/RouteTransition'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,7 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">
-            {children}
+            <RouteTransition>{children}</RouteTransition>
           </main>
           <Footer />
         </div>

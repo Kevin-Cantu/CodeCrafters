@@ -1,12 +1,12 @@
 "use client";
 
 import { Brain, Bot, Cloud, Palette, Workflow, BarChart3, Link as LinkIcon, ShieldCheck, ShoppingCart, LifeBuoy } from "lucide-react"
-import { motion } from "motion/react"
+import { motion } from "framer-motion"
 
 const stats = [
   { id: 1, name: 'Proyectos Completados', value: '50+' },
   { id: 2, name: 'Clientes Satisfechos', value: '30+' },
-  { id: 3, name: 'Años de Experiencia', value: '5+' },
+  { id: 3, name: 'Años de Experiencia', value: '8+' },
   { id: 4, name: 'Tecnologías Dominadas', value: '20+' },
 ]
 
