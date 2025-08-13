@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { Sparkles, ArrowRight, ShieldCheck, Clock, Star } from 'lucide-react'
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const

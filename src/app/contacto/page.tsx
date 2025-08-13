@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 
 export default function ContactoPage() {
   return (
-    <>
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <ContactHero />
-      <div className="container-custom py-16">
+      <div className="container-custom py-16 -mt-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ContactForm />
           <ContactInfo />
         </div>
       </div>
-    </>
+    </section>
   )
 }
