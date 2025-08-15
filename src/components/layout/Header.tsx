@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 import { Code2, Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navigation = [
@@ -78,12 +77,23 @@ export function Header() {
               </Link>
             ))}
 
-            {/* CTA Button */}
-            <InteractiveHoverButton>
-              <Link href="/contacto">
-                Contáctanos
-              </Link>
-            </InteractiveHoverButton>
+            {/* CTA Button - full clickable area */}
+            <Link
+              href="/contacto"
+              className="group relative w-auto cursor-pointer overflow-hidden rounded-full border bg-background px-6 py-2 text-center font-semibold"
+              aria-label="Contáctanos"
+            >
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary transition-all duration-300 group-hover:scale-[100.8]"></div>
+                <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
+                  Contáctanos
+                </span>
+              </div>
+              <div className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-primary-foreground opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
+                <span>Contáctanos</span>
+                <ArrowRight />
+              </div>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
