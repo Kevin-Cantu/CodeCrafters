@@ -1,4 +1,7 @@
 import { Metadata } from 'next'
+import { ProjectsHero } from '@/components/sections/ProjectsHero'
+import { ProjectsGrid } from '@/components/sections/ProjectsGrid'
+import { projects } from '@/data/projects'
 
 export const metadata: Metadata = {
   title: 'Proyectos Realizados | Consultora de Programación',
@@ -8,19 +11,11 @@ export const metadata: Metadata = {
 export default function ProyectosPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-white">
-        <div className="container-custom">
-          <div className="text-center">
-            {/* Hero de proyectos aquí */}
-          </div>
-        </div>
-      </section>
+      <ProjectsHero />
 
-      {/* Projects Grid */}
-      <section className="py-20">
+      <section className="py-12 sm:py-16">
         <div className="container-custom">
-          {/* Grid de proyectos aquí */}
+          <ProjectsGrid projects={projects} />
         </div>
       </section>
     </div>

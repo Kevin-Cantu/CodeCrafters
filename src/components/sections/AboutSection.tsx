@@ -139,7 +139,7 @@ export function AboutSection() {
         </div>
 
         {/* Bloque: Servicios profesionales */}
-        <div className="mt-20">
+        <div className="mt-36">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h3
               className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
