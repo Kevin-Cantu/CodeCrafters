@@ -16,7 +16,7 @@ export function ProjectsHero() {
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         {/* base gradient wash */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-500 via-black/75 to-slate-500" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black/75 to-black" />
 
         {/* animated squares pattern (subtle) */}
         <AnimatedGridPattern
@@ -65,7 +65,7 @@ export function ProjectsHero() {
           </motion.div>
 
           <motion.h1
-            className="mt-5 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-900"
+            className="mt-5 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-300"
             variants={fadeInUp(0.05)}
           >
             Soluciones a medida con un diseño
@@ -74,7 +74,7 @@ export function ProjectsHero() {
           </motion.h1>
 
           <motion.p
-            className="mt-5 text-lg md:text-xl leading-relaxed text-slate-900"
+            className="mt-5 text-lg md:text-xl leading-relaxed text-slate-300"
             variants={fadeInUp(0.1)}
           >
             Casos reales de negocio resueltos con tecnología moderna. Calidad visual, rendimiento y resultados.
