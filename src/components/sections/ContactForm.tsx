@@ -40,22 +40,21 @@ export function ContactForm() {
     <motion.div
       id="contacto-form"
       className="relative group"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: easeOutCubic }}
-      viewport={{ once: true, amount: 0.2 }}
+      initial={false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: easeOutCubic }}
     >
       <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-cyan-600/30 opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />
       <div className="relative bg-slate-900/60 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur p-8">
-        <motion.h2 className="text-2xl font-semibold text-white mb-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: easeOutCubic }} viewport={{ once: true }}>
+        <motion.h2 className="text-2xl font-semibold text-white mb-2" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: easeOutCubic }}>
           Cuéntanos sobre tu proyecto
         </motion.h2>
-        <motion.p className="text-slate-300 text-sm mb-6" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05, ease: easeOutCubic }} viewport={{ once: true }}>
+        <motion.p className="text-slate-300 text-sm mb-6" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.05, ease: easeOutCubic }}>
           Respuesta en menos de 24h. Tu información está segura con nosotros.
         </motion.p>
         
-        <motion.form onSubmit={handleSubmit} className="space-y-6" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={{ hidden: { opacity: 1 }, show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+        <motion.form onSubmit={handleSubmit} className="space-y-6" initial={false} animate="show" variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
                 Nombre *
@@ -89,7 +88,7 @@ export function ContactForm() {
             </div>
           </motion.div>
 
-          <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+          <motion.div variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
               Empresa
             </label>
@@ -104,7 +103,7 @@ export function ContactForm() {
             />
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <div>
               <label htmlFor="projectType" className="block text-sm font-medium text-slate-300 mb-2">
                 Tipo de Proyecto
@@ -145,7 +144,7 @@ export function ContactForm() {
             </div>
           </motion.div>
 
-          <motion.div variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}>
+          <motion.div variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
               Mensaje *
             </label>
@@ -166,7 +165,8 @@ export function ContactForm() {
             className="w-full group relative inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 border border-blue-500/30 shadow-lg shadow-blue-600/10 hover:from-blue-700 hover:to-purple-700 transition-all"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
-            variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
+            variants={{ show: { opacity: 1, y: 0 } }}
+            initial={false}
           >
             <span className="relative z-10">Enviar Mensaje</span>
             <svg className="ml-2 h-5 w-5 absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -174,7 +174,7 @@ export function ContactForm() {
             </svg>
           </motion.button>
 
-          <motion.p className="text-xs text-slate-400 text-center" variants={{ hidden: { opacity: 0, y: 6 }, show: { opacity: 1, y: 0 } }}>
+          <motion.p className="text-xs text-slate-400 text-center" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             Al enviar, aceptas nuestra política de privacidad.
           </motion.p>
         </motion.form>
