@@ -12,9 +12,9 @@ const fadeInUp = (delay = 0) => ({
 
 export function ProjectsHero() {
   return (
-    <section className="relative isolate pt-28 pb-14 sm:pt-36 sm:pb-20">
+    <section className="relative isolate pt-28 pb-14 sm:pt-36 sm:pb-20 overflow-x-clip">
       {/* Background */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* base gradient wash */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/75 to-black" />
 
