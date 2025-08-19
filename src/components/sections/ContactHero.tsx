@@ -1,8 +1,8 @@
 "use client";
 
 import Link from 'next/link'
-import { AnimatedGridPattern } from '@/components/magicui/animated-grid-pattern'
 import { motion } from 'framer-motion'
+import { HeroProjectsBackground } from '@/components/common/HeroProjectsBackground'
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const
 
@@ -18,19 +18,9 @@ const stagger = {
 
 export function ContactHero() {
   return (
-    <section className="relative isolate pt-28 pb-16 sm:pt-36 sm:pb-24">
-      {/* Animated background */}
-      <AnimatedGridPattern
-        numSquares={42}
-        maxOpacity={0.06}
-        duration={4}
-        repeatDelay={1.5}
-        className="z-0 text-slate-400/50 [mask-image:radial-gradient(900px_circle_at_center,white,transparent)]"
-      />
-
-      {/* Gradient overlays */}
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/40" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-blue-950/10 via-transparent to-purple-950/10" />
+    <section className="relative isolate pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+      {/* Fondo unificado tipo Proyectos */}
+      <HeroProjectsBackground />
 
       <div className="container-custom relative z-10">
         <motion.div className="text-center max-w-4xl mx-auto" variants={stagger} initial="hidden" animate="show">

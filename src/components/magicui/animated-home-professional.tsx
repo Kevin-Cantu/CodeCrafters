@@ -1,10 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
 import { VideoText } from "@/components/magicui/video-text";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { HeroProjectsBackground } from "@/components/common/HeroProjectsBackground";
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
 
@@ -20,22 +19,9 @@ const stagger = {
 
 export function AnimatedHomeProfessional() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 -mt-6">
-      {/* Animated Grid Background */}
-      <AnimatedGridPattern
-        numSquares={30}
-        maxOpacity={0.08}
-        duration={4}
-        repeatDelay={2}
-        className={cn(
-          "[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]",
-          "absolute inset-0 h-full"
-        )}
-      />
-
-      {/* Subtle gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-950/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-950/10 via-transparent to-purple-950/10" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-6">
+      {/* Fondo unificado tipo Proyectos */}
+      <HeroProjectsBackground />
 
       {/* Main Content Container */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -56,7 +42,7 @@ export function AnimatedHomeProfessional() {
             </VideoText>
             {/* Elegant glow effect */}
             <div className="absolute inset-0 -z-10 blur-2xl opacity-20 transition-opacity duration-700 group-hover:opacity-30">
-              <div className="w-full h-full bg-gradient-to-r from-blue-400/90 via-purple-400/60 to-cyan-400/90 rounded-full" />
+              <div className="w-full h-full bg-gradient-to-r from-white/50 via-white/50 to-white/50 rounded-full" />
             </div>
           </motion.div>
 
