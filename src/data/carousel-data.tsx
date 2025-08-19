@@ -6,17 +6,13 @@ import {
   SiMongodb,
   SiHtml5,
   SiTypescript,
-  SiRedux,
   SiPostgresql,
   SiDocker,
   SiRedis,
   SiPrisma,
   SiGraphql,
   SiNestjs,
-  SiSwift,
   SiAndroid,
-  SiApple,
-  SiXcode,
   SiFirebase,
   SiKotlin,
   SiGradle,
@@ -25,6 +21,17 @@ import {
   SiRealm,
   SiFlutter,
   SiDart,
+  SiPython,
+  SiTensorflow,
+  SiPytorch,
+  SiScikitlearn,
+  SiJupyter,
+  SiNumpy,
+  SiPandas,
+  SiOpenai,
+  SiKeras,
+  SiLangchain,
+  SiFastapi,
 } from "react-icons/si";
 
 export const techWeb = [
@@ -61,24 +68,6 @@ export const techMovil = [
   { name: "Dart", icon: <SiDart className="text-blue-400 w-10 h-10" /> },
 ];
 
-export const techFront = [
-  { name: "HTML", icon: <SiHtml5 className="text-orange-500 w-10 h-10" /> },
-  {
-    name: "TypeScript",
-    icon: <SiTypescript className="text-blue-500 w-10 h-10" />,
-  },
-  { name: "React", icon: <SiReact className="text-blue-500 w-10 h-10" /> },
-  {
-    name: "Next.js",
-    icon: <SiNextdotjs className="text-black dark:text-white w-10 h-10" />,
-  },
-  {
-    name: "Tailwind",
-    icon: <SiTailwindcss className="text-cyan-500 w-10 h-10" />,
-  },
-  { name: "Redux", icon: <SiRedux className="text-purple-600 w-10 h-10" /> },
-];
-
 export const techBack = [
   {
     name: "Node.js",
@@ -99,17 +88,38 @@ export const techBack = [
   { name: "Redis", icon: <SiRedis className="text-red-600 w-10 h-10" /> },
   { name: "NestJS", icon: <SiNestjs className="text-rose-600 w-10 h-10" /> },
 ];
-
-export const techIOS = [
-  { name: "Swift", icon: <SiSwift className="text-orange-500 w-10 h-10" /> },
-  { name: "Xcode", icon: <SiXcode className="text-blue-500 w-10 h-10" /> },
+export const techIA = [
+  { name: "Python", icon: <SiPython className="text-yellow-500 w-10 h-10" /> },
   {
-    name: "Apple",
-    icon: <SiApple className="text-gray-900 dark:text-white w-10 h-10" />,
+    name: "TensorFlow",
+    icon: <SiTensorflow className="text-orange-500 w-10 h-10" />,
   },
   {
-    name: "Firebase",
-    icon: <SiFirebase className="text-amber-500 w-10 h-10" />,
+    name: "PyTorch",
+    icon: <SiPytorch className="text-red-500 w-10 h-10" />,
   },
-  { name: "GraphQL", icon: <SiGraphql className="text-pink-600 w-10 h-10" /> },
+  {
+    name: "Scikit-learn",
+    icon: <SiScikitlearn className="text-blue-500 w-10 h-10" />,
+  },
+  {
+    name: "Jupyter",
+    icon: <SiJupyter className="text-orange-400 w-10 h-10" />,
+  },
+  {
+    name: "NumPy",
+    icon: <SiNumpy className="text-blue-600 w-10 h-10" />,
+  },
+  {
+    name: "Pandas",
+    icon: <SiPandas className="text-black dark:text-white w-10 h-10" />,
+  },
+  {
+    name: "OpenAI",
+    icon: <SiOpenai className="text-green-500 w-10 h-10" />,
+  },
+  {
+    name: "Keras",
+    icon: <SiKeras className="text-red-500 w-10 h-10" />,
+  },
 ];

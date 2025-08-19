@@ -3,7 +3,7 @@
 import React from "react";
 import { Carousel, Card } from "@/components/magicui/apple-cards-carousel";
 import CarouselTech from "@/components/magicui/carousel-tech";
-import { techWeb, techMovil, techFront, techBack, techIOS } from "@/data/carousel-data";
+import { techWeb, techMovil, techBack, techIA, techAgenteIA } from "@/data/carousel-data";
 import { motion } from "framer-motion";
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
@@ -27,13 +27,13 @@ export function WhatWeDoCarousel() {
       <div className="container-custom relative">
         <div className="text-center max-w-4xl mx-auto">
           <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-sm font-medium mb-6 shadow-sm"
+            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-lg font-medium mb-6 shadow-sm"
             variants={fadeInUp(0)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
             </svg>
             Nuestros Servicios
@@ -186,27 +186,7 @@ const data = [
     ),
   },
   {
-    category: "Frontend",
-    title: "Interfaces atractivas y dinámicas",
-    src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2515&auto=format&fit=crop",
-    content: (
-      <DummyContent
-        heading="Frontend de Nueva Generación"
-        description="Interfaces de usuario modernas con animaciones fluidas y experiencias interactivas excepcionales."
-        features={[
-          "Componentes reutilizables y modulares",
-          "Animaciones y micro-interacciones",
-          "Estado global optimizado",
-          "Testing automatizado",
-          "Accesibilidad web (WCAG)",
-          "Progressive Web Apps (PWA)"
-        ]}
-        carousel={<CarouselTech items={techFront} />}
-      />
-    ),
-  },
-  {
-    category: "Backend",
+    category: "Servicios en la nube ",
     title: "APIs robustas y seguras",
     src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2793&auto=format&fit=crop",
     content: (
@@ -226,23 +206,44 @@ const data = [
     ),
   },
   {
-    category: "iOS Apps",
-    title: "Experiencias nativas en Apple",
-    src: "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=2048&auto=format&fit=crop",
-    content: (
-      <DummyContent
-        heading="Desarrollo Nativo iOS"
-        description="Aplicaciones iOS nativas que aprovechan al máximo el ecosistema Apple con SwiftUI y las últimas tecnologías."
-        features={[
-          "SwiftUI y UIKit moderno",
-          "Integración con servicios Apple",
-          "Core Data y CloudKit",
-          "App Clips y Widgets",
-          "Apple Pay y In-App Purchases",
-          "TestFlight y App Store Connect"
-        ]}
-        carousel={<CarouselTech items={techIOS} />}
-      />
-    ),
-  },
+  category: "IA",
+  title: "Soluciones de Inteligencia Artificial",
+  src: "https://images.unsplash.com/photo-1581091870622-1e7e3434a11f?q=80&w=2793&auto=format&fit=crop",
+  content: (
+    <DummyContent
+      heading="Inteligencia Artificial Aplicada"
+      description="Desarrollamos soluciones basadas en IA que potencian procesos, automatizan tareas y transforman datos en decisiones inteligentes."
+      features={[
+        "Modelos de Machine Learning entrenados a medida",
+        "Procesamiento de lenguaje natural (NLP)",
+        "Visión por computadora",
+        "Sistemas de recomendación",
+        "Automatización con IA generativa",
+        "Integración con herramientas como OpenAI, Google Cloud AI, etc."
+      ]}
+      carousel={<CarouselTech items={techIA} />}
+    />
+  ),
+},
+{
+  category: "IA",
+  title: "Agentes de Inteligencia Artificial",
+  src: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2793&auto=format&fit=crop",
+  content: (
+    <DummyContent
+      heading="Agentes Autónomos Inteligentes"
+      description="Desarrollamos agentes de IA capaces de razonar, planificar y actuar de forma autónoma para ejecutar flujos complejos, integraciones o tareas repetitivas."
+      features={[
+        "Agentes basados en LLMs (Large Language Models)",
+        "Ejecución autónoma de tareas con memoria",
+        "Razonamiento multietapa y toma de decisiones",
+        "Integración con APIs y herramientas externas",
+        "Orquestación de agentes y herramientas (LangChain, AutoGPT)",
+        "Sistemas autoevaluables y escalables"
+      ]}
+      carousel={<CarouselTech items={techAgenteIA} />}
+    />
+  ),
+}
+
 ];
