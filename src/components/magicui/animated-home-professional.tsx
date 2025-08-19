@@ -40,10 +40,7 @@ export function AnimatedHomeProfessional() {
             >
               CodeCrafters
             </VideoText>
-            {/* Elegant glow effect */}
-            <div className="absolute inset-0 -z-10 blur-2xl opacity-20 transition-opacity duration-700 group-hover:opacity-30">
-              <div className="w-full h-full bg-gradient-to-r from-white/50 via-white/50 to-white/50 rounded-full" />
-            </div>
+       
           </motion.div>
 
           {/* Main Headline */}
@@ -65,7 +62,7 @@ export function AnimatedHomeProfessional() {
             </motion.h1>
             
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light"
+              className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light"
               variants={fadeInUp(0.1)}
             >
               Consultora especializada en desarrollo de software a medida.

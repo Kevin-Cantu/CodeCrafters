@@ -10,7 +10,7 @@ export function HeroProjectsBackground({ className }: { className?: string }) {
   return (
     <div className={cn("absolute inset-0 -z-10 overflow-hidden", className)}>
       {/* base gradient wash */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/75 to-black" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-black/80 to-black" />
 
       {/* animated squares pattern (subtle) */}
       <AnimatedGridPattern
