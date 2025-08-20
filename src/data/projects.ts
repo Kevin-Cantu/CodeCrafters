@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { techWeb, techMovil, techFront, techBack, techIOS } from "./carousel-data";
+import { techWeb, techMovil, techBack, } from "./carousel-data";
 
 // Helper to create a map from technology name to icon ReactNode using existing tech data
-const allTechArrays = [techWeb, techMovil, techFront, techBack, techIOS];
+const allTechArrays = [techWeb, techMovil, techBack, ];
 const techIconMap = new Map<string, ReactNode>();
 allTechArrays.forEach((arr) => {
   arr.forEach((t) => techIconMap.set(t.name.toLowerCase(), t.icon));

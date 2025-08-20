@@ -19,12 +19,12 @@ const stagger = {
 
 export function AnimatedHomeProfessional() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-6">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-6 ">
       {/* Fondo unificado tipo Proyectos */}
       <HeroProjectsBackground />
 
       {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-52 2xl:px-12">
         <motion.div
           className="text-center"
           variants={stagger}
@@ -32,11 +32,11 @@ export function AnimatedHomeProfessional() {
           animate="show"
         >
           {/* Company Logo/Brand */}
-          <motion.div className="relative group py-10" variants={fadeInUp(0)}>
+          <motion.div className="relative group py-11" variants={fadeInUp(0)}>
             <VideoText 
               src="/assets/video.mp4" 
               fontSize={16} 
-              className="h-[200px] sm:h-[240px] md:h-[280px] transition-all duration-700 "
+              className="h-[200px] sm:h-[240px] md:h-[160px] transition-all duration-700 "
             >
               CodeCrafters
             </VideoText>
@@ -44,7 +44,7 @@ export function AnimatedHomeProfessional() {
           </motion.div>
 
           {/* Main Headline */}
-          <div className="space-y-6 max-w-5xl mx-auto">
+          <div className="space-y-3 max-w-5xl mx-auto ">
             <motion.h1
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white leading-tight tracking-tight"
               variants={fadeInUp(0.05)}
@@ -131,7 +131,7 @@ export function AnimatedHomeProfessional() {
           </motion.div>
 
           {/* Trust Indicators */}
-          <motion.div className="pt-16 flex flex-col items-center space-y-4 pb-10" variants={fadeInUp(0.25)}>
+          <motion.div className="pt-12 flex flex-col items-center space-y-4 pb-4" variants={fadeInUp(0.25)}>
             <div className="flex items-center space-x-2 text-slate-400 text-sm">
               <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
