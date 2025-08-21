@@ -39,7 +39,7 @@ export default function RootLayout({
       e.preventDefault();
       const currentY = e.touches[0].clientY;
       const deltaY = startY - currentY;
-      window.scrollBy({ top: deltaY * 0.3, left: 0 });
+      window.scrollBy({ top: deltaY * .65, left: 0 });
       startY = currentY;
     };
   
