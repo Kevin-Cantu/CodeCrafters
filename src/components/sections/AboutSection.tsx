@@ -1,6 +1,6 @@
 "use client";
 
-import { Brain, Bot, Cloud, Palette, Workflow, BarChart3, Link as LinkIcon, ShieldCheck, ShoppingCart, LifeBuoy } from "lucide-react"
+import { Brain, Bot, Cloud, Palette, Workflow, BarChart3, Link as LinkIcon, ShieldCheck, ShoppingCart, LifeBuoy, Layers, Database } from "lucide-react"
 import { motion } from "framer-motion"
 
 const stats = [
@@ -36,12 +36,6 @@ const services = [
     Icon: Palette,
   },
   {
-    title: 'Automatización y RPA',
-    description:
-      'Bots, integraciones con APIs, Zapier/Make y flujos de negocio para eliminar tareas repetitivas.',
-    Icon: Workflow,
-  },
-  {
     title: 'Data & Analytics',
     description:
       'ETL, data warehousing, BI, dashboards accionables y calidad de datos para decisiones con impacto.',
@@ -54,13 +48,13 @@ const services = [
     Icon: LinkIcon,
   },
   {
-    title: 'Seguridad y Cumplimiento',
+    title: 'Seguridad TI',
     description:
       'Autenticación/autorización, OWASP, cifrado, auditoría y hardening de infraestructura.',
     Icon: ShieldCheck,
   },
   {
-    title: 'E‑commerce y Pagos',
+    title: 'E‑commerce, Pagos y Puntos de venta',
     description:
       'Carritos, checkouts, suscripciones, antifraude y pasarelas como Stripe, PayPal y Mercado Pago.',
     Icon: ShoppingCart,
@@ -70,6 +64,24 @@ const services = [
     description:
       'SRE/DevOps, SLAs, mejoras continuas, monitoreo y performance para mantener tu sistema saludable.',
     Icon: LifeBuoy,
+  },
+  {
+    title: 'Gestión de Relaciones con el Cliente (CRM)',
+    description:
+      'Implementación de plataformas CRM para centralizar clientes, ventas, marketing y soporte, mejorando la experiencia del usuario.',
+    Icon: Workflow,
+  },
+  {
+    title: 'Planificación de Recursos Empresariales (ERP)',
+    description:
+      'Soluciones ERP para integrar finanzas, operaciones, logística, inventario y recursos humanos en un único ecosistema.',
+    Icon: Layers,
+  },
+  {
+    title: 'Migraciones y Actualizaciones de Datos',
+    description:
+      'Estrategias seguras para migrar, limpiar y actualizar datos entre sistemas, garantizando integridad, continuidad y mínima interrupción.',
+    Icon: Database,
   },
 ] as const
 

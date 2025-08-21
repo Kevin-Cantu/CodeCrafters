@@ -2,8 +2,17 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { SimpleCombobox, type ComboboxItem } from '@/components/ui/combobox'
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const
+
+const projectTypes: ComboboxItem[] = [
+  { value: 'web', label: 'Desarrollo Web' },
+  { value: 'mobile', label: 'Aplicación Móvil' },
+  { value: 'api', label: 'API/Backend' },
+  { value: 'consulting', label: 'Consultoría' },
+  { value: 'other', label: 'Otro' },
+]
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -108,39 +117,17 @@ export function ContactForm() {
               <label htmlFor="projectType" className="block text-sm font-medium text-slate-300 mb-2">
                 Tipo de Proyecto
               </label>
-              <select
+              <SimpleCombobox
                 id="projectType"
-                name="projectType"
+                items={projectTypes}
                 value={formData.projectType}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
-              >
-                <option value="">Seleccionar...</option>
-                <option value="web">Desarrollo Web</option>
-                <option value="mobile">Aplicación Móvil</option>
-                <option value="api">API/Backend</option>
-                <option value="consulting">Consultoría</option>
-                <option value="other">Otro</option>
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="budget" className="block text-sm font-medium text-slate-300 mb-2">
-                Presupuesto Estimado
-              </label>
-              <select
-                id="budget"
-                name="budget"
-                value={formData.budget}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg bg-slate-950/60 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60 transition"
-              >
-                <option value="">Seleccionar...</option>
-                <option value="5k-10k">$5,000 - $10,000</option>
-                <option value="10k-25k">$10,000 - $25,000</option>
-                <option value="25k-50k">$25,000 - $50,000</option>
-                <option value="50k+">$50,000+</option>
-              </select>
+                onChange={(val) => setFormData((prev) => ({ ...prev, projectType: val }))}
+                placeholder="Seleccionar..."
+                searchPlaceholder="Buscar tipo..."
+                emptyMessage="Sin resultados"
+                contentClassName="bg-black text-white border-slate-800"
+                commandClassName="bg-transparent"
+              />
             </div>
           </motion.div>
 

@@ -46,7 +46,7 @@ export function AnimatedHomeProfessional() {
           {/* Main Headline */}
           <div className="space-y-3 max-w-5xl mx-auto ">
             <motion.h1
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white leading-tight tracking-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white leading-tight tracking-tight -mt-12 xl:mt-0"
               variants={fadeInUp(0.05)}
             >
               Transformamos{" "}
