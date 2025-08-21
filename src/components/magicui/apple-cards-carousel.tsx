@@ -170,9 +170,15 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                 exit={{ opacity: 0, scale: 0.98 }}
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
-                className="w-full max-w-2xl md:max-w-5xl rounded-2xl md:rounded-3xl bg-white p-4 md:p-8 font-sans dark:bg-neutral-900 overflow-hidden h-[85vh] md:h-[88vh] shadow-2xl"
-              >
-                <button
+                className="
+                w-full max-w-2xl md:max-w-5xl 
+                rounded-2xl md:rounded-3xl 
+                bg-white p-4 md:p-8 
+                font-sans dark:bg-neutral-900 
+                overflow-hidden 
+h-[85vh] md:h-[100vh] 2xl:h-[90vh]        
+        shadow-2xl
+              ">                <button
                   className="absolute top-3 right-3 md:top-4 md:right-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/90 dark:bg-white"
                   onClick={handleClose}
                 >
