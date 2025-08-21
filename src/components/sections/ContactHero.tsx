@@ -18,7 +18,7 @@ const stagger = {
 
 export function ContactHero() {
   return (
-    <section className="relative isolate pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+    <section className="relative isolate pt-16 pb-10 sm:pt-20 sm:pb-14 overflow-hidden">
       {/* Fondo unificado tipo Proyectos */}
       <HeroProjectsBackground />
 
@@ -40,7 +40,7 @@ export function ContactHero() {
             Cuéntanos sobre tu idea, tu desafío o tu próximo producto. Nos encargamos de convertirlo en una solución digital de alto impacto.
           </motion.p>
 
-          <motion.div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" variants={fadeInUp(0.15)}>
+          <motion.div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4" variants={fadeInUp(0.15)}>
             <a
               href="#contacto-form"
               className="group inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 border border-blue-500/30 shadow-lg shadow-blue-600/10 hover:from-blue-700 hover:to-purple-700 transition-all"
@@ -61,7 +61,7 @@ export function ContactHero() {
             </Link>
           </motion.div>
 
-          <motion.div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-slate-400 text-sm" variants={fadeInUp(0.2)}>
+          <motion.div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-slate-400 text-sm" variants={fadeInUp(0.2)}>
             <div className="inline-flex items-center gap-2">
               <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
               Consulta gratuita
