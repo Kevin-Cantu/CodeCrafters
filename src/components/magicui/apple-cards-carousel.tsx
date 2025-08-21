@@ -23,6 +23,7 @@ interface CarouselProps {
   initialScroll?: number;
 }
 
+// Card shape used by the carousel
 type Card = {
   src: string;
   title: string;
@@ -176,7 +177,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                 bg-white p-4 md:p-8 
                 font-sans dark:bg-neutral-900 
                 overflow-hidden 
-h-[85vh] md:h-[100vh] 2xl:h-[90vh]        
+ h-[85vh] md:h-[100vh] 2xl:h-[90vh]        
         shadow-2xl
               ">                <button
                   className="absolute top-3 right-3 md:top-4 md:right-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/90 dark:bg-white"

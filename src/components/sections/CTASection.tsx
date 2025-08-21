@@ -74,7 +74,7 @@ export function CTASection() {
             variants={fadeInUp(0.05)}
           >
             ¿Listo para comenzar tu proyecto?
-            <span className="ml-2 bg-white/20 bg-clip-text text-transparent">Hablemos hoy mismo</span>
+            <span className="ml-2 bg-white/70 bg-clip-text text-transparent">Hablemos hoy mismo</span>
           </motion.h2>
 
           {/* Description */}

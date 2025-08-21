@@ -27,13 +27,13 @@ export function WhatWeDoCarousel() {
       <div className="container-custom relative">
         <div className="text-center max-w-4xl mx-auto">
           <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-50 text-primary-600 text-lg font-medium mb-6 shadow-sm"
+            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 text-lg font-medium mb-6 shadow-sm"
             variants={fadeInUp(0)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
             </svg>
             Nuestros Servicios
@@ -188,7 +188,8 @@ const data = [
   {
     category: "Servicios en la nube ",
     title: "APIs robustas y seguras",
-    src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2793&auto=format&fit=crop",
+    // Opción A seleccionada (pasillo de servidores, azul)
+    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2400&auto=format&fit=crop",
     content: (
       <DummyContent
         heading="Arquitectura Backend Escalable"
@@ -206,44 +207,48 @@ const data = [
     ),
   },
   {
-  category: "IA",
-  title: "Soluciones de Inteligencia Artificial",
-  src: "https://images.unsplash.com/photo-1581091870622-1e7e3434a11f?q=80&w=2793&auto=format&fit=crop",
-  content: (
-    <DummyContent
-      heading="Inteligencia Artificial Aplicada"
-      description="Desarrollamos soluciones basadas en IA que potencian procesos, automatizan tareas y transforman datos en decisiones inteligentes."
-      features={[
-        "Modelos de Machine Learning entrenados a medida",
-        "Procesamiento de lenguaje natural (NLP)",
-        "Visión por computadora",
-        "Sistemas de recomendación",
-        "Automatización con IA generativa",
-        "Integración con herramientas como OpenAI, Google Cloud AI, etc."
-      ]}
-      carousel={<CarouselTech items={techIA} />}
-    />
-  ),
-},
-{
-  category: "IA",
-  title: "Agentes de Inteligencia Artificial",
-  src: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2793&auto=format&fit=crop",
-  content: (
-    <DummyContent
-      heading="Agentes Autónomos Inteligentes"
-      description="Desarrollamos agentes de IA capaces de razonar, planificar y actuar de forma autónoma para ejecutar flujos complejos, integraciones o tareas repetitivas."
-      features={[
-        "Agentes basados en LLMs (Large Language Models)",
-        "Ejecución autónoma de tareas con memoria",
-        "Razonamiento multietapa y toma de decisiones",
-        "Integración con APIs y herramientas externas",
-        "Orquestación de agentes y herramientas (LangChain, AutoGPT)",
-        "Sistemas autoevaluables y escalables"
-      ]}
-      carousel={<CarouselTech items={techAgentIA} />}
-    />
-  ),
-}
+    category: "IA",
+    title: "Soluciones de Inteligencia Artificial",
+    // Imagen IA explícita (cerebro wireframe)
+    src: "https://plus.unsplash.com/premium_photo-1683121718643-fb18d2668d53?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: (
+      <DummyContent
+        heading="Inteligencia Artificial Aplicada"
+        description="Desarrollamos soluciones basadas en IA que potencian procesos, automatizan tareas y transforman datos en decisiones inteligentes."
+        features={[
+          "Modelos de Machine Learning entrenados a medida",
+          "Procesamiento de lenguaje natural (NLP)",
+          "Visión por computadora",
+          "Sistemas de recomendación",
+          "Automatización con IA generativa",
+          "Integración con herramientas como OpenAI, Google Cloud AI, etc."
+        ]}
+        carousel={<CarouselTech items={techIA} />}
+      />
+    ),
+  },
+  {
+    category: "IA",
+    title: "Agentes de Inteligencia Artificial",
+    // Imagen proporcionada por ti (Unsplash premium) + fallback local
+    src: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=2400&h=1600&fit=crop",
+    // @ts-ignore - propiedad opcional para el fallback del <BlurImage />
+    fallbackSrc: "/assets/web-landing-dark.svg",
+    content: (
+      <DummyContent
+        heading="Agentes Autónomos Inteligentes"
+        description="Desarrollamos agentes de IA capaces de razonar, planificar y actuar de forma autónoma para ejecutar flujos complejos, integraciones o tareas repetitivas."
+        features={[
+          "Agentes basados en LLMs (Large Language Models)",
+          "Ejecución autónoma de tareas con memoria",
+          "Razonamiento multietapa y toma de decisiones",
+          "Integración con APIs y herramientas externas",
+          "Orquestación de agentes y herramientas (LangChain, AutoGPT)",
+          "Sistemas autoevaluables y escalables"
+        ]}
+        carousel={<CarouselTech items={techAgentIA} />}
+      />
+    ),
+  }
 
 ];
