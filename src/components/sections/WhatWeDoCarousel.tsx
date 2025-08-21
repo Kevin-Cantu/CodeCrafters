@@ -3,7 +3,7 @@
 import React from "react";
 import { Carousel, Card } from "@/components/magicui/apple-cards-carousel";
 import CarouselTech from "@/components/magicui/carousel-tech";
-import { techWeb, techMovil, techBack, techIA, techAgenteIA } from "@/data/carousel-data";
+import { techWeb, techMovil, techBack, techIA, techAgentIA } from "@/data/carousel-data";
 import { motion } from "framer-motion";
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
@@ -241,7 +241,7 @@ const data = [
         "Orquestación de agentes y herramientas (LangChain, AutoGPT)",
         "Sistemas autoevaluables y escalables"
       ]}
-      carousel={<CarouselTech items={techAgenteIA} />}
+      carousel={<CarouselTech items={techAgentIA} />}
     />
   ),
 }

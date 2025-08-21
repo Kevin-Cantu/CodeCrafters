@@ -123,3 +123,49 @@ export const techIA = [
     icon: <SiKeras className="text-red-500 w-10 h-10" />,
   },
 ];
+export const techAgentIA = [
+  {
+    name: "OpenAI",
+    icon: <SiOpenai className="text-green-500 w-10 h-10" />,
+  },
+  {
+    name: "LangChain",
+    icon: <SiLangchain className="text-blue-600 w-10 h-10" />,
+  },
+  {
+    name: "FastAPI",
+    icon: <SiFastapi className="text-sky-500 w-10 h-10" />,
+  },
+  {
+    name: "Python",
+    icon: <SiPython className="text-yellow-500 w-10 h-10" />,
+  },
+  {
+    name: "TensorFlow",
+    icon: <SiTensorflow className="text-orange-500 w-10 h-10" />,
+  },
+  {
+    name: "PyTorch",
+    icon: <SiPytorch className="text-red-500 w-10 h-10" />,
+  },
+  {
+    name: "Scikit-learn",
+    icon: <SiScikitlearn className="text-blue-500 w-10 h-10" />,
+  },
+  {
+    name: "Keras",
+    icon: <SiKeras className="text-purple-500 w-10 h-10" />,
+  },
+  {
+    name: "Jupyter",
+    icon: <SiJupyter className="text-orange-400 w-10 h-10" />,
+  },
+  {
+    name: "NumPy",
+    icon: <SiNumpy className="text-blue-600 w-10 h-10" />,
+  },
+  {
+    name: "Pandas",
+    icon: <SiPandas className="text-black dark:text-white w-10 h-10" />,
+  },
+];
