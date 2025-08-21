@@ -61,21 +61,21 @@ export function ContactHero() {
             </Link>
           </motion.div>
 
-          <motion.div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-slate-400 text-sm" variants={fadeInUp(0.2)}>
-            <div className="inline-flex items-center gap-2">
+          <motion.div className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-slate-400 text-sm" variants={fadeInUp(0.2)}>
+            <div className="inline-flex items-center gap-2 text-lg">
               <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
               Consulta gratuita
             </div>
             <span className="text-slate-700">•</span>
-            <div className="inline-flex items-center gap-2">
+            <div className="inline-flex items-center gap-2 text-lg">
               <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
-              NDA disponible
-            </div>
+              Tu información siempre protegida        
+                  </div>
             <span className="text-slate-700">•</span>
-            <div className="inline-flex items-center gap-2">
+            <div className="inline-flex items-center gap-2 text-lg">
               <svg className="h-4 w-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
-              Sin compromiso
-            </div>
+              Sin compromiso, tú tienes el control
+                          </div>
           </motion.div>
         </motion.div>
       </div>
