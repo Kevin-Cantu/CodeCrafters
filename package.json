@@ -15,6 +15,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
+    "locomotive-scroll": "^4.1.4",
     "lucide-react": "^0.537.0",
     "motion": "^12.23.12",
     "next": "^15.4.2-canary.33",
@@ -26,6 +27,7 @@
     "typescript": "^5.0.0"
   },
   "devDependencies": {
+    "@types/locomotive-scroll": "^4.1.4",
     "@types/node": "^20.19.9",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
