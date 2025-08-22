@@ -130,19 +130,85 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 export const Card = ({ card, index, layout = false }: { card: Card; index: number; layout?: boolean }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const contentInnerRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [desktopScale, setDesktopScale] = useState(1);
+  const [scrolled, setScrolled] = useState(false);
+  const [shortScreen, setShortScreen] = useState(false); // pantallas "bajas" (Nest Hub, tablets landscape)
   const { onCardClose } = useContext(CarouselContext);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") handleClose();
     }
-    // Bloquear scroll del body detrás del modal
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "auto";
+    // Bloquear scroll del body detrás del modal y pausar Lenis
+    if (open) {
+      document.body.style.overflow = "hidden";
+      (window as any).lenis?.stop?.();
+    } else {
+      document.body.style.overflow = "auto";
+      (window as any).lenis?.start?.();
+    }
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      (window as any).lenis?.start?.();
+    };
   }, [open]);
+
+  // Scroll listener para efectos en móvil
+  useEffect(() => {
+    const el = scrollAreaRef.current;
+    if (!el) return;
+    const onScroll = () => setScrolled(el.scrollTop > 6);
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  // Detecta pantallas con poca altura (Nest Hub, etc.) para ajustar layout en md+
+  useEffect(() => {
+    if (!open) return;
+    const recomputeShort = () => {
+      if (typeof window === "undefined") return;
+      setShortScreen(window.innerHeight < 840); // umbral más alto para pantallas bajas
+    };
+    recomputeShort();
+    window.addEventListener("resize", recomputeShort);
+    return () => window.removeEventListener("resize", recomputeShort);
+  }, [open]);
+
+  // Ajuste automático para que en desktop siempre quepa sin scroll interno
+  useEffect(() => {
+    if (!open) return;
+
+    const recompute = () => {
+      if (typeof window === "undefined") return;
+      const isDesktop = window.innerWidth >= 768;
+      if (!isDesktop) {
+        setDesktopScale(1);
+        return;
+      }
+      const vh = window.innerHeight;
+      const available = Math.floor(vh * 0.98); // más espacio utilizable
+      const headerH = headerRef.current?.offsetHeight || 0;
+      const paddingY = shortScreen ? 16 * 2 : 24 * 2; // compactar en pantallas bajas
+      const contentH = contentInnerRef.current?.scrollHeight || 0;
+      const target = available - headerH - paddingY;
+      const minScale = vh < 840 ? 0.6 : 0.8; // permisivo en pantallas bajas
+      const scale = target > 0 && contentH > 0 ? Math.min(1, Math.max(minScale, target / contentH)) : 1;
+      setDesktopScale(scale);
+    };
+
+    recompute();
+    window.addEventListener("resize", recompute);
+    const t = setTimeout(recompute, 50);
+    return () => {
+      window.removeEventListener("resize", recompute);
+      clearTimeout(t);
+    };
+  }, [open, shortScreen]);
 
   useOutsideClick(containerRef, () => handleClose());
 
@@ -156,52 +222,86 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     <>
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-50 h-screen overflow-hidden">
+          <div className="fixed inset-0 z-50 h-[100svh] overflow-hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 h-full w-full bg-black/80 backdrop-blur-lg"
             />
-            {/* Contenedor centrado con altura controlada */}
-            <div className="relative z-[60] flex h-full w-full items-center justify-center p-3">
+
+            {/* Contenedor principal del modal (centro en desktop, full en móvil) */}
+            <div className="relative z-[60] flex h-full w-full items-start justify-center md:items-center p-0 md:p-3">
               <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1, transition: { duration: 0.25, ease: easeOutCubic } }}
-                exit={{ opacity: 0, scale: 0.98 }}
+                initial={{ opacity: 0, y: 0, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.25, ease: easeOutCubic } }}
+                exit={{ opacity: 0, y: 0, scale: 0.98 }}
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
-                className="
-                w-full max-w-2xl md:max-w-5xl 
-                rounded-2xl md:rounded-3xl 
-                bg-white p-4 md:p-8 
-                font-sans dark:bg-neutral-900 
-                overflow-hidden 
- h-[85vh] md:h-[100vh] 2xl:h-[90vh]        
-        shadow-2xl
-              ">                <button
-                  className="absolute top-3 right-3 md:top-4 md:right-4 flex h-8 w-8 items-center justify-center rounded-full bg-black/90 dark:bg-white"
-                  onClick={handleClose}
+                className={cn(
+                  "w-full h-full md:h-auto md:max-w-5xl rounded-3xl md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden flex min-h-0 flex-col",
+                  shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
+                )}
+              >
+                {/* Toda la vista (incluida la imagen) scrollea en móvil; en md+ no hay scroll */}
+                <div
+                  ref={scrollAreaRef}
+                  className={cn(
+                    "min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y [-webkit-overflow-scrolling:touch]",
+                    "md:overflow-y-hidden"
+                  )}
+                  data-lenis-prevent
+                  data-lenis-prevent-touch
                 >
-                  <IconX className="h-5 w-5 text-neutral-100 dark:text-neutral-900" />
-                </button>
-                {/* En mobile el contenido es scrolleable dentro del card; en desktop no */}
-                <div className="h-full flex flex-col overflow-y-auto md:overflow-y-visible">
-                  <motion.p
-                    layoutId={layout ? `category-${card.title}` : undefined}
-                    className="pt-6 md:pt-10 text-base font-medium text-black dark:text-white"
+                  {/* Hero/Image dentro del flujo (no fijo) */}
+                  <div
+                    ref={headerRef}
+                    className={cn(
+                      "relative w-full",
+                      "h-[20vh] min-h-[100px] max-h-[46vh]",
+                      shortScreen ? "md:h-[110px]" : "md:h-[160px]"
+                    )}
                   >
-                    {card.category}
-                  </motion.p>
-                  <motion.p
-                    layoutId={layout ? `title-${card.title}` : undefined}
-                    className="mt-2 text-2xl md:text-5xl font-semibold text-neutral-700 dark:text-white"
+                    <BlurImage src={card.src} alt={card.title} className="absolute inset-0 h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/10" />
+
+                    {/* Botón de cerrar */}
+                    <button
+                      className="absolute right-3 top-[max(10px,env(safe-area-inset-top))] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 hover:bg-black/70 dark:bg-white/15 dark:hover:bg-white/25 backdrop-blur text-white md:right-4 md:top-4 ring-1 ring-white/20"
+                      onClick={handleClose}
+                      aria-label="Cerrar"
+                    >
+                      <IconX className="h-5 w-5" />
+                    </button>
+
+                    {/* Títulos */}
+                    <div className="absolute bottom-4 left-0 right-0 px-4 md:px-5">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur-sm shadow-sm">
+                        {card.category}
+                      </span>
+                      <h3 className="mt-2 text-3xl font-semibold text-white md:text-3xl [text-wrap:balance] drop-shadow-sm">
+                        {card.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Contenido */}
+                  <div
+                    ref={contentInnerRef}
+                    className={cn(
+                      "mx-auto w-full px-4 py-5",
+                      shortScreen ? "md:max-w-6xl md:px-4 md:py-4" : "md:max-w-6xl md:px-6 md:py-6"
+                    )}
+                    style={{
+                      transform: `scale(${desktopScale})`,
+                      transformOrigin: "top center",
+                    }}
                   >
-                    {card.title}
-                  </motion.p>
-                  <div className="mt-4 md:mt-6 flex-1">
                     {card.content}
                   </div>
+
+                  {/* Safe area inferior iOS */}
+                  <div className="h-[max(env(safe-area-inset-bottom,16px),16px)] md:h-0" />
                 </div>
               </motion.div>
             </div>
