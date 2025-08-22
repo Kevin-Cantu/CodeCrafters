@@ -91,3 +91,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Evita el overscroll/bounce por encima/debajo del límite scrollable */
+@layer base {
+  html, body {
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+  }
+}
