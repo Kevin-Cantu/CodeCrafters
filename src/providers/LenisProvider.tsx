@@ -12,15 +12,18 @@ import { usePathname } from 'next/navigation'
  * - Resetea el scroll al cambiar de ruta
  *
  * Ajustes de velocidad/suavidad:
- * - Desktop: `lerp` y `wheelMultiplier`
- * - Mobile (tacto): `touchMultiplier` (y si quieres, `lerp`)
+ * - Desktop: usa `lerp` y `wheelMultiplier`
+ * - Mobile: usa `duration` + `syncTouch: true` + `touchMultiplier` (más fiable según versiones)
  * - Para scrollTo (anclas/botones): `anchorDuration`
  */
 export type LenisConfig = {
+  // Desktop
   lerp?: number
-  smoothWheel?: boolean
   wheelMultiplier?: number
+  // Mobile
+  duration?: number
   touchMultiplier?: number
+  syncTouch?: boolean | number
 }
 
 export function LenisProvider({
@@ -43,29 +46,44 @@ export function LenisProvider({
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return // accesibilidad
 
-    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches
+    const isTouch =
+      window.matchMedia('(pointer: coarse)').matches ||
+      ('ontouchstart' in window) ||
+      (navigator as any).maxTouchPoints > 0
 
-    // Base defaults
-    const base: Required<LenisConfig> = {
+    // Defaults razonables
+    const baseDesktop: Required<Pick<LenisConfig, 'lerp' | 'wheelMultiplier'>> = {
       lerp: 0.06,
-      smoothWheel: true,
       wheelMultiplier: 0.9,
-      touchMultiplier: 1,
+    }
+    const baseMobile: Required<Pick<LenisConfig, 'duration' | 'touchMultiplier' | 'syncTouch'>> = {
+      duration: 1.1, // mayor => más lento/suave
+      touchMultiplier: 0.85, // <1 => más lento
+      syncTouch: true, // usar el scroll táctil nativo pero sincronizado
     }
 
-    // Mezcla: config global + override mobile si es pointer "coarse"
-    const merged: Required<LenisConfig> = {
-      ...base,
-      ...config,
-      ...(isCoarsePointer ? mobileConfig : {}),
-    } as Required<LenisConfig>
+    const mergedDesktop = { ...baseDesktop, ...config }
+    const mergedMobile = { ...baseMobile, ...mobileConfig }
 
-    const lenis = new Lenis({
-      lerp: merged.lerp,
-      smoothWheel: merged.smoothWheel,
-      wheelMultiplier: merged.wheelMultiplier,
-      touchMultiplier: merged.touchMultiplier,
-    })
+    // Construimos opciones con `any` para mantener compatibilidad con cambios de tipos entre versiones
+    const opts: any = {}
+
+    if (isTouch) {
+      // Modo móvil: usar duration + syncTouch en lugar de lerp
+      opts.duration = mergedMobile.duration
+      opts.touchMultiplier = mergedMobile.touchMultiplier
+      opts.syncTouch = typeof mergedMobile.syncTouch === 'undefined' ? true : mergedMobile.syncTouch
+    } else {
+      // Modo desktop: usar lerp + wheelMultiplier
+      opts.lerp = mergedDesktop.lerp
+      opts.wheelMultiplier = mergedDesktop.wheelMultiplier
+      opts.smoothWheel = true
+    }
+
+    const lenis = new Lenis(opts)
+
+    // Opcional: ayuda para debug en dispositivo
+    ;(window as any).lenis = lenis
 
     lenisRef.current = lenis
 
@@ -85,7 +103,6 @@ export function LenisProvider({
       lenis.destroy()
       lenisRef.current = null
     }
-    // No incluimos `config`/`mobileConfig` para no reinstanciar Lenis en runtime
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -93,9 +110,7 @@ export function LenisProvider({
   useEffect(() => {
     const lenis = lenisRef.current
     if (!lenis) return
-    // Si se navega a otra ruta, vuelve al top
     lenis.scrollTo(0, { immediate: true })
-    // Si la nueva URL trae hash, respétalo
     if (window.location.hash) {
       lenis.scrollTo(window.location.hash, { immediate: true })
     }
@@ -115,12 +130,10 @@ export function LenisProvider({
       if (!href || href === '#' || href === '#!') return
 
       const url = new URL(href, window.location.href)
-      // Solo interceptar si apunta a la misma página (misma ruta) o hash local
       const samePath = url.pathname === window.location.pathname
       if (!samePath) return
 
       e.preventDefault()
-      // Ajusta la duración para hacer el desplazamiento más lento o más rápido
       lenis.scrollTo(url.hash, { duration: anchorDuration })
     }
 
