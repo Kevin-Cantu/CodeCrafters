@@ -12,15 +12,14 @@ import { usePathname } from 'next/navigation'
  * - Resetea el scroll al cambiar de ruta
  *
  * Ajustes de velocidad/suavidad:
- * - Desktop: usa `lerp` y `wheelMultiplier`
- * - Mobile (tacto): usa `smoothTouch` y `touchMultiplier`
+ * - Desktop: `lerp` y `wheelMultiplier`
+ * - Mobile (tacto): `touchMultiplier` (y si quieres, `lerp`)
  * - Para scrollTo (anclas/botones): `anchorDuration`
  */
 export type LenisConfig = {
   lerp?: number
   smoothWheel?: boolean
   wheelMultiplier?: number
-  smoothTouch?: boolean
   touchMultiplier?: number
 }
 
@@ -51,7 +50,6 @@ export function LenisProvider({
       lerp: 0.06,
       smoothWheel: true,
       wheelMultiplier: 0.9,
-      smoothTouch: false,
       touchMultiplier: 1,
     }
 
@@ -66,7 +64,6 @@ export function LenisProvider({
       lerp: merged.lerp,
       smoothWheel: merged.smoothWheel,
       wheelMultiplier: merged.wheelMultiplier,
-      smoothTouch: merged.smoothTouch,
       touchMultiplier: merged.touchMultiplier,
     })
 

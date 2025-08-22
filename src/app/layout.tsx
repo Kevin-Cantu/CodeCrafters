@@ -33,15 +33,12 @@ export default function RootLayout({
           <main className="flex-grow">
             <LenisProvider
               config={{
-                lerp: 0.06,         // desktop: menor => más suave/lento
+                lerp: 0.06,          // desktop: menor => más suave/lento
                 wheelMultiplier: 0.9, // desktop: <1 => más "lento" al hacer scroll
-                smoothWheel: true,
-                smoothTouch: false,  // desktop no usa touch
               }}
               mobileConfig={{
-                lerp: 0.06,          // puedes bajar a 0.05 si quieres aún más suave en móvil
-                smoothTouch: true,    // activa suavizado táctil
-                touchMultiplier: 0.75 // <1 => más lento al deslizar en móvil
+                lerp: 0.06,          // móvil: puedes bajar a 0.05 si quieres aún más suave
+                touchMultiplier: 0.85 // móvil: <1 => más lento al deslizar en móvil
               }}
               anchorDuration={1.2}    // duración al ir a #anclas (mayor => más lento)
             >
