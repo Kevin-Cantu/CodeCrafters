@@ -239,7 +239,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
                 className={cn(
-                  "w-full h-full md:h-auto md:max-w-5xl rounded-3xl md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden flex min-h-0 flex-col",
+                  "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden flex min-h-0 flex-col",
                   shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
                 )}
               >
