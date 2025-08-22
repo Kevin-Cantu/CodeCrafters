@@ -18,7 +18,7 @@ const stagger = {
 
 export function ContactHero() {
   return (
-    <section className="relative isolate pt-16 pb-10 sm:pt-20 sm:pb-14 overflow-hidden">
+    <section className="relative isolate pt-24 pb-16 sm:pt-28 sm:pb-20 md:pt-32 md:pb-24 overflow-hidden">
       {/* Fondo unificado tipo Proyectos */}
       <HeroProjectsBackground />
 
@@ -40,7 +40,7 @@ export function ContactHero() {
             Cuéntanos sobre tu idea, tu desafío o tu próximo producto. Nos encargamos de convertirlo en una solución digital de alto impacto.
           </motion.p>
 
-          <motion.div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4" variants={fadeInUp(0.15)}>
+          <motion.div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4" variants={fadeInUp(0.15)}>
             <a
               href="#contacto-form"
               className="group inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 border border-blue-500/30 shadow-lg shadow-blue-600/10 hover:from-blue-700 hover:to-purple-700 transition-all"

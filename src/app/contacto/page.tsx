@@ -12,7 +12,10 @@ export const metadata: Metadata = {
 export default function ContactoPage() {
   return (
     <div className="relative overflow-hidden">
-      {/* Primero: Formulario y detalles de contacto con un fondo sutil dedicado */}
+      {/* Primero: Hero "Construyamos" */}
+      <ContactHero />
+
+      {/* Segundo: Formulario y detalles de contacto con un fondo sutil dedicado */}
       <section className="relative isolate overflow-hidden">
         <SectionBackdrop />
         <div className="container-custom py-16 relative z-10">
@@ -22,9 +25,6 @@ export default function ContactoPage() {
           </div>
         </div>
       </section>
-
-      {/* Segundo: Hero intacto */}
-      <ContactHero />
     </div>
   )
 }
