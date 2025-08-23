@@ -27,6 +27,43 @@ export function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Overlay transparente y por debajo del header (solo click-catcher)
+  const overlayClass = "bg-transparent";
+
+  // Panel del menú móvil (sin blur). En no scrollear: fondo sólido para legibilidad
+  const panelClass = scrolled
+    ? "border-slate-200 bg-white/95"
+    : "border-slate-800 bg-slate-950";
+
+  const linkBase =
+    "group relative mx-2 my-1 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-base font-semibold transition-colors";
+
+  const linkActive = scrolled
+    ? "bg-gradient-to-r from-violet-50 to-purple-50 text-purple-700 border border-purple-200"
+    : "bg-white/5 text-violet-200 border border-white/10";
+
+  const linkInactive = scrolled
+    ? "text-slate-700 hover:bg-slate-50 border border-transparent"
+    : "text-slate-200 hover:bg-white/5 border border-transparent";
+
+  // Estilos del contenedor del navbar
+  // Ancho: expandir a full-width SOLO en mobile cuando no hay scroll y el menú está abierto; en md+ mantener el ancho original
+  const headerContainerWidth = !scrolled && mobileMenuOpen
+    ? "w-full mx-0 md:max-w-4xl md:w-full md:mx-4"
+    : "max-w-4xl w-full mx-4";
+
+  // Base original del header: transparente cuando no hay scroll, claro cuando hay scroll
+  const headerContainerBase = scrolled
+    ? "bg-white/95 border border-gray-200 rounded-t-sm shadow-lg"
+    : "bg-transparent rounded-none";
+
+  // Override solo en mobile cuando NO hay scroll y el menú está abierto:
+  // igualamos color al panel del menú, quitamos borde superior e inferior; mantenemos solo bordes laterales
+  // en md+ revertimos totalmente al estado original (sin afectar PC)
+  const headerContainerOverride = !scrolled && mobileMenuOpen
+    ? "bg-slate-950 border-x border-slate-800 border-t-0 border-b-0 rounded-b-none md:bg-transparent md:border-0 md:rounded-xl md:shadow-none"
+    : "";
+
   return (
     <header
       className={`fixed left-0 right-0 z-[40] flex justify-center pointer-events-none transition-all duration-300 ease-in-out top-0 ${
@@ -34,11 +71,7 @@ export function Header() {
       }`}
     >
       <div
-        className={`pointer-events-auto max-w-4xl w-full mx-4 transition-all duration-300 ease-in-out relative isolate ${
-          scrolled
-            ? "bg-white/95  border border-gray-200 rounded-t-sm shadow-lg"
-            : "bg-transparent rounded-xl"
-        }`}
+        className={`pointer-events-auto ${headerContainerWidth} transition-all duration-300 ease-in-out relative isolate ${headerContainerBase} ${headerContainerOverride}`}
       >
         <nav className="flex items-center justify-between px-6 py-4">
           {/* Logo */}
@@ -53,7 +86,7 @@ export function Header() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation (PC sin cambios) */}
           <div className="hidden md:flex items-center gap-12">
             {navigation.map((item) => (
               <Link
@@ -115,32 +148,31 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Mobile Navigation - drop just below navbar */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <>
-              {/* Backdrop behind content but below header */}
+              {/* Backdrop (click-catcher) por debajo del header y transparente */}
               <motion.div
                 key="backdrop"
-                className="fixed inset-0 z-40 md:hidden"
+                className={`fixed inset-0 z-10 md:hidden ${overlayClass}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setMobileMenuOpen(false)}
               />
 
-              {/* Dropdown attached right under the navbar */}
+              {/* Dropdown: limitado al contenedor (PC sin cambios); en mobile coincide con el contenedor */}
               <motion.div
                 key="sheet"
                 id="mobile-menu"
-                className="absolute inset-x-0 top-full z-[60] md:hidden"
+                className="absolute inset-x-0 top-full z-[100] md:hidden"
                 initial={{ y: -8, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -8, opacity: 0 }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div className="w-full border-b border-slate-200 bg-white/95 shadow-lg backdrop-blur rounded-b-md overflow-hidden">
-                  {/* Sin encabezado (sin texto "Menú" ni botón X) */}
+                <div className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${panelClass}`}>
                   <div className="flex flex-col px-2 pb-3 pt-2">
                     {navigation.map((item) => {
                       const active = pathname === item.href;
@@ -148,17 +180,19 @@ export function Header() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className={`group relative mx-2 my-1 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-base font-semibold transition-colors ${
-                            active
-                              ? "bg-gradient-to-r from-violet-50 to-purple-50 text-purple-700 border border-purple-200"
-                              : "text-slate-700 hover:bg-slate-50 border border-transparent"
-                          }`}
+                          className={`${linkBase} ${active ? linkActive : linkInactive}`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{item.name}</span>
                           <ArrowRight
                             className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${
-                              active ? "text-purple-600" : "text-slate-400"
+                              active
+                                ? scrolled
+                                  ? "text-purple-600"
+                                  : "text-violet-300"
+                                : scrolled
+                                ? "text-slate-400"
+                                : "text-slate-400"
                             }`}
                           />
                         </Link>
@@ -169,7 +203,11 @@ export function Header() {
                       <Link
                         href="/contacto"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-3 text-base font-semibold text-white shadow-md active:scale-[0.99]"
+                        className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold shadow-md active:scale-[0.99] transition-colors ${
+                          scrolled
+                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white border border-blue-500/20"
+                            : "bg-slate-800 text-white border border-white/10 hover:bg-slate-700"
+                        }`}
                       >
                         Contáctanos
                         <ArrowRight className="h-4 w-4" />
