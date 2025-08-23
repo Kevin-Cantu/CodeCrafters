@@ -55,14 +55,10 @@ export function Header() {
   // Base original del header: transparente cuando no hay scroll, claro cuando hay scroll
   const headerContainerBase = scrolled
     ? "bg-white/95 border border-gray-200 rounded-t-sm shadow-lg"
-    : "bg-transparent rounded-none";
+    : "bg-transparent rounded-xl";
 
-  // Override solo en mobile cuando NO hay scroll y el menú está abierto:
-  // igualamos color al panel del menú, quitamos borde superior e inferior; mantenemos solo bordes laterales
-  // en md+ revertimos totalmente al estado original (sin afectar PC)
-  const headerContainerOverride = !scrolled && mobileMenuOpen
-    ? "bg-slate-950 border-x border-slate-800 border-t-0 border-b-0 rounded-b-none md:bg-transparent md:border-0 md:rounded-xl md:shadow-none"
-    : "";
+  // Ya no cambiamos el fondo del header al abrir el menú (para evitar flash). Usamos un underlay interno solo en mobile.
+  const headerContainerOverride = "";
 
   return (
     <header
@@ -73,7 +69,12 @@ export function Header() {
       <div
         className={`pointer-events-auto ${headerContainerWidth} transition-all duration-300 ease-in-out relative isolate ${headerContainerBase} ${headerContainerOverride}`}
       >
-        <nav className="flex items-center justify-between px-6 py-4">
+        {/* Underlay: pinta el fondo del navbar solo en mobile cuando no hay scroll y el menú está abierto. No bloquea clics */}
+        {!scrolled && mobileMenuOpen && (
+          <div className="absolute inset-0 z-0 bg-slate-950 border-x border-slate-800 md:hidden pointer-events-none" />
+        )}
+
+        <nav className="relative z-10 flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Code2 className="h-6 w-6 text-purple-600" />
@@ -162,7 +163,7 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               />
 
-              {/* Dropdown: limitado al contenedor (PC sin cambios); en mobile coincide con el contenedor */}
+              {/* Dropdown: limitado al contenedor (PC sin cambios) y top-full para no tapar el header */}
               <motion.div
                 key="sheet"
                 id="mobile-menu"
@@ -172,7 +173,7 @@ export function Header() {
                 exit={{ y: -8, opacity: 0 }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${panelClass}`}>
+                <div className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${!scrolled ? "border-t-0" : ""} ${panelClass}`}>
                   <div className="flex flex-col px-2 pb-3 pt-2">
                     {navigation.map((item) => {
                       const active = pathname === item.href;
