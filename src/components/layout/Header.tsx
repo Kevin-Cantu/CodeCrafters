@@ -27,24 +27,23 @@ export function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  // Estado visual: blanco si hay scroll o menú abierto; transparente si no hay scroll y menú cerrado
+  const isLightBg = scrolled || mobileMenuOpen;
+
   // Overlay transparente y por debajo del header (solo click-catcher)
   const overlayClass = "bg-transparent";
 
-  // Panel del menú móvil (sin blur). En no scrollear: fondo sólido para legibilidad
-  const panelClass = scrolled
-    ? "border-slate-200 bg-white/95"
-    : "border-slate-800 bg-slate-950";
+  // Panel del menú móvil: siempre claro
+  const panelClass = "border-none bg-white/95";
 
   const linkBase =
     "group relative mx-2 my-1 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-base font-semibold transition-colors";
 
-  const linkActive = scrolled
-    ? "bg-gradient-to-r from-violet-50 to-purple-50 text-purple-700 border border-purple-200"
-    : "bg-white/5 text-violet-200 border border-white/10";
+  const linkActive =
+    "bg-gradient-to-r from-violet-50 to-purple-50 text-purple-700 border border-purple-200";
 
-  const linkInactive = scrolled
-    ? "text-slate-700 hover:bg-slate-50 border border-transparent"
-    : "text-slate-200 hover:bg-white/5 border border-transparent";
+  const linkInactive =
+    "text-slate-700 hover:bg-slate-50 border border-transparent";
 
   // Estilos del contenedor del navbar
   // Ancho: expandir a full-width SOLO en mobile cuando no hay scroll y el menú está abierto; en md+ mantener el ancho original
@@ -52,12 +51,12 @@ export function Header() {
     ? "w-full mx-0 md:max-w-4xl md:w-full md:mx-4"
     : "max-w-4xl w-full mx-4";
 
-  // Base original del header: transparente cuando no hay scroll, claro cuando hay scroll
-  const headerContainerBase = scrolled
-    ? "bg-white/95 border border-gray-200 rounded-t-sm shadow-lg"
+  // Fondo del header: transparente cuando no hay scroll ni menú; blanco en el resto
+  const headerContainerBase = isLightBg
+    ? "bg-white/95 rounded-t-sm shadow-lg"
     : "bg-transparent rounded-xl";
 
-  // Ya no cambiamos el fondo del header al abrir el menú (para evitar flash). Usamos un underlay interno solo en mobile.
+  // Sin overrides adicionales
   const headerContainerOverride = "";
 
   return (
@@ -71,7 +70,7 @@ export function Header() {
       >
         {/* Underlay: pinta el fondo del navbar solo en mobile cuando no hay scroll y el menú está abierto. No bloquea clics */}
         {!scrolled && mobileMenuOpen && (
-          <div className="absolute inset-0 z-0 bg-slate-950 border-x border-slate-800 md:hidden pointer-events-none" />
+          <div className="absolute inset-0 z-0 bg-white border-none md:hidden pointer-events-none" />
         )}
 
         <nav className="relative z-10 flex items-center justify-between px-6 py-4">
@@ -80,14 +79,14 @@ export function Header() {
             <Code2 className="h-6 w-6 text-purple-600" />
             <span
               className={`text-xl font-bold transition-colors duration-300 opacity-100 ${
-                scrolled ? "text-gray-800" : "text-gray-200"
+                isLightBg ? "text-gray-800" : "text-gray-200"
               }`}
             >
               CodeCrafters
             </span>
           </Link>
 
-          {/* Desktop Navigation (PC sin cambios) */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
             {navigation.map((item) => (
               <Link
@@ -95,10 +94,10 @@ export function Header() {
                 href={item.href}
                 className={`text-lg font-semibold transition-colors duration-300 ${
                   pathname === item.href
-                    ? scrolled
+                    ? isLightBg
                       ? "text-purple-600"
                       : "text-gray-200"
-                    : scrolled
+                    : isLightBg
                     ? "text-gray-700 hover:text-purple-700"
                     : "text-gray-200 hover:text-purple-400"
                 }`}
@@ -131,9 +130,7 @@ export function Header() {
             <button
               type="button"
               className={`transition-colors duration-300 ${
-                scrolled
-                  ? "text-gray-700 hover:text-purple-600"
-                  : "text-white hover:text-purple-200"
+                isLightBg ? "text-gray-700 hover:text-purple-600" : "text-white hover:text-purple-200"
               }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
@@ -187,13 +184,7 @@ export function Header() {
                           <span>{item.name}</span>
                           <ArrowRight
                             className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${
-                              active
-                                ? scrolled
-                                  ? "text-purple-600"
-                                  : "text-violet-300"
-                                : scrolled
-                                ? "text-slate-400"
-                                : "text-slate-400"
+                              active ? "text-purple-600" : "text-slate-400"
                             }`}
                           />
                         </Link>
@@ -204,11 +195,7 @@ export function Header() {
                       <Link
                         href="/contacto"
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold shadow-md active:scale-[0.99] transition-colors ${
-                          scrolled
-                            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white border border-blue-500/20"
-                            : "bg-slate-800 text-white border border-white/10 hover:bg-slate-700"
-                        }`}
+                        className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold shadow-md active:scale-[0.99] transition-colors bg-gradient-to-r from-blue-600 to-purple-600 text-white border border-blue-500/20`}
                       >
                         Contáctanos
                         <ArrowRight className="h-4 w-4" />

@@ -28,9 +28,9 @@ export default function CarouselTech({
             key={index}
             className="basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/7"
           >
-            <div className="p-2">
+            <div className="">
               <Card className="bg-gray transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-none border-none hover:shadow-md">
-                <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                <CardContent className="flex flex-col items-center justify-center gap-4 ">
                   {item.icon}
                   <span className="text-lg font-medium text-gray-400">{item.name}</span>
                 </CardContent>

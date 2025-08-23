@@ -91,12 +91,10 @@ const DummyContent = ({
   features?: string[];
 }) => {
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 p-8 md:p-14 rounded-3xl mb-4 border border-gray-100 dark:border-neutral-700 shadow-xl backdrop-blur-sm">
-      <div className="mb-8">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-          <span className="bg-gradient-to-r from-primary-600 via-purple-600 to-primary-500 bg-clip-text text-transparent">
-            {heading}
-          </span>
+    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 p-5 md:p-14 rounded-3xl mb-4 border border-gray-100 dark:border-neutral-700 shadow-xl backdrop-blur-sm">
+      <div className="mb-3">
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight ">
+    
         </h2>
         
         {description && (
@@ -108,7 +106,7 @@ const DummyContent = ({
 
       {/* Features List */}
       {features && (
-        <div className="mb-8">
+        <div className="mb-2">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Características principales:
           </h3>
@@ -120,7 +118,7 @@ const DummyContent = ({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-sm font-medium group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{feature}</span>
+                <span className="text-sm sm:text-lg font-medium group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{feature}</span>
               </div>
             ))}
           </div>
@@ -129,7 +127,7 @@ const DummyContent = ({
 
       {/* Technology Carousel */}
       {carousel && (
-        <div className=" rounded-2xl p-6  ">
+        <div className=" rounded-2xl p-2  ">
           <h3 className="text-lg font-semibold mb-4 text-center">
             Stack Tecnológico
           </h3>
@@ -244,8 +242,8 @@ const data = [
           "Razonamiento multietapa y toma de decisiones",
           "Integración con APIs y herramientas externas",
           "Orquestación de agentes y herramientas (LangChain, AutoGPT)",
-          "Sistemas autoevaluables y escalables"
-        ]}
+          
+                ]}
         carousel={<CarouselTech items={techAgentIA} />}
       />
     ),
