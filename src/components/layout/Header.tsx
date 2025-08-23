@@ -29,7 +29,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed left-0 right-0 z-[60] flex justify-center pointer-events-none transition-all duration-300 ease-in-out top-0 ${
+      className={`fixed left-0 right-0 z-[40] flex justify-center pointer-events-none transition-all duration-300 ease-in-out top-0 ${
         scrolled ? "translate-y-6" : "translate-y-0"
       }`}
     >
