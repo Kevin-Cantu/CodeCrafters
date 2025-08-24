@@ -87,13 +87,13 @@ const services = [
 
 export function AboutSection() {
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="container-custom">
+    <section className="py-14 bg-gray-50">
+      <div className="container-custom ">
         {/* Bloque: ¿Por qué elegirnos? */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <motion.h2
-              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl "
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -151,7 +151,7 @@ export function AboutSection() {
         </div>
 
         {/* Bloque: Servicios profesionales */}
-        <div className="mt-36">
+        <div className="mt-24">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h3
               className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"

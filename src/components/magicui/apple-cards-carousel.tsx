@@ -93,7 +93,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div className="absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
 
           {/* Inicia al borde izquierdo, padding simétrico y snap para ver cada card completa */}
-          <div className="flex w-full flex-row justify-start gap-6 md:gap-8 pl-4 md:pl-8 pr-4 md:pr-8">
+          <div className="flex w-full flex-row justify-start  2xl:justify-center gap-6 md:gap-8 pl-4 md:pl-8 pr-4 md:pr-8">
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -239,8 +239,8 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
                 className={cn(
-                  "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl overflow-hidden flex min-h-0 flex-col",
-                  shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
+             "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
+    shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
                 )}
               >
                 {/* Toda la vista (incluida la imagen) scrollea en móvil; en md+ no hay scroll */}

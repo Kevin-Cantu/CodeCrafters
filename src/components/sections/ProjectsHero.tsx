@@ -23,13 +23,7 @@ export function ProjectsHero() {
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }}
         >
-          <motion.div
-            className="mx-auto inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur"
-            variants={fadeInUp(0)}
-          >
-            <span className="inline-block h-2 w-2 rounded-full bg-primary-500" />
-            Proyectos destacados
-          </motion.div>
+  
 
           <motion.h1
             className="mt-5 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-slate-300"

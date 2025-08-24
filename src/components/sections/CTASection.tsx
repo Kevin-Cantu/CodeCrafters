@@ -51,7 +51,7 @@ export function CTASection() {
         />
       </div>
 
-      <div className="container-custom relative py-20">
+      <div className="container-custom relative py-10">
         <motion.div
           className="mx-auto max-w-3xl text-center"
           variants={stagger}

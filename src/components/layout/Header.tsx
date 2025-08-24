@@ -34,7 +34,7 @@ export function Header() {
   const overlayClass = "bg-transparent";
 
   // Panel del menú móvil: siempre claro
-  const panelClass = "border-none bg-white/95";
+  const panelClass = "border-none bg-white";
 
   const linkBase =
     "group relative mx-2 my-1 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-base font-semibold transition-colors";
@@ -53,7 +53,7 @@ export function Header() {
 
   // Fondo del header: transparente cuando no hay scroll ni menú; blanco en el resto
   const headerContainerBase = isLightBg
-    ? "bg-white/95 rounded-t-sm shadow-lg"
+    ? "bg-white rounded-t-sm shadow-lg"
     : "bg-transparent rounded-xl";
 
   // Sin overrides adicionales
