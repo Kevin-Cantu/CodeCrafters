@@ -7,11 +7,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import {
-  IconArrowNarrowLeft,
-  IconArrowNarrowRight,
-  IconX,
-} from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
@@ -24,7 +20,7 @@ interface CarouselProps {
 }
 
 // Card shape used by the carousel
-type Card = {
+export type Card = {
   src: string;
   title: string;
   category: string;
@@ -45,6 +41,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
+  const unitSize = () => (isMobile() ? 256 + 24 : 384 + 32); // card width + gap
+
   useEffect(() => {
     if (carouselRef.current) {
       // Asegura que el scroll siempre inicie completamente a la izquierda
@@ -54,33 +53,38 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   }, [initialScroll]);
 
   const checkScrollability = () => {
-    if (carouselRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-    }
+    if (!carouselRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+
+    // Estimar índice actual según el desplazamiento
+    const idx = Math.round(scrollLeft / unitSize());
+    const clamped = Math.max(0, Math.min(items.length - 1, idx));
+    setCurrentIndex(clamped);
+  };
+
+  const scrollToIndex = (index: number) => {
+    const left = unitSize() * index;
+    carouselRef.current?.scrollTo({ left, behavior: "smooth" });
+    setCurrentIndex(index);
   };
 
   const scrollLeft = () => {
-    carouselRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+    carouselRef.current?.scrollBy({ left: -unitSize(), behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    carouselRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+    carouselRef.current?.scrollBy({ left: unitSize(), behavior: "smooth" });
   };
 
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      // Ajustado a los nuevos tamaños y separación de las cards
-      const cardWidth = isMobile() ? 256 : 384; // w-64 (256px) y md:w-96 (384px)
-      const gap = isMobile() ? 24 : 32; // gap-6 (24px) y md:gap-8 (32px)
-      const scrollPosition = (cardWidth + gap) * index; // alinea el card con el borde izquierdo visible
+      const scrollPosition = unitSize() * index; // alinea el card con el borde izquierdo visible
       carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
       setCurrentIndex(index);
     }
   };
-
-  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
 
   return (
     <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
@@ -106,21 +110,19 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
-        <div className="mr-10 flex justify-end gap-2">
-          <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
-            onClick={scrollLeft}
-            disabled={!canScrollLeft}
-          >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
-          </button>
-          <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
-            onClick={scrollRight}
-            disabled={!canScrollRight}
-          >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
-          </button>
+
+        {/* Paginación tipo dashes ( - - - - ) */}
+        <div className="mt-2 flex w-full items-center justify-center gap-2">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToIndex(i)}
+              aria-label={`Ir al slide ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${
+                i === currentIndex ? "w-6 bg-gray-800/80" : "w-3 bg-gray-300"
+              }`}
+            />)
+          )}
         </div>
       </div>
     </CarouselContext.Provider>
@@ -239,8 +241,8 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
                 className={cn(
-             "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
-    shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
+                 "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
+                 shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
                 )}
               >
                 {/* Toda la vista (incluida la imagen) scrollea en móvil; en md+ no hay scroll */}
@@ -310,7 +312,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
       </AnimatePresence>
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
         className="relative z-10 flex h-64 w-64 md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />

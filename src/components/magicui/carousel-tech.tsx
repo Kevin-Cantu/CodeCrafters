@@ -3,8 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/magicui/carousel";
 import React from "react";
 
@@ -21,26 +19,31 @@ export default function CarouselTech({
   items,
 }: CarouselWithMultipleSlidesProps) {
   return (
-    <Carousel opts={{ align: "center", dragFree: false }} className="w-full mx-auto">
+    <Carousel
+      // Alineamos al inicio y dejamos drag libre para ver 2.5 ítems
+      opts={{ align: "start", dragFree: true }}
+      className="w-full mx-auto"
+    >
       <CarouselContent className="items-stretch">
         {items?.map((item, index) => (
           <CarouselItem
             key={index}
-            className="basis-[calc(100%/2.25)] sm:basis-[calc(100%/2.25)] md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
+            // 2.5 ítems visibles en mobile/sm, y más en pantallas grandes
+            className="basis-[calc(100%/2.5)] sm:basis-[calc(100%/2.5)] md:basis-1/3 lg:basis-1/4 xl:basis-1/6"
           >
             <div className="h-full">
-              <Card className="h-full bg-gray transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-none border-none hover:shadow-md">
-                <CardContent className="h-full flex flex-col items-center justify-center gap-4 ">
+              {/* Tarjeta limpia para evitar apariencia de "doble card" en móvil */}
+              <Card className="h-full bg-transparent transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-none border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+                <CardContent className="h-full flex flex-col items-center justify-center gap-4">
                   {item.icon}
-                  <span className="text-lg font-medium text-gray-400">{item.name}</span>
+                  <span className="text-lg font-medium text-gray-500 dark:text-gray-400">{item.name}</span>
                 </CardContent>
               </Card>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      {/* Botones removidos según requerimiento */}
     </Carousel>
   );
 }
