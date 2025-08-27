@@ -4,7 +4,6 @@ import '@/styles/globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { RouteTransition } from '@/components/layout/RouteTransition'
-import { LenisProvider } from '@/providers/LenisProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,19 +30,7 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">
-            <LenisProvider
-              config={{
-                lerp: 0.06,          // desktop: menor => más suave/lento
-                wheelMultiplier: 0.9, // desktop: <1 => más "lento" al hacer scroll
-              }}
-              mobileConfig={{
-                lerp: 0.06,          // móvil: puedes bajar a 0.05 si quieres aún más suave
-                touchMultiplier: 0.85 // móvil: <1 => más lento al deslizar en móvil
-              }}
-              anchorDuration={1.2}    // duración al ir a #anclas (mayor => más lento)
-            >
-              <RouteTransition>{children}</RouteTransition>
-            </LenisProvider>
+            <RouteTransition>{children}</RouteTransition>
           </main>
           <Footer />
         </div>

@@ -245,19 +245,13 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") handleClose();
     }
-    // Bloquear scroll del body detrás del modal y pausar Lenis
-    if (open) {
-      document.body.style.overflow = "hidden";
-      (window as any).lenis?.stop?.();
-    } else {
-      document.body.style.overflow = "auto";
-      (window as any).lenis?.start?.();
-    }
+    // Bloquear scroll del body detrás del modal
+    document.body.style.overflow = open ? "hidden" : "auto";
 
     window.addEventListener("keydown", onKeyDown);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      (window as any).lenis?.start?.();
+      document.body.style.overflow = "auto";
     };
   }, [open]);
 
@@ -332,8 +326,6 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                     "min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y [-webkit-overflow-scrolling:touch]",
                     "md:overflow-y-hidden"
                   )}
-                  data-lenis-prevent
-                  data-lenis-prevent-touch
                 >
                   {/* Hero/Image dentro del flujo (no fijo) */}
                   <div

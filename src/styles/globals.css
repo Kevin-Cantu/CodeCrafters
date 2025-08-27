@@ -82,7 +82,6 @@
 }
 
 
-
 @layer base {
   * {
     @apply border-border;
@@ -97,24 +96,5 @@
   html, body {
     overscroll-behavior-y: none;
     overscroll-behavior-x: none;
-  }
-}
-
-/* Recomendaciones oficiales de Lenis para el HTML root */
-@layer base {
-  html.lenis {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important; /* evita mezclar con smooth nativo */
-  }
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-  .lenis.lenis-scrolling iframe {
-    pointer-events: none;
   }
 }
