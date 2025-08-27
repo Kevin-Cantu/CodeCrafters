@@ -160,7 +160,7 @@ const data = [
     category: "Desarrollo Web",
     title: "Sitios modernos y responsivos",
     // Web: landing oscura local (siempre visible)
-    src: "/assets/web-landing-dark.svg",
+    src: "https://images.unsplash.com/photo-1678690832324-67961a27ca92?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
       <DummyContent
         heading="Stack Web Moderno"
@@ -181,7 +181,7 @@ const data = [
     category: "Desarrollo Móvil",
     title: "Apps intuitivas para Android ",
     // Móvil: teléfono con bokeh en negro (URL válida)mag
-    src: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=3387&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1594948506928-2d4cad88d0af?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
       <DummyContent
         heading="Desarrollo Móvil Multiplataforma"
@@ -202,7 +202,7 @@ const data = [
     category: "Backend",
     title: "APIs robustas y seguras",
     // Opción A seleccionada (pasillo de servidores, azul)
-    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2400&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: (
       <DummyContent
         heading="Arquitectura Backend Escalable"
