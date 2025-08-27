@@ -66,7 +66,7 @@ export function WhatWeDoCarousel() {
 
       {/* Carousel */}
       <motion.div
-        className="relative pl-3"
+        className="relative pl-3 pr-3"
         variants={fadeInUp(0.15)}
         initial="hidden"
         whileInView="show"

@@ -36,74 +36,176 @@ export const CarouselContext = createContext<{
 });
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
-  const unitSize = () => (isMobile() ? 256 + 24 : 384 + 32); // card width + gap
+  // Locks to stabilize index while animating to a dash target
+  const isProgrammaticRef = useRef(false);
+  const programmaticUntilRef = useRef<number>(0);
+  const lastClickedIndexRef = useRef<number | null>(null);
+
+  // Helpers to work with item nodes and positions
+  const getItemNodes = () =>
+    Array.from(listRef.current?.querySelectorAll<HTMLElement>(".rovocard-item") || []);
+
+  const updateCurrentIndex = () => {
+    // If we're still within the stabilization window, keep the last clicked index
+    if (isProgrammaticRef.current || Date.now() < programmaticUntilRef.current) return;
+
+    const scroller = scrollerRef.current;
+    const nodes = getItemNodes();
+    if (!scroller || nodes.length === 0) return;
+
+    const sl = scroller.scrollLeft;
+    const maxSl = scroller.scrollWidth - scroller.clientWidth;
+
+    // Edge stabilization (small to avoid early jump)
+    const nearEnd = maxSl - sl <= 2; // px
+    const nearStart = sl <= 2; // px
+    if (nearEnd) {
+      setCurrentIndex(nodes.length - 1);
+      return;
+    }
+    if (nearStart) {
+      setCurrentIndex(0);
+      return;
+    }
+
+    const base = nodes[0].offsetLeft;
+
+    // Choose the item whose LEFT edge is closest to scrollLeft (stable for multi-visible)
+    let best = 0;
+    let bestDelta = Infinity;
+    for (let i = 0; i < nodes.length; i++) {
+      const itemLeft = nodes[i].offsetLeft - base;
+      const d = Math.abs(itemLeft - sl);
+      if (d < bestDelta) {
+        bestDelta = d;
+        best = i;
+      }
+    }
+    setCurrentIndex(best);
+  };
 
   useEffect(() => {
-    if (carouselRef.current) {
-      // Asegura que el scroll siempre inicie completamente a la izquierda
-      carouselRef.current.scrollLeft = initialScroll ?? 0;
-      checkScrollability();
-    }
+    if (!scrollerRef.current) return;
+    scrollerRef.current.scrollLeft = initialScroll ?? 0;
+
+    const onResize = () => {
+      updateCurrentIndex();
+    };
+
+    const list = listRef.current;
+    const onLoadCapture = () => {
+      updateCurrentIndex();
+    };
+    list?.addEventListener("load", onLoadCapture, true);
+
+    const ro = new ResizeObserver(() => {
+      updateCurrentIndex();
+    });
+    if (list) ro.observe(list);
+    if (scrollerRef.current) ro.observe(scrollerRef.current);
+
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      list?.removeEventListener("load", onLoadCapture, true);
+      ro.disconnect();
+    };
   }, [initialScroll]);
 
-  const checkScrollability = () => {
-    if (!carouselRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+  // Smoothly animate scrollLeft to target without CSS snap interference
+  const animateScrollTo = (targetLeft: number, onDone?: () => void, duration = 260) => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
 
-    // Estimar índice actual según el desplazamiento
-    const idx = Math.round(scrollLeft / unitSize());
-    const clamped = Math.max(0, Math.min(items.length - 1, idx));
-    setCurrentIndex(clamped);
+    const prevSnap = scroller.style.scrollSnapType;
+    const prevBehavior = scroller.style.scrollBehavior as string;
+    scroller.style.scrollSnapType = "none";
+    scroller.style.scrollBehavior = "auto";
+
+    const maxSl = scroller.scrollWidth - scroller.clientWidth;
+    const clampedExact = Math.max(0, Math.min(targetLeft, Math.max(0, maxSl)));
+    const clamped = Math.floor(clampedExact); // avoid subpixel rounding pushing next
+
+    const start = scroller.scrollLeft;
+    const delta = clamped - start;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      scroller.scrollLeft = start + delta * eased;
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        scroller.scrollLeft = clamped;
+        requestAnimationFrame(() => {
+          scroller.style.scrollSnapType = prevSnap || "";
+          scroller.style.scrollBehavior = prevBehavior || "";
+          onDone?.();
+        });
+      }
+    };
+
+    requestAnimationFrame(step);
   };
 
   const scrollToIndex = (index: number) => {
-    const left = unitSize() * index;
-    carouselRef.current?.scrollTo({ left, behavior: "smooth" });
+    const scroller = scrollerRef.current;
+    const nodes = getItemNodes();
+    if (!scroller || !nodes[index]) return;
+
+    const base = nodes[0].offsetLeft;
+    // Exact left offset of the item relative to the first
+    let targetLeft = nodes[index].offsetLeft - base;
+
+    // On mobile, bias a bit to the left to avoid overshooting to the next card due to rounding
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    if (isMobile) targetLeft = Math.max(0, targetLeft - 4);
+
+    // Lock updates for a short window to avoid flicker to next index
+    isProgrammaticRef.current = true;
+    programmaticUntilRef.current = Date.now() + 500; // 0.5s stabilization window
+    lastClickedIndexRef.current = index;
+
     setCurrentIndex(index);
-  };
-
-  const scrollLeft = () => {
-    carouselRef.current?.scrollBy({ left: -unitSize(), behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    carouselRef.current?.scrollBy({ left: unitSize(), behavior: "smooth" });
-  };
-
-  const handleCardClose = (index: number) => {
-    if (carouselRef.current) {
-      const scrollPosition = unitSize() * index; // alinea el card con el borde izquierdo visible
-      carouselRef.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
-      setCurrentIndex(index);
-    }
+    animateScrollTo(targetLeft, () => {
+      // Keep lock a bit longer to absorb any momentum
+      setTimeout(() => {
+        if (!scrollerRef.current) return;
+        const sc = scrollerRef.current;
+        // Snap to integer left again to stabilize
+        sc.scrollLeft = Math.floor(targetLeft);
+        isProgrammaticRef.current = false;
+      }, 120);
+    });
   };
 
   return (
-    <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
+    <CarouselContext.Provider value={{ onCardClose: (i) => scrollToIndex(i), currentIndex }}>
       <div className="relative w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 md:py-20 [scrollbar-width:none] snap-x snap-mandatory"
-          ref={carouselRef}
-          onScroll={checkScrollability}
+          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 [scrollbar-width:none] touch-pan-x"
+          ref={scrollerRef}
+          onScroll={updateCurrentIndex}
         >
-          <div className="absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
+          {/* Right gradient hint (no pointer events) */}
+          <div className="pointer-events-none absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
 
-          {/* Inicia al borde izquierdo, padding simétrico y snap para ver cada card completa */}
-          <div className="flex w-full flex-row justify-start  2xl:justify-center gap-6 md:gap-8 pl-4 md:pl-8 pr-4 md:pr-8">
+          {/* Show ~2.25 cards on mobile, full cards on md+ */}
+          <div
+            ref={listRef}
+            className="flex w-full flex-row justify-start 2xl:justify-center gap-0 md:gap-8 pl-0 md:pl-8 pr-0 md:pr-8"
+          >
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: easeOutCubic } }}
                 key={"card" + index}
-                className="flex-none snap-start"
+                className="rovocard-item flex-none basis-[calc(100%/2.25)] sm:basis-[calc(100%/2.25)] md:basis-auto px-2 md:px-0 first:pl-0 last:pr-0"
               >
                 {item}
               </motion.div>
@@ -111,8 +213,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           </div>
         </div>
 
-        {/* Paginación tipo dashes ( - - - - ) */}
-        <div className="mt-2 flex w-full items-center justify-center gap-2">
+        {/* Dash pagination (hidden on md+ i.e., PC) */}
+        <div className="mt-2 flex w-full items-center justify-center gap-2 md:hidden">
           {items.map((_, i) => (
             <button
               key={i}
@@ -121,8 +223,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
               className={`h-1.5 rounded-full transition-all ${
                 i === currentIndex ? "w-6 bg-gray-800/80" : "w-3 bg-gray-300"
               }`}
-            />)
-          )}
+            />
+          ))}
         </div>
       </div>
     </CarouselContext.Provider>
@@ -136,7 +238,6 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
   const contentInnerRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [desktopScale, setDesktopScale] = useState(1);
-  const [scrolled, setScrolled] = useState(false);
   const [shortScreen, setShortScreen] = useState(false); // pantallas "bajas" (Nest Hub, tablets landscape)
   const { onCardClose } = useContext(CarouselContext);
 
@@ -160,27 +261,6 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
     };
   }, [open]);
 
-  // Scroll listener para efectos en móvil
-  useEffect(() => {
-    const el = scrollAreaRef.current;
-    if (!el) return;
-    const onScroll = () => setScrolled(el.scrollTop > 6);
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [open]);
-
-  // Detecta pantallas con poca altura (Nest Hub, etc.) para ajustar layout en md+
-  useEffect(() => {
-    if (!open) return;
-    const recomputeShort = () => {
-      if (typeof window === "undefined") return;
-      setShortScreen(window.innerHeight < 840); // umbral más alto para pantallas bajas
-    };
-    recomputeShort();
-    window.addEventListener("resize", recomputeShort);
-    return () => window.removeEventListener("resize", recomputeShort);
-  }, [open]);
-
   // Ajuste automático para que en desktop siempre quepa sin scroll interno
   useEffect(() => {
     if (!open) return;
@@ -193,12 +273,12 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
         return;
       }
       const vh = window.innerHeight;
-      const available = Math.floor(vh * 0.98); // más espacio utilizable
+      const available = Math.floor(vh * 0.98);
       const headerH = headerRef.current?.offsetHeight || 0;
-      const paddingY = shortScreen ? 16 * 2 : 24 * 2; // compactar en pantallas bajas
+      const paddingY = shortScreen ? 16 * 2 : 24 * 2;
       const contentH = contentInnerRef.current?.scrollHeight || 0;
       const target = available - headerH - paddingY;
-      const minScale = vh < 840 ? 0.6 : 0.8; // permisivo en pantallas bajas
+      const minScale = vh < 840 ? 0.6 : 0.8;
       const scale = target > 0 && contentH > 0 ? Math.min(1, Math.max(minScale, target / contentH)) : 1;
       setDesktopScale(scale);
     };
@@ -313,7 +393,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={() => setOpen(true)}
-        className="relative z-10 flex h-64 w-64 md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
+        className="relative z-10 flex h-64 w-full md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         <div className="relative z-40 p-6 md:p-8">
