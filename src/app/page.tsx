@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen overscroll-none">
       {/* Hero Section */}
-      <section className="py-6">
+      <section className="py-6 ">
         <div className="text-center ">
           <AnimatedHomeProfessional />
         </div>

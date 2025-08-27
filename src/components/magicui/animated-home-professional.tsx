@@ -138,7 +138,7 @@ export function AnimatedHomeProfessional() {
 
           {/* Professional Stats */}
           <motion.div
-            className="pt-20 grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-4xl mx-auto  "
+            className="sm:pt-20 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl mx-auto  "
             variants={fadeInUp(0.2)}
           >
             {[
@@ -149,8 +149,8 @@ export function AnimatedHomeProfessional() {
                 description: "En el mercado",
               },
               {
-                number: "100%",
-                label: "Satisfacción del cliente",
+                number: "+20",
+                label: "Proyectos realizados",
                 gradient: "from-emerald-400 to-teal-400",
                 description: "Garantía de calidad",
               },
@@ -176,15 +176,15 @@ export function AnimatedHomeProfessional() {
               </motion.div>
             ))}
           </motion.div>
-          <div className=" sm:mb-12" />
+          <div className=" sm:mb-12 -mb-14" />
           {/* Trust Indicators */}
           <motion.div
             className="pt-16  flex flex-col items-center space-y-4 pb-4 "
             variants={fadeInUp(0.25)}
           >
-            <div className="flex items-center space-x-2 sm:space-x-4  text-slate-400 text-sm">
+            <div className="sm:flex items-center space-x-2 sm:space-x-4  text-white/80 text-sm hidden">
               <svg
-                className="w-4 h-4 text-emerald-400"
+                className="w-6 h-6 text-emerald-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -195,9 +195,8 @@ export function AnimatedHomeProfessional() {
                 />
               </svg>
               <span className="text-xl">Consulta gratuita</span>
-              <span className="text-slate-600">•</span>
               <svg
-                className="w-4 h-4 text-emerald-400"
+                className="w-6 h-6 text-emerald-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -208,9 +207,8 @@ export function AnimatedHomeProfessional() {
                 />
               </svg>
               <span className="text-xl">Soporte continuo</span>
-              <span className="text-slate-600">•</span>
               <svg
-                className="w-4 h-4 text-emerald-400"
+                className="w-6 h-6 text-emerald-400"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >

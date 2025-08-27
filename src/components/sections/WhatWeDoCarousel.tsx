@@ -90,7 +90,7 @@ const DummyContent = ({
   features?: string[];
 }) => {
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 p-5 md:p-14 rounded-3xl -mt-3 -mb-6 sm:mb-0 sm:mt-0 border border-gray-100 dark:border-neutral-700 shadow-xl backdrop-blur-sm">
+    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 p-5 md:p-14 rounded-3xl -mt-3 -mb-6 sm:mb-0 sm:mt-0 sm:border border-gray-100 dark:border-neutral-700 sm:shadow-xl backdrop-blur-sm">
       <div className="mb-4">
         <h2 className="hidden sm:block text-3xl md:text-5xl font-bold tracking-tight mb-4">
           <span className="bg-gradient-to-r from-primary-600 via-purple-600 to-primary-500 bg-clip-text text-transparent ">
@@ -220,7 +220,7 @@ const data = [
     ),
   },
   {
-    category: "IA",
+    category: "IA y Agentes de IA",
     title: "Soluciones de Inteligencia Artificial",
     // Imagen IA explícita (cerebro wireframe)
     src: "https://plus.unsplash.com/premium_photo-1683121718643-fb18d2668d53?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

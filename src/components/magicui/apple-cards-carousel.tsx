@@ -358,7 +358,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
 
                     {/* Títulos */}
                     <div className="absolute bottom-4 left-0 right-0 px-4 md:px-5">
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur-sm shadow-sm">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[16px] font-medium text-white/90 backdrop-blur-sm shadow-sm">
                         {card.category}
                       </span>
                       <h3 className="mt-2 text-3xl font-semibold text-white md:text-3xl [text-wrap:balance] drop-shadow-sm">

@@ -33,7 +33,7 @@ export default function CarouselTech({
           >
             <div className="h-full">
               {/* Tarjeta limpia para evitar apariencia de "doble card" en móvil */}
-              <Card className="h-full bg-transparent transition-transform duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-none border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
+              <Card className="h-full bg-transparent transition-transform duration-300 ease-in-out g hover:scale-105 active:scale-100 shadow-none border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                 <CardContent className="h-full flex flex-col items-center justify-center gap-4">
                   {item.icon}
                   <span className="text-lg font-medium text-gray-500 dark:text-gray-400">{item.name}</span>
