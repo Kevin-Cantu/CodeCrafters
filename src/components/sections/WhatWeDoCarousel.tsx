@@ -199,7 +199,7 @@ const data = [
     ),
   },
   {
-    category: "Servicios en la Nube",
+    category: "Backend",
     title: "APIs robustas y seguras",
     // Opción A seleccionada (pasillo de servidores, azul)
     src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2400&auto=format&fit=crop",

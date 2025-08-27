@@ -18,7 +18,7 @@ const services = [
     Icon: Brain,
   },
   {
-    title: 'Agentes de IA',
+    title: 'Agentes de IA ',
     description:
       'Agentes autónomos/orquestados con herramientas (tools), workflows, seguridad y monitoreo end-to-end.',
     Icon: Bot,
