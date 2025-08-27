@@ -53,7 +53,7 @@ export function Header() {
 
   // Fondo del header: transparente cuando no hay scroll ni menú; blanco en el resto
   const headerContainerBase = isLightBg
-    ? "bg-white rounded-t-sm shadow-lg"
+    ? "bg-white rounded-t-sm shadow-lg rounded-b-sm"
     : "bg-transparent rounded-xl";
 
   // Sin overrides adicionales
