@@ -160,7 +160,7 @@ const data = [
     category: "Desarrollo Web",
     title: "Sitios modernos y responsivos",
     // Web: landing oscura local (siempre visible)
-    src: "https://images.unsplash.com/photo-1678690832324-67961a27ca92?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://imgs.search.brave.com/nIggKIF8rn6p53XeeSKi354MezIshqJMuEqHkMwYz8U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmFra3kubXgvd3At/Y29udGVudC91cGxv/YWRzLzIwMjQvMDMv/cmVzcG9uc2l2ZS13/ZWItZGVzaWduLmpw/Zw",
     content: (
       <DummyContent
         heading="Stack Web Moderno"
@@ -181,7 +181,7 @@ const data = [
     category: "Desarrollo Móvil",
     title: "Apps intuitivas para Android ",
     // Móvil: teléfono con bokeh en negro (URL válida)mag
-    src: "https://images.unsplash.com/photo-1594948506928-2d4cad88d0af?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://img.freepik.com/vector-gratis/fondo-degradado-ui-ux_23-2149065783.jpg?semt=ais_hybrid&w=740&q=80",
     content: (
       <DummyContent
         heading="Desarrollo Móvil Multiplataforma"
@@ -202,7 +202,7 @@ const data = [
     category: "Backend",
     title: "APIs robustas y seguras",
     // Opción A seleccionada (pasillo de servidores, azul)
-    src: "https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://imgs.search.brave.com/tffjEcdkDAOrQhdtzS9Gi8aeSz_WhjaIIzysjEdBhGM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by93ZWItZGV2ZWxv/cG1lbnQtcHJvZ3Jh/bW1pbmctY29kZS1h/cHAtZGV2ZWxvcG1l/bnQtd2ViLWRlc2ln/bi1jb21wdXRlci1z/ZW8tM2QtYmFja2dy/b3VuZF8xMjUzMjIt/NDUwLmpwZz9zZW10/PWFpc19oeWJyaWQm/dz03NDAmcT04MA",
     content: (
       <DummyContent
         heading="Arquitectura Backend Escalable"
@@ -223,7 +223,7 @@ const data = [
     category: "IA y Agentes de IA",
     title: "Soluciones de Inteligencia Artificial",
     // Imagen IA explícita (cerebro wireframe)
-    src: "https://plus.unsplash.com/premium_photo-1683121718643-fb18d2668d53?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    src: "https://farolbi.com.br/wp-content/uploads/2018/01/146248-o-que-e-inteligencia-artificial-e-como-ela-afeta-o-nosso-trabalho.jpg",
     content: (
       <DummyContent
         heading="Inteligencia Artificial Aplicada"

@@ -35,7 +35,25 @@ export function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
+  
+    const subject = encodeURIComponent(`Nuevo mensaje de ${formData.name}`)
+    const body = encodeURIComponent(
+      `Buen día,\n\n` +
+      `Me permito ponerme en contacto para presentar mi interés en un proyecto.\n\n` +
+      `Datos de contacto:\n` +
+      `• Nombre: ${formData.name}\n` +
+      `• Correo: ${formData.email}\n` +
+      `• Empresa: ${formData.company}\n` +
+      `• Tipo de proyecto: ${formData.projectType}\n` +
+      `• Presupuesto estimado: ${formData.budget}\n\n` +
+      `Mensaje:\n` +
+      `${formData.message}\n\n` +
+      `Agradezco de antemano su atención y quedo a la espera de su respuesta.\n\nSaludos,\n${formData.name}`
+
+    )
+    
+    window.location.href = `mailto:carameloreocantugarcia@gmail.com?subject=${subject}&body=${body}`
+  
     setFormData({
       name: '',
       email: '',
