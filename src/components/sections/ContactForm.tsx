@@ -16,7 +16,11 @@ const projectTypes: ComboboxItem[] = [
   { value: 'other', label: 'Otro' },
 ]
 
-export function ContactForm() {
+type ContactFormProps = {
+  onValidationError?: (message: string) => void
+}
+
+export function ContactForm({ onValidationError }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,9 +37,30 @@ export function ContactForm() {
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
+  // Validamos los campos obligatorios: Nombre, Email, Tipo de Proyecto y Mensaje
+  const validate = () => {
+    const missing: string[] = []
+    if (!formData.name.trim()) missing.push('Nombre')
+    if (!formData.email.trim()) missing.push('Email')
+    if (!formData.projectType.trim()) missing.push('Tipo de Proyecto')
+    if (!formData.message.trim()) missing.push('Mensaje')
+    if (missing.length) {
+      return `Por favor completa los campos obligatorios: ${missing.join(', ')}.`
+    }
+    const emailOk = /.+@.+\..+/.test(formData.email)
+    if (!emailOk) return 'Ingresa un correo electrónico válido.'
+    return null
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const v = validate()
+    if (v) {
+      onValidationError?.(v)
+      return
+    }
+
     const templateParams = {
       name: formData.name,
       email: formData.email,
@@ -43,7 +68,7 @@ export function ContactForm() {
       projectType: formData.projectType,
       message: formData.message,
     }
-  
+
     emailjs.send('service_f74t434', 'template_22qckiz', templateParams, 'qZWpiXXlxCTGAjjyx')
       .then((response) => {
         console.log('Correo enviado!', response.status, response.text)
@@ -66,7 +91,7 @@ export function ContactForm() {
       {/* Glow border */}
       <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-cyan-600/30 opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />
 
-      {/* Container with subtle dark background (reverted) */}
+      {/* Container con fondo sutil (diseño base intacto) */}
       <div className="relative bg-slate-950/50 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur p-6 sm:p-8">
         <motion.h2 className="text-2xl font-semibold text-white mb-2" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: easeOutCubic }}>
           Cuéntanos sobre tu proyecto
@@ -75,7 +100,8 @@ export function ContactForm() {
           Respuesta en menos de 24h. Tu información está segura con nosotros.
         </motion.p>
         
-        <motion.form onSubmit={handleSubmit} className="space-y-6" initial={false} animate="show" variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
+        {/* Importante: noValidate para usar validación personalizada */}
+        <motion.form noValidate onSubmit={handleSubmit} className="space-y-6" initial={false} animate="show" variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
           <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
@@ -137,7 +163,7 @@ export function ContactForm() {
           <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
             <div>
               <label htmlFor="projectType" className="block text-sm font-medium text-slate-300 mb-2">
-                Tipo de Proyecto
+                Tipo de Proyecto <span className="text-red-400">*</span>
               </label>
               <div className="relative">
                 <Layers className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400/80 z-10" />
