@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { SimpleCombobox, type ComboboxItem } from '@/components/ui/combobox'
 import { User, Mail, Building2, Layers, MessageSquareText } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const
 
@@ -21,7 +22,6 @@ export function ContactForm() {
     email: '',
     company: '',
     projectType: '',
-    budget: '',
     message: '',
   })
 
@@ -33,35 +33,26 @@ export function ContactForm() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
   
-    const subject = encodeURIComponent(`Nuevo mensaje de ${formData.name}`)
-    const body = encodeURIComponent(
-      `Buen día,\n\n` +
-      `Me permito ponerme en contacto para presentar mi interés en un proyecto.\n\n` +
-      `Datos de contacto:\n` +
-      `• Nombre: ${formData.name}\n` +
-      `• Correo: ${formData.email}\n` +
-      `• Empresa: ${formData.company}\n` +
-      `• Tipo de proyecto: ${formData.projectType}\n` +
-      `• Presupuesto estimado: ${formData.budget}\n\n` +
-      `Mensaje:\n` +
-      `${formData.message}\n\n` +
-      `Agradezco de antemano su atención y quedo a la espera de su respuesta.\n\nSaludos,\n${formData.name}`
-
-    )
-    
-    window.location.href = `mailto:carameloreocantugarcia@gmail.com?subject=${subject}&body=${body}`
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      projectType: formData.projectType,
+      message: formData.message,
+    }
   
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      projectType: '',
-      budget: '',
-      message: '',
-    })
+    emailjs.send('service_f74t434', 'template_22qckiz', templateParams, 'qZWpiXXlxCTGAjjyx')
+      .then((response) => {
+        console.log('Correo enviado!', response.status, response.text)
+        alert('Mensaje enviado con éxito.')
+        setFormData({ name:'', email:'', company:'', projectType:'', message:'' })
+      }, (err) => {
+        console.error('Error:', err)
+        alert('Error al enviar mensaje. Intenta nuevamente.')
+      })
   }
 
   return (
