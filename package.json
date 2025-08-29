@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@heroui/alert": "^2.2.24",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-popover": "^1.1.15",
     "@tabler/icons-react": "^3.34.1",
