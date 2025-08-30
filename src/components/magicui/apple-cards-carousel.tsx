@@ -47,11 +47,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
   // Helpers to work with item nodes and positions
   const getItemNodes = () =>
-    Array.from(listRef.current?.querySelectorAll<HTMLElement>(".rovocard-item") || []);
+    Array.from(
+      listRef.current?.querySelectorAll<HTMLElement>(".rovocard-item") || []
+    );
 
   const updateCurrentIndex = () => {
     // If we're still within the stabilization window, keep the last clicked index
-    if (isProgrammaticRef.current || Date.now() < programmaticUntilRef.current) return;
+    if (isProgrammaticRef.current || Date.now() < programmaticUntilRef.current)
+      return;
 
     const scroller = scrollerRef.current;
     const nodes = getItemNodes();
@@ -117,7 +120,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   }, [initialScroll]);
 
   // Smoothly animate scrollLeft to target without CSS snap interference
-  const animateScrollTo = (targetLeft: number, onDone?: () => void, duration = 260) => {
+  const animateScrollTo = (
+    targetLeft: number,
+    onDone?: () => void,
+    duration = 260
+  ) => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
@@ -185,7 +192,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   return (
-    <CarouselContext.Provider value={{ onCardClose: (i) => scrollToIndex(i), currentIndex }}>
+    <CarouselContext.Provider
+      value={{ onCardClose: (i) => scrollToIndex(i), currentIndex }}
+    >
       <div className="relative w-full">
         <div
           className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 [scrollbar-width:none] touch-auto"
@@ -203,7 +212,15 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             {items.map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 * index, ease: easeOutCubic } }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.5,
+                    delay: 0.2 * index,
+                    ease: easeOutCubic,
+                  },
+                }}
                 key={"card" + index}
                 className="rovocard-item flex-none basis-[calc(100%/2.25)] sm:basis-[calc(100%/2.25)] md:basis-auto px-2 md:px-0 first:pl-0 last:pr-0"
               >
@@ -231,7 +248,15 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   );
 };
 
-export const Card = ({ card, index, layout = false }: { card: Card; index: number; layout?: boolean }) => {
+export const Card = ({
+  card,
+  index,
+  layout = false,
+}: {
+  card: Card;
+  index: number;
+  layout?: boolean;
+}) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -273,7 +298,10 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
       const contentH = contentInnerRef.current?.scrollHeight || 0;
       const target = available - headerH - paddingY;
       const minScale = vh < 840 ? 0.6 : 0.8;
-      const scale = target > 0 && contentH > 0 ? Math.min(1, Math.max(minScale, target / contentH)) : 1;
+      const scale =
+        target > 0 && contentH > 0
+          ? Math.min(1, Math.max(minScale, target / contentH))
+          : 1;
       setDesktopScale(scale);
     };
 
@@ -310,13 +338,18 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
             <div className="relative z-[60] flex h-full w-full items-start justify-center md:items-center p-0 md:p-3">
               <motion.div
                 initial={{ opacity: 0, y: 0, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1, transition: { duration: 0.25, ease: easeOutCubic } }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.25, ease: easeOutCubic },
+                }}
                 exit={{ opacity: 0, y: 0, scale: 0.98 }}
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
                 className={cn(
-                 "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
-                 shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
+                  "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
+                  shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
                 )}
               >
                 {/* Toda la vista (incluida la imagen) scrollea en móvil; en md+ no hay scroll */}
@@ -336,7 +369,11 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                       shortScreen ? "md:h-[110px]" : "md:h-[160px]"
                     )}
                   >
-                    <BlurImage src={card.src} alt={card.title} className="absolute inset-0 h-full w-full object-cover" />
+                    <BlurImage
+                      src={card.src}
+                      alt={card.title}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />
 
                     {/* Botón de cerrar */}
@@ -353,7 +390,7 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[16px] font-medium text-white/90 backdrop-blur-sm shadow-sm">
                         {card.category}
                       </span>
-                      <h3 className="mt-2 text-3xl font-semibold text-white md:text-3xl [text-wrap:balance] drop-shadow-sm">
+                      <h3 className="mt-2 inline-flex items-center gap-1.5 rounded-md border border-white/30 bg-black/15 px-3 py-1 text-3xl font-semibold text-white md:text-3xl [text-wrap:balance] backdrop-blur-sm shadow-sm">
                         {card.title}
                       </h3>
                     </div>
@@ -364,7 +401,9 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                     ref={contentInnerRef}
                     className={cn(
                       "mx-auto w-full px-4 py-5",
-                      shortScreen ? "md:max-w-6xl md:px-4 md:py-4" : "md:max-w-6xl md:px-6 md:py-6"
+                      shortScreen
+                        ? "md:max-w-6xl md:px-4 md:py-4"
+                        : "md:max-w-6xl md:px-6 md:py-6"
                     )}
                     style={{
                       transform: `scale(${desktopScale})`,
@@ -402,17 +441,33 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
             {card.title}
           </motion.p>
         </div>
-        <BlurImage src={card.src} alt={card.title} fill className="absolute inset-0 z-10 object-cover" />
+        <BlurImage
+          src={card.src}
+          alt={card.title}
+          fill
+          className="absolute inset-0 z-10 object-cover"
+        />
       </motion.button>
     </>
   );
 };
 
-export const BlurImage = ({ height, width, src, className, alt, ...rest }: any) => {
+export const BlurImage = ({
+  height,
+  width,
+  src,
+  className,
+  alt,
+  ...rest
+}: any) => {
   const [isLoading, setLoading] = useState(true);
   return (
     <img
-      className={cn("h-full w-full transition duration-300", isLoading ? "blur-0" : "blur-0", className)}
+      className={cn(
+        "h-full w-full transition duration-300",
+        isLoading ? "blur-0" : "blur-0",
+        className
+      )}
       onLoad={() => setLoading(false)}
       src={src as string}
       width={width}
