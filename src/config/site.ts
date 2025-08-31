@@ -1,17 +1,16 @@
 export const siteConfig = {
-  name: "DevConsultora",
+  name: "CodeCrafters",
   description: "Consultora especializada en desarrollo de software y frameworks modernos",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   ogImage: "/og-image.jpg",
   links: {
-    github: "https://github.com/devconsultora",
-    linkedin: "https://linkedin.com/company/devconsultora",
-    email: "contacto@devconsultora.com",
-    phone: "+1 (555) 123-4567",
+
+    email: "contac@codecraftersmx.com",
+    phone: "+52 1 81 2627 0599",
   },
   author: {
-    name: "DevConsultora Team",
-    url: "https://devconsultora.com",
+    name: "CodeCrafters",
+    url: "https://c-codecrafters.netlify.app",
   },
 }
 

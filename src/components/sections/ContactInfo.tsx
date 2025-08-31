@@ -33,7 +33,7 @@ const contactInfo = [
       </svg>
     ),
     title: 'Ubicación',
-    content: 'Ciudad de México, México',
+    content: 'Nuevo León, México',
     link: '#',
   },
 ]
@@ -79,16 +79,7 @@ export function ContactInfo() {
           <h3 className="text-lg font-medium text-white mb-4">
             Síguenos
           </h3>
-          <div className="flex gap-4">
-            <Link href={siteConfig.links.linkedin} className="text-slate-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
-              <span className="sr-only">LinkedIn</span>
-              <Linkedin className="h-6 w-6" aria-hidden="true" />
-            </Link>
-            <Link href={siteConfig.links.github} className="text-slate-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
-              <span className="sr-only">GitHub</span>
-              <Github className="h-6 w-6" aria-hidden="true" />
-            </Link>
-          </div>
+
         </div>
       </div>
     </div>

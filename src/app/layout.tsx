@@ -4,6 +4,7 @@ import '@/styles/globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { RouteTransition } from '@/components/layout/RouteTransition'
+import { WhatsAppFloatingButton } from '@/components/common/WhatsAppFloatingButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,10 @@ export default function RootLayout({
           <main className="flex-grow">
             <RouteTransition>{children}</RouteTransition>
           </main>
+
+          {/* Floating WhatsApp button shown on all pages */}
+          <WhatsAppFloatingButton position="br" tooltip="¿hablamos por whatsap?" />
+
           <Footer />
         </div>
       </body>
