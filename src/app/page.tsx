@@ -2,6 +2,7 @@ import { AnimatedHomeProfessional } from "@/components/magicui/animated-home-pro
 import { WhatWeDoCarousel } from "@/components/sections/WhatWeDoCarousel";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { SponsorsSection } from "./customized/sponsors";
 
 export default function HomePage() {
   return (
@@ -23,6 +24,7 @@ export default function HomePage() {
 
       {/* CTA Section animada */}
       <CTASection />
+      <SponsorsSection />
     </div>
   );
 }
