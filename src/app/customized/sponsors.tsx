@@ -45,17 +45,28 @@ export const SponsorsSection = () => {
             </div>
           </Reveal>
 
-          <Reveal as="h2" delayMs={60} id="sponsors-title" className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+          <Reveal
+            as="h2"
+            delayMs={60}
+            id="sponsors-title"
+            className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight"
+          >
             <span className="bg-gradient-to-r from-slate-900 to-slate-600 dark:from-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
               Marcas que confían en nosotros
             </span>
           </Reveal>
 
-          <Reveal as="div" delayMs={120} className="mx-auto mt-6 h-px w-40 bg-gradient-to-r from-transparent via-slate-300/80 to-transparent dark:via-white/20" />
+          <Reveal as="div" delayMs={120}>
+            <div className="mx-auto mt-6 h-px w-40 bg-gradient-to-r from-transparent via-slate-300/80 to-transparent dark:via-white/20" />
+          </Reveal>
         </div>
 
         {/* Carrusel al aire, sin card */}
-        <Reveal as="div" delayMs={160} className="relative mx-auto mt-8 max-w-6xl">
+        <Reveal
+          as="div"
+          delayMs={160}
+          className="relative mx-auto mt-8 max-w-6xl"
+        >
           <div role="region" aria-label="Patrocinadores y clientes">
             <Marquee
               className="gap-[3rem]"
