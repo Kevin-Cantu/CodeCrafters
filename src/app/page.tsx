@@ -21,10 +21,10 @@ export default function HomePage() {
 
       {/* About + Servicios profesionales (nueva sección dentro de AboutSection) */}
       <AboutSection />
+      <SponsorsSection />
 
       {/* CTA Section animada */}
       <CTASection />
-      <SponsorsSection />
     </div>
   );
 }
