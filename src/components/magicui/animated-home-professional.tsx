@@ -31,7 +31,7 @@ export function AnimatedHomeProfessional() {
       <HeroProjectsBackground />
 
       {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-52 2xl:px-12">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-52 2xl:px-14 mt-14">
         <motion.div
           className="text-center"
           variants={stagger}
@@ -112,33 +112,13 @@ export function AnimatedHomeProfessional() {
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                href="/proyectos"
-                className="group inline-flex items-center justify-center px-10 py-4 text-lg font-medium text-slate-300 transition-all duration-300 ease-out border border-slate-600 rounded-2xl hover:border-slate-400 hover:text-white hover:bg-slate-800/50 backdrop-blur-sm"
-              >
-                <span className="flex items-center">
-                  Ver proyectos
-                  <svg
-                    className="ml-3 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </span>
-              </Link>
+             
             </motion.div>
           </motion.div>
 
           {/* Professional Stats */}
           <motion.div
-            className="sm:pt-20 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl mx-auto  "
+            className="sm:pt-4 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-4xl mx-auto  "
             variants={fadeInUp(0.2)}
           >
             {[

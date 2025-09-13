@@ -99,12 +99,6 @@ export function CTASection() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
 
-            <Link
-              href="/proyectos"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/15"
-            >
-              Ver proyectos
-            </Link>
           </motion.div>
 
           {/* Trust indicators */}

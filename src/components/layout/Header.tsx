@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const navigation = [
   { name: "Inicio", href: "/" },
-  { name: "Proyectos", href: "/proyectos" },
+  // Proyectos eliminado para ocultar enlaces a /proyectos
 ];
 
 export function Header() {

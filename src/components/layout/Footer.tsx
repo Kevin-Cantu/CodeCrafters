@@ -3,7 +3,6 @@ import Link from 'next/link'
 const navigation = {
   main: [
     { name: 'Inicio', href: '/' },
-    { name: 'Proyectos', href: '/proyectos' },
     { name: 'Contacto', href: '/contacto' },
   ],
   social: [
