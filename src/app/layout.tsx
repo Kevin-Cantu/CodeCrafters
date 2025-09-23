@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://codecraftersmx.com'),
   robots: { index: true, follow: true },
   icons: {
-    icon: '/favicon.icass',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/assets/cc.jpeg', // corregido
+    shortcut: '/assets/cc.jpeg',
+    apple: '/assets/cc.jpeg',
   },
   openGraph: {
     title: 'Consultora de Programación',
