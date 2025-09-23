@@ -4,9 +4,10 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   ogImage: "/og-image.jpg",
   links: {
-
     email: "contac@codecraftersmx.com",
     phone: "+52 1 81 2627 0599",
+    facebook: "https://www.facebook.com/profile.php?id=61580625784898",
+    instagram: "https://www.instagram.com/codecraftersmx/",
   },
   author: {
     name: "CodeCrafters",
