@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Consultora de Programación | Desarrollo de Software',
   description: 'Consultora especializada en desarrollo de software y frameworks modernos. Creamos soluciones tecnológicas innovadoras para tu negocio.',
-  keywords: 'consultora, programación, desarrollo, software, frameworks, react, next.js,codecraftersmx',
+  keywords: 'consultora, programación, desarrollo, software, frameworks, react, next.js,codecraftersmx, codecrafters, code crafters, consultoria web,',
   authors: [{ name: 'Consultora de Programación' }],
   metadataBase: new URL('https://codecraftersmx.com'),
   robots: { index: true, follow: true },
