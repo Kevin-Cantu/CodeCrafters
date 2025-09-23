@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://codecraftersmx.com'),
   robots: { index: true, follow: true },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.icass',
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'CodeCrafters',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/assets/cc.jpeg',
         width: 1200,
         height: 630,
         alt: 'CodeCrafters - Consultoría de software',
