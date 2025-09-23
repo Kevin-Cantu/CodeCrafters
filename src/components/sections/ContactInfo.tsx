@@ -76,7 +76,7 @@ export function ContactInfo() {
   return (
     <div className="relative group max-w-lg mx-auto">
       {/* Fondo de la card */}
-<div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-600/30 via-blue-600/30 to-cyan-600/30 opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />
+<div className="absolute inset-0 rounded-2xl  opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />  
       {/* Card */}
       <div className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 backdrop-blur shadow-2xl">
         <div className="mb-8">
