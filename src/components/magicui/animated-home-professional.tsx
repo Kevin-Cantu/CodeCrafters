@@ -4,6 +4,7 @@ import { VideoText } from "@/components/magicui/video-text";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { HeroProjectsBackground } from "@/components/common/HeroProjectsBackground";
+import Image from "next/image";
 
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
 
@@ -39,15 +40,18 @@ export function AnimatedHomeProfessional() {
           animate="show"
         >
           {/* Company Logo/Brand */}
-          <motion.div className="relative group py-11" variants={fadeInUp(0)}>
-            <VideoText
-              src="/assets/video.mp4"
-              fontSize={16}
-              className="h-[200px] sm:h-[240px] md:h-[160px] transition-all duration-700 "
-            >
-              CodeCrafters
-            </VideoText>
-          </motion.div>
+          <motion.div
+      className="relative group sm:-mt-12 sm:-mb-12  mb-12"
+      variants={fadeInUp(0)}
+    >
+      <Image
+        src="/logo/ccdark.svg"
+        alt="CodeCrafters logo"
+        width={100}
+        height={100}
+        className="h-[200px] sm:h-[240px] md:h-[360px] w-auto transition-all duration-700 "
+      />
+    </motion.div>
 
           {/* Main Headline */}
           <div className="space-y-3 max-w-5xl mx-auto ">
