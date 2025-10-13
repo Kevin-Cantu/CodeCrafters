@@ -56,7 +56,7 @@ export function WhatsAppFloatingButton({
   const desktopLabel = tooltip ?? "¿Hablamos por WhatsApp?";
 
   return (
-    <div className={clsx("fixed z-50", posClass)}>
+    <div className={clsx("fixed z-10", posClass)}>
       <a
         href={href}
         target="_blank"

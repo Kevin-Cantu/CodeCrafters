@@ -29,7 +29,7 @@ export function ContactSectionClient() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-4 right-0 z-40 w-full flex justify-end px-4 sm:px-6 lg:px-8 pointer-events-none"
+            className="absolute top-4 right-0 z-40 w-full flex justify-end px-4 sm:px-6 lg:px-8 pointer-events-none "
           >
             <div className="pointer-events-auto max-w-md w-full sm:w-auto">
               <div className="relative overflow-hidden rounded-xl ring-1 ring-emerald-400/25 bg-slate-900/90 backdrop-blur shadow-2xl">

@@ -73,18 +73,14 @@ export function Header() {
           <div className="absolute inset-0 z-0 bg-white border-none md:hidden pointer-events-none" />
         )}
 
-        <nav className="relative z-10 flex items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Code2 className="h-6 w-6 text-purple-600" />
-            <span
-              className={`text-xl font-bold transition-colors duration-300 opacity-100 ${
-                isLightBg ? "text-gray-800" : "text-gray-200"
-              }`}
-            >
-              CodeCrafters
-            </span>
-          </Link>
+<nav className="relative z-10 flex items-center justify-between px-6 -my-1 sm:py-1">          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 ">
+  <img
+    src={isLightBg ? "/logo/ccwhite.svg" : "/logo/ccdark.svg"}
+    alt="CodeCrafters"
+    className="sm:h-18 h-20 w-auto transition-all duration-300"
+  />
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">

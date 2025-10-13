@@ -41,11 +41,11 @@ export function AnimatedHomeProfessional() {
         >
           {/* Company Logo/Brand */}
           <motion.div
-      className="relative group sm:-mt-12 sm:-mb-12  mb-12"
+      className="relative group -mt-16 sm:-mb-8  mb-12"
       variants={fadeInUp(0)}
     >
       <Image
-        src="/logo/ccdark.svg"
+        src="/logo/ccdarkfull.svg"
         alt="CodeCrafters logo"
         width={100}
         height={100}
@@ -74,15 +74,15 @@ export function AnimatedHomeProfessional() {
             </motion.h1>
 
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light"
-              variants={fadeInUp(0.1)}
-            >
-              Consultora especializada en desarrollo de software a medida.
-              <br />
-              <span className="text-slate-300">
-                Convertimos visiones en productos digitales exitosos.
-              </span>
-            </motion.p>
+  className="hidden sm:block text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light"
+  variants={fadeInUp(0.1)}
+>
+  Consultora especializada en desarrollo de software a medida.
+  <br />
+  <span className="text-slate-300">
+    Convertimos visiones en productos digitales exitosos.
+  </span>
+</motion.p>
           </div>
 
           {/* Call-to-Action Buttons */}

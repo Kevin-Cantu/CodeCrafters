@@ -29,14 +29,13 @@ export function WhatWeDoCarousel() {
   ));
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100  relative overflow-hidden">
+    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-gray-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10 " />
+      <div className="absolute inset-0 bg-grid-gray-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
 
       {/* Header Section */}
       <div className="container-custom relative">
         <div className="text-center max-w-4xl mx-auto pt-6">
-
 
           <motion.h2
             className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6"
@@ -66,7 +65,7 @@ export function WhatWeDoCarousel() {
 
       {/* Carousel */}
       <motion.div
-        className="relative pl-3 pr-3"
+        className="relative pl-3 pr-3 min-h-[50dvh] md:min-h-[70dvh]" // <--- Aquí ajustamos alto dinámico
         variants={fadeInUp(0.15)}
         initial="hidden"
         whileInView="show"
@@ -90,8 +89,11 @@ const DummyContent = ({
   features?: string[];
 }) => {
   return (
-    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900 dark:to-neutral-800 p-5 md:p-14 rounded-3xl -mt-3 -mb-6 sm:mb-0 sm:mt-0 sm:border border-gray-100 dark:border-neutral-700 sm:shadow-xl backdrop-blur-sm">
-      <div className="mb-4">
+    <div className="bg-gradient-to-br from-white to-gray-50 dark:from-neutral-900
+     dark:to-neutral-800 p-5 md:p-14 rounded-3xl -mt-3 -mb-6 sm:mb-0 sm:mt-0 sm:border
+      border-gray-100 dark:border-neutral-700
+     sm:shadow-xl backdrop-blur-sm">
+      <div className="mb-4"> 
         <h2 className="hidden sm:block text-3xl md:text-5xl font-bold tracking-tight mb-4">
           <span className="bg-gradient-to-r from-primary-600 via-purple-600 to-primary-500 bg-clip-text text-transparent ">
             {heading}

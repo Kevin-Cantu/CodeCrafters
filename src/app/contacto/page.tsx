@@ -15,7 +15,7 @@ export default function ContactoPage() {
       <ContactHero />
 
       {/* Segundo: Formulario y detalles de contacto con un fondo sutil dedicado */}
-      <section className="relative isolate overflow-hidden">
+      <section className="relative isolate overflow-hidden scroll-mt-20">
         <SectionBackdrop />
         <div className="container-custom py-16 relative z-10">
           <ContactSectionClient />

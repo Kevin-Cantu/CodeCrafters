@@ -97,7 +97,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
   return (
     <motion.div
       id="contacto-form"
-      className="relative group"
+      className="relative group scroll-mt-36 "
       initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: easeOutCubic }}
