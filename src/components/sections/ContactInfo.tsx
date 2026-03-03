@@ -2,137 +2,217 @@
 
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Github, Linkedin, Instagram, Facebook } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Instagram,
+  Facebook,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  ArrowUpRight,
+} from "lucide-react";
+import { motion } from "framer-motion";
+
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 const contactInfo = [
   {
-    icon: (
-      <svg
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-        />
-      </svg>
-    ),
+    icon: Mail,
     title: "Email",
     content: siteConfig.links.email,
     link: `mailto:${siteConfig.links.email}`,
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
-    icon: (
-      <svg
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-        />
-      </svg>
-    ),
+    icon: Phone,
     title: "Teléfono",
     content: siteConfig.links.phone,
     link: `tel:${siteConfig.links.phone}`,
+    gradient: "from-purple-500 to-pink-500",
   },
   {
-    icon: (
-      <svg
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-        />
-      </svg>
-    ),
+    icon: MapPin,
     title: "Ubicación",
     content: "Nuevo León, México",
     link: "#",
+    gradient: "from-emerald-500 to-teal-500",
+  },
+];
+
+const socialLinks = [
+  {
+    name: "Instagram",
+    href: siteConfig.links.instagram,
+    icon: Instagram,
+    gradient: "from-pink-500 to-rose-500",
+    hoverColor: "hover:text-pink-400",
+  },
+  {
+    name: "Facebook",
+    href: siteConfig.links.facebook,
+    icon: Facebook,
+    gradient: "from-blue-500 to-blue-600",
+    hoverColor: "hover:text-blue-400",
   },
 ];
 
 export function ContactInfo() {
   return (
-    <div className="relative group max-w-lg mx-auto">
-      {/* Fondo de la card */}
-<div className="absolute inset-0 rounded-2xl  opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />  
+    <motion.div
+      className="relative group max-w-lg mx-auto"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2, ease: easeOutExpo }}
+    >
+      {/* Animated border gradient */}
+      <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-50 group-hover:opacity-80 transition-opacity duration-700 blur-sm" />
+
+      {/* Inner glow */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
       {/* Card */}
-      <div className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 backdrop-blur shadow-2xl">
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-2">
+      <div className="relative rounded-3xl border border-slate-800/50 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8 backdrop-blur-xl shadow-2xl overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div
+            className="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        {/* Header */}
+        <div className="relative mb-8">
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <Mail className="w-3.5 h-3.5 text-blue-400" />
+            <span className="text-xs font-medium text-blue-300">
+              Contacto directo
+            </span>
+          </motion.div>
+
+          <h2 className="text-2xl font-bold text-white mb-2">
             Información de Contacto
           </h2>
-          <p className="text-slate-300">
+          <p className="text-slate-400">
             Estamos aquí para ayudarte. Escríbenos por cualquiera de estos
-            medios o utiliza el formulario para enviarnos un mensaje.
+            medios o utiliza el formulario.
           </p>
         </div>
 
-        <div className="space-y-6">
+        {/* Contact items */}
+        <div className="relative space-y-4">
           {contactInfo.map((item, index) => (
-            <div key={index} className="flex items-start gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 text-white border border-blue-500/30">
-                {item.icon}
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-white">{item.title}</h3>
-                {item.link !== "#" ? (
-                  <a
-                    href={item.link}
-                    className="mt-1 inline-block text-sm text-slate-300 hover:text-white transition-colors"
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 + index * 0.1 }}
+              className="group/item"
+            >
+              {item.link !== "#" ? (
+                <a
+                  href={item.link}
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30 hover:border-slate-600/50 hover:bg-slate-800/50 transition-all duration-300"
+                >
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
                   >
-                    {item.content}
-                  </a>
-                ) : (
-                  <p className="mt-1 text-sm text-slate-300">{item.content}</p>
-                )}
-              </div>
-            </div>
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-sm font-medium text-slate-400">
+                      {item.title}
+                    </h3>
+                    <p className="text-white font-medium">{item.content}</p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover/item:text-white group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-all duration-300" />
+                </a>
+              ) : (
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
+                  >
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-400">
+                      {item.title}
+                    </h3>
+                    <p className="text-white font-medium">{item.content}</p>
+                  </div>
+                </div>
+              )}
+            </motion.div>
           ))}
         </div>
 
-        {/* Redes sociales */}
-        <div className="mt-8 pt-8 border-t border-slate-800">
-          <h3 className="text-lg font-medium text-white mb-4">Síguenos</h3>
-          <div className="flex gap-4">
-            <Link
-              href={siteConfig.links.instagram}
-              target="_blank"
-              className="text-white hover:text-pink-500 transition-colors"
-            >
-              <Instagram className="h-8 w-8" /> {/* 32px */}
-            </Link>
-            <Link
-              href={siteConfig.links.facebook}
-              target="_blank"
-              className="text-white hover:text-blue-600 transition-colors"
-            >
-              <Facebook className="h-8 w-8" /> {/* 32px */}
-            </Link>
+        {/* Social links */}
+        <div className="relative mt-8 pt-8 border-t border-slate-800/50">
+          <h3 className="text-lg font-semibold text-white mb-4">Síguenos</h3>
+          <div className="flex gap-3">
+            {socialLinks.map((social, index) => (
+              <motion.div
+                key={social.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 + index * 0.1 }}
+              >
+                <Link
+                  href={social.href}
+                  target="_blank"
+                  className={`group/social flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/30 border border-slate-700/30 text-white ${social.hoverColor} hover:border-slate-600/50 hover:bg-slate-800/50 transition-all duration-300`}
+                >
+                  <social.icon className="h-5 w-5" />
+                  <span className="text-sm font-medium">{social.name}</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover/social:opacity-100 transition-opacity" />
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
+
+        {/* Response time badge */}
+        <motion.div
+          className="relative mt-8 p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-2 h-2 rounded-full bg-white"
+              />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-white">Respuesta rápida</p>
+              <p className="text-xs text-emerald-300">
+                Normalmente respondemos en menos de 24 horas
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

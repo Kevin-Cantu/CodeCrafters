@@ -47,9 +47,10 @@ export function Header() {
 
   // Estilos del contenedor del navbar
   // Ancho: expandir a full-width SOLO en mobile cuando no hay scroll y el menú está abierto; en md+ mantener el ancho original
-  const headerContainerWidth = !scrolled && mobileMenuOpen
-    ? "w-full mx-0 md:max-w-4xl md:w-full md:mx-4"
-    : "max-w-4xl w-full mx-4";
+  const headerContainerWidth =
+    !scrolled && mobileMenuOpen
+      ? "w-full mx-0 md:max-w-4xl md:w-full md:mx-4"
+      : "max-w-4xl w-full mx-4";
 
   // Fondo del header: transparente cuando no hay scroll ni menú; blanco en el resto
   const headerContainerBase = isLightBg
@@ -73,15 +74,16 @@ export function Header() {
           <div className="absolute inset-0 z-0 bg-white border-none md:hidden pointer-events-none" />
         )}
 
-<nav className="relative z-10 flex items-center justify-between px-6 -my-1 sm:py-1">          {/* Logo */}
+        <nav className="relative z-10 flex items-center justify-between px-6 -my-1 sm:py-1">
+          {" "}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 ">
-  <img
-    src={isLightBg ? "/logo/ccwhite.svg" : "/logo/ccdark.svg"}
-    alt="CodeCrafters"
-    className="sm:h-18 h-20 w-auto transition-all duration-300"
-  />
-</Link>
-
+            <img
+              src={isLightBg ? "/logo/ccwhite.svg" : "/logo/ccdark.svg"}
+              alt="CodeCrafters"
+              className="sm:h-18 h-20 w-auto transition-all duration-300"
+            />
+          </Link>
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
             {navigation.map((item) => (
@@ -120,13 +122,14 @@ export function Header() {
               </div>
             </Link>
           </div>
-
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               type="button"
               className={`transition-colors duration-300 ${
-                isLightBg ? "text-gray-700 hover:text-purple-600" : "text-white hover:text-purple-200"
+                isLightBg
+                  ? "text-gray-700 hover:text-purple-600"
+                  : "text-white hover:text-purple-200"
               }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
@@ -166,7 +169,11 @@ export function Header() {
                 exit={{ y: -8, opacity: 0 }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${!scrolled ? "border-t-0" : ""} ${panelClass}`}>
+                <div
+                  className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${
+                    !scrolled ? "border-t-0" : ""
+                  } ${panelClass}`}
+                >
                   <div className="flex flex-col px-2 pb-3 pt-2">
                     {navigation.map((item) => {
                       const active = pathname === item.href;
@@ -174,7 +181,9 @@ export function Header() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className={`${linkBase} ${active ? linkActive : linkInactive}`}
+                          className={`${linkBase} ${
+                            active ? linkActive : linkInactive
+                          }`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{item.name}</span>

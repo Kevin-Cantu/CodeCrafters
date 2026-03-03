@@ -1,250 +1,564 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { SimpleCombobox, type ComboboxItem } from '@/components/ui/combobox'
-import { User, Mail, Building2, Layers, MessageSquareText } from 'lucide-react'
-import emailjs from '@emailjs/browser'
-import { z } from 'zod'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { SimpleCombobox, type ComboboxItem } from "@/components/ui/combobox";
+import {
+  User,
+  Mail,
+  Building2,
+  Layers,
+  MessageSquareText,
+  Send,
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { z } from "zod";
 
-const easeOutCubic = [0.16, 1, 0.3, 1] as const
+const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 const projectTypes: ComboboxItem[] = [
-  { value: 'web', label: 'Desarrollo Web' },
-  { value: 'mobile', label: 'Aplicación Móvil' },
-  { value: 'api', label: 'API/Backend' },
-  { value: 'consulting', label: 'Consultoría' },
-  { value: 'other', label: 'Otro' },
-]
+  { value: "web", label: "Desarrollo Web" },
+  { value: "mobile", label: "Aplicación Móvil" },
+  { value: "api", label: "API/Backend" },
+  { value: "consulting", label: "Consultoría" },
+  { value: "other", label: "Otro" },
+];
 
 type ContactFormProps = {
-  onSuccess?: (message: string) => void
-}
+  onSuccess?: (message: string) => void;
+};
 
 type FormData = {
-  name: string
-  email: string
-  company: string
-  projectType: string
-  message: string
-}
+  name: string;
+  email: string;
+  company: string;
+  projectType: string;
+  message: string;
+};
 
 const schema = z.object({
-  name: z.string().min(1, 'el Nombre es obligatorio'),
-  email: z.string().email('Ingresa un correo electrónico válido'),
-  company: z.string().min(1, 'Empresa es obligatoria'),
-  projectType: z.string().min(1, 'Tipo de Proyecto es obligatorio'),
-  message: z.string().optional().or(z.literal('')),
-})
+  name: z.string().min(1, "el Nombre es obligatorio"),
+  email: z.string().email("Ingresa un correo electrónico válido"),
+  company: z.string().min(1, "Empresa es obligatoria"),
+  projectType: z.string().min(1, "Tipo de Proyecto es obligatorio"),
+  message: z.string().optional().or(z.literal("")),
+});
+
+// Animated input field component
+const AnimatedInput = ({
+  icon: Icon,
+  label,
+  name,
+  type = "text",
+  placeholder,
+  value,
+  onChange,
+  error,
+  required,
+  children,
+}: {
+  icon: React.ElementType;
+  label: string;
+  name: string;
+  type?: string;
+  placeholder: string;
+  value: string;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  error?: string;
+  required?: boolean;
+  children?: React.ReactNode;
+}) => {
+  const [focused, setFocused] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: easeOutExpo }}
+    >
+      <label
+        htmlFor={name}
+        className="block text-sm font-medium text-slate-300 mb-2"
+      >
+        {label} {required && <span className="text-pink-400">*</span>}
+      </label>
+      <div className="relative group">
+        {/* Glow effect on focus */}
+        <motion.div
+          className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300 ${focused ? "opacity-100" : ""
+            }`}
+          style={{ zIndex: 0 }}
+        />
+
+        <div className="relative flex items-center">
+          <motion.div
+            className={`absolute left-4 z-10 transition-colors duration-300 ${focused ? "text-blue-400" : "text-slate-400"
+              }`}
+            animate={{ scale: focused ? 1.1 : 1 }}
+          >
+            <Icon className="h-5 w-5" />
+          </motion.div>
+
+          {children || (
+            <input
+              type={type}
+              id={name}
+              name={name}
+              required={required}
+              value={value}
+              onChange={onChange}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              placeholder={placeholder}
+              className={`relative w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-900/80 border text-white placeholder:text-slate-500 focus:outline-none transition-all duration-300 ${error
+                ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                : focused
+                  ? "border-transparent"
+                  : "border-slate-700/50 hover:border-slate-600"
+                }`}
+            />
+          )}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mt-2 text-xs text-red-400 flex items-center gap-1"
+          >
+            <span className="w-1 h-1 rounded-full bg-red-400" />
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 export function ContactForm({ onSuccess }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    company: '',
-    projectType: '',
-    message: '',
-  })
+    name: "",
+    email: "",
+    company: "",
+    projectType: "",
+    message: "",
+  });
 
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
-  const [submitting, setSubmitting] = useState(false)
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
+    {}
+  );
+  const [submitting, setSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    // Limpia error del campo modificado
-    setErrors(prev => ({ ...prev, [name]: undefined }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: undefined }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // Validación con Zod
-    const parsed = schema.safeParse(formData)
+    const parsed = schema.safeParse(formData);
     if (!parsed.success) {
-      const fieldErrors: Partial<Record<keyof FormData, string>> = {}
+      const fieldErrors: Partial<Record<keyof FormData, string>> = {};
       parsed.error.issues.forEach((issue) => {
-        const path = issue.path[0] as keyof FormData
-        fieldErrors[path] = issue.message
-      })
-      setErrors(fieldErrors)
-      return
+        const path = issue.path[0] as keyof FormData;
+        fieldErrors[path] = issue.message;
+      });
+      setErrors(fieldErrors);
+      return;
     }
 
     try {
-      setSubmitting(true)
+      setSubmitting(true);
       const templateParams = {
         name: formData.name,
         email: formData.email,
         company: formData.company,
         projectType: formData.projectType,
         message: formData.message,
-      }
+      };
 
-      const response = await emailjs.send('service_f74t434', 'template_22qckiz', templateParams, 'qZWpiXXlxCTGAjjyx')
-      console.log('Correo enviado!', response.status, response.text)
-      onSuccess?.('Mensaje enviado con éxito.')
-      setFormData({ name:'', email:'', company:'', projectType:'', message:'' })
-      setErrors({})
+      const response = await emailjs.send(
+        "service_f74t434",
+        "template_22qckiz",
+        templateParams,
+        "qZWpiXXlxCTGAjjyx"
+      );
+      console.log("Correo enviado!", response.status, response.text);
+      onSuccess?.("Mensaje enviado con éxito.");
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        projectType: "",
+        message: "",
+      });
+      setErrors({});
     } catch (err) {
-      console.error('Error:', err)
-      // Podemos agregar manejo de error general si deseas
+      console.error("Error:", err);
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <motion.div
       id="contacto-form"
-      className="relative group scroll-mt-36 "
-      initial={false}
+      className="relative group scroll-mt-36"
+      initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, ease: easeOutCubic }}
+      transition={{ duration: 0.8, ease: easeOutExpo }}
     >
-      {/* Glow border */}
-      <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-cyan-600/30 opacity-60 blur transition-opacity duration-500 group-hover:opacity-90" />
+      {/* Animated border gradient */}
+      <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-50 group-hover:opacity-80 transition-opacity duration-700 blur-sm" />
 
-      {/* Container con fondo sutil (diseño base intacto) */}
-      <div className="relative bg-slate-950/50 rounded-2xl border border-slate-800 shadow-2xl backdrop-blur p-6 sm:p-8">
-        <motion.h2 className="text-2xl font-semibold text-white mb-2" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: easeOutCubic }}>
-          Cuéntanos sobre tu proyecto
-        </motion.h2>
-        <motion.p className="text-slate-300 text-sm mb-6" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.05, ease: easeOutCubic }}>
-          Respuesta en menos de 24h. Tu información está segura con nosotros.
-        </motion.p>
-        
-        <motion.form noValidate onSubmit={handleSubmit} className="space-y-6" initial={false} animate="show" variants={{ show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } } }}>
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
-                Nombre <span className="text-red-400">*</span>
-              </label>
-              <div className="relative group/input">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400/80" />
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Juan Pérez"
-                  className={`w-full pl-10 pr-3 py-2.5 rounded-lg bg-slate-950/60 border text-white placeholder:text-slate-500 focus:outline-none transition shadow-sm ${errors.name ? 'border-red-500 focus:ring-2 focus:ring-red-500/60 focus:border-red-500' : 'border-slate-700/80 focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60'}`}
-                />
-              </div>
-              {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
-            </div>
-            
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                Email <span className="text-red-400">*</span>
-              </label>
-              <div className="relative group/input">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400/80" />
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="tu@email.com"
-                  className={`w-full pl-10 pr-3 py-2.5 rounded-lg bg-slate-950/60 border text-white placeholder:text-slate-500 focus:outline-none transition shadow-sm ${errors.email ? 'border-red-500 focus:ring-2 focus:ring-red-500/60 focus:border-red-500' : 'border-slate-700/80 focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60'}`}
-                />
-              </div>
-              {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
-            </div>
+      {/* Inner glow */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+      {/* Container */}
+      <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 rounded-3xl border border-slate-800/50 shadow-2xl backdrop-blur-xl p-8 sm:p-10 overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div
+            className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+
+        {/* Header */}
+        <div className="relative mb-8">
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+
+            <span className="text-xs font-medium text-blue-300">
+              Respueta en 24h
+            </span>
           </motion.div>
 
-          <motion.div variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
-            <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
-              Empresa <span className="text-red-400">*</span>
+          <motion.h2
+            className="text-2xl sm:text-3xl font-bold text-white mb-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Cuéntanos sobre tu proyecto
+          </motion.h2>
+
+          <motion.p
+            className="text-slate-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Tu información está segura con nosotros. Te responderemos pronto.
+          </motion.p>
+        </div>
+
+        {/* Form */}
+        <motion.form
+          noValidate
+          onSubmit={handleSubmit}
+          className="relative space-y-6"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+            },
+          }}
+        >
+          {/* Name and Email row */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 },
+            }}
+          >
+            <AnimatedInput
+              icon={User}
+              label="Nombre"
+              name="name"
+              placeholder="Juan Pérez"
+              value={formData.name}
+              onChange={handleChange}
+              error={errors.name}
+              required
+            />
+
+            <AnimatedInput
+              icon={Mail}
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="tu@email.com"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              required
+            />
+          </motion.div>
+
+          {/* Company */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 },
+            }}
+          >
+            <AnimatedInput
+              icon={Building2}
+              label="Empresa"
+              name="company"
+              placeholder="Nombre de tu empresa"
+              value={formData.company}
+              onChange={handleChange}
+              error={errors.company}
+              required
+            />
+          </motion.div>
+
+          {/* Project Type */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 },
+            }}
+          >
+            <label
+              htmlFor="projectType"
+              className="block text-sm font-medium text-slate-300 mb-2"
+            >
+              Tipo de Proyecto <span className="text-pink-400">*</span>
             </label>
-            <div className="relative group/input">
-              <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400/80" />
-              <input
-                type="text"
-                id="company"
-                name="company"
-                required
-                value={formData.company}
-                onChange={handleChange}
-                placeholder="Nombre de tu empresa"
-                className={`w-full pl-10 pr-3 py-2.5 rounded-lg bg-slate-950/60 border text-white placeholder:text-slate-500 focus:outline-none transition shadow-sm ${errors.company ? 'border-red-500 focus:ring-2 focus:ring-red-500/60 focus:border-red-500' : 'border-slate-700/80 focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60'}`}
+            <div className="relative group">
+              <motion.div
+                className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300 ${focusedField === "projectType" ? "opacity-100" : ""
+                  }`}
+                style={{ zIndex: 0 }}
               />
-            </div>
-            {errors.company && <p className="mt-1 text-xs text-red-400">{errors.company}</p>}
-          </motion.div>
 
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
-            <div>
-              <label htmlFor="projectType" className="block text-sm font-medium text-slate-300 mb-2">
-                Tipo de Proyecto <span className="text-red-400">*</span>
-              </label>
-              <div className="relative">
-                <Layers className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400/80 z-10" />
-                <SimpleCombobox
-                  id="projectType"
-                  items={projectTypes}
-                  value={formData.projectType}
-                  onChange={(val) => { setFormData((prev) => ({ ...prev, projectType: val })); setErrors((prev) => ({ ...prev, projectType: undefined })) }}
-                  placeholder="Seleccionar..."
-                  searchPlaceholder="Buscar tipo..."
-                  emptyMessage="Sin resultados"
-                  contentClassName="bg-black text-white border-slate-800"
-                  commandClassName="bg-transparent"
-                  buttonClassName={`pl-10 pr-3 py-2.5 bg-slate-950/60 border ${errors.projectType ? 'border-red-500' : 'border-slate-700/80'} hover:bg-slate-900/50`}
-                />
+              <div className="relative flex items-center">
+                <motion.div
+                  className={`absolute left-4 z-10 transition-colors duration-300 ${focusedField === "projectType"
+                    ? "text-blue-400"
+                    : "text-slate-400"
+                    }`}
+                >
+                  <Layers className="h-5 w-5" />
+                </motion.div>
+
+                <div
+                  className="relative w-full"
+                  onFocus={() => setFocusedField("projectType")}
+                  onBlur={() => setFocusedField(null)}
+                >
+                  <SimpleCombobox
+                    id="projectType"
+                    items={projectTypes}
+                    value={formData.projectType}
+                    onChange={(val) => {
+                      setFormData((prev) => ({ ...prev, projectType: val }));
+                      setErrors((prev) => ({
+                        ...prev,
+                        projectType: undefined,
+                      }));
+                    }}
+                    placeholder="Seleccionar..."
+                    searchPlaceholder="Buscar tipo..."
+                    emptyMessage="Sin resultados"
+                    contentClassName="bg-slate-900 text-white border-slate-700"
+                    commandClassName="bg-transparent"
+                    buttonClassName={`pl-12 pr-4 py-3.5 bg-slate-900/80 border ${errors.projectType
+                      ? "border-red-500"
+                      : "border-slate-700/50 hover:border-slate-600"
+                      } rounded-xl w-full text-left`}
+                  />
+                </div>
               </div>
-              {errors.projectType && <p className="mt-1 text-xs text-red-400">{errors.projectType}</p>}
-              <p className="mt-2 text-xs text-slate-400">Esto nos ayuda a asignar el equipo adecuado.</p>
             </div>
+
+            <AnimatePresence>
+              {errors.projectType && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mt-2 text-xs text-red-400 flex items-center gap-1"
+                >
+                  <span className="w-1 h-1 rounded-full bg-red-400" />
+                  {errors.projectType}
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <p className="mt-2 text-xs text-slate-500">
+              Esto nos ayuda a asignar el equipo adecuado.
+            </p>
           </motion.div>
 
-          <motion.div variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
-            <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+          {/* Message */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 },
+            }}
+          >
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-slate-300 mb-2"
+            >
               Mensaje
             </label>
-            <div className="relative">
-              <MessageSquareText className="absolute left-3 top-3 h-4 w-4 text-slate-400/80" />
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Cuéntanos más detalles sobre tu proyecto, objetivos y plazos..."
-                className={`w-full pl-10 pr-3 py-2.5 rounded-lg bg-slate-950/60 border text-white placeholder:text-slate-500 focus:outline-none transition shadow-sm ${errors.message ? 'border-red-500 focus:ring-2 focus:ring-red-500/60 focus:border-red-500' : 'border-slate-700/80 focus:ring-2 focus:ring-blue-500/60 focus:border-blue-500/60'}`}
+            <div className="relative group">
+              <motion.div
+                className={`absolute -inset-[1px] rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300 ${focusedField === "message" ? "opacity-100" : ""
+                  }`}
+                style={{ zIndex: 0 }}
               />
+
+              <div className="relative">
+                <motion.div
+                  className={`absolute left-4 top-4 z-10 transition-colors duration-300 ${focusedField === "message"
+                    ? "text-blue-400"
+                    : "text-slate-400"
+                    }`}
+                >
+                  <MessageSquareText className="h-5 w-5" />
+                </motion.div>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  onFocus={() => setFocusedField("message")}
+                  onBlur={() => setFocusedField(null)}
+                  placeholder="Cuéntanos más detalles sobre tu proyecto, objetivos y plazos..."
+                  className={`relative w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-900/80 border text-white placeholder:text-slate-500 focus:outline-none transition-all duration-300 resize-none ${errors.message
+                    ? "border-red-500 focus:ring-2 focus:ring-red-500/30"
+                    : focusedField === "message"
+                      ? "border-transparent"
+                      : "border-slate-700/50 hover:border-slate-600"
+                    }`}
+                />
+              </div>
             </div>
-            {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
-            <p className="mt-2 text-xs text-slate-400">Cuanto más contexto nos des, mejor podremos ayudarte.</p>
+
+            <p className="mt-2 text-xs text-slate-500">
+              Cuanto más contexto nos des, mejor podremos ayudarte.
+            </p>
           </motion.div>
 
-          <motion.button
-            type="submit"
-            disabled={submitting}
-            className="w-full group relative inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 border border-blue-500/30 shadow-lg shadow-blue-600/10 hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-            whileHover={{ scale: submitting ? 1 : 1.01 }}
-            whileTap={{ scale: submitting ? 1 : 0.99 }}
-            variants={{ show: { opacity: 1, y: 0 } }}
-            initial={false}
+          {/* Submit Button */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0 },
+            }}
+            className="pt-2"
           >
-            {submitting && (
-              <svg className="absolute left-6 h-5 w-5 animate-spin text-white/90" viewBox="0 0 24 24" fill="none">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-              </svg>
-            )}
-            <span className="relative z-10">{submitting ? 'Enviando…' : 'Enviar Mensaje'}</span>
-          </motion.button>
+            <motion.button
+              type="submit"
+              disabled={submitting}
+              className="group relative w-full overflow-hidden rounded-2xl px-8 py-4 text-base font-semibold text-white transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+              whileHover={{ scale: submitting ? 1 : 1.01 }}
+              whileTap={{ scale: submitting ? 1 : 0.99 }}
+            >
+              {/* Button background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300 group-hover:opacity-90" />
 
-          <motion.p className="text-xs text-slate-400 text-center" variants={{ show: { opacity: 1, y: 0 } }} initial={false}>
+              {/* Shimmer effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.6 }}
+              />
+
+              {/* Glow effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 blur-xl" />
+              </div>
+
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                {submitting ? (
+                  <>
+                    <svg
+                      className="h-5 w-5 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                    Enviando…
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Enviar Mensaje
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </span>
+            </motion.button>
+          </motion.div>
+
+          {/* Privacy note */}
+          <motion.p
+            className="text-xs text-slate-500 text-center flex items-center justify-center gap-2"
+            variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+          >
+            <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
             Al enviar, aceptas nuestra política de privacidad.
           </motion.p>
         </motion.form>
       </div>
     </motion.div>
-  )
+  );
 }

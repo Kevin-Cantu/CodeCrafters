@@ -45,6 +45,11 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const programmaticUntilRef = useRef<number>(0);
   const lastClickedIndexRef = useRef<number | null>(null);
 
+  // Drag scroll state
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
   // Helpers to work with item nodes and positions
   const getItemNodes = () =>
     Array.from(
@@ -191,15 +196,52 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     });
   };
 
+  // Drag scroll handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollerRef.current) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.pageX - scrollerRef.current.offsetLeft;
+    scrollLeftRef.current = scrollerRef.current.scrollLeft;
+    scrollerRef.current.style.cursor = "grabbing";
+    scrollerRef.current.style.userSelect = "none";
+  };
+
+  const handleMouseUp = () => {
+    if (!scrollerRef.current) return;
+    isDraggingRef.current = false;
+    scrollerRef.current.style.cursor = "grab";
+    scrollerRef.current.style.userSelect = "";
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current || !scrollerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollerRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5; // Scroll speed multiplier
+    scrollerRef.current.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleMouseLeave = () => {
+    if (isDraggingRef.current && scrollerRef.current) {
+      isDraggingRef.current = false;
+      scrollerRef.current.style.cursor = "grab";
+      scrollerRef.current.style.userSelect = "";
+    }
+  };
+
   return (
     <CarouselContext.Provider
       value={{ onCardClose: (i) => scrollToIndex(i), currentIndex }}
     >
       <div className="relative w-full">
         <div
-          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 [scrollbar-width:none] touch-auto"
+          className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 [scrollbar-width:none] cursor-grab carousel-drag-scroll"
           ref={scrollerRef}
           onScroll={updateCurrentIndex}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
           {/* Right gradient hint (no pointer events) */}
           <div className="pointer-events-none absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l" />
@@ -323,7 +365,7 @@ export const Card = ({
   };
 
   return (
-    <>    
+    <>
       <AnimatePresence>
         {open && (
           <div className="fixed inset-0 z-50 h-[100dvh] overflow-hidden">
@@ -475,6 +517,7 @@ export const BlurImage = ({
       loading="lazy"
       decoding="async"
       alt={alt || "Background image"}
+      draggable="false"
       {...rest}
     />
   );
