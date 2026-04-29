@@ -89,12 +89,12 @@ export function AnimatedHomeProfessional() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            <Link
+            {/* <Link
               href="/proyectos"
               className="group relative inline-flex items-center justify-center px-6 py-4 xs:px-10 xs:py-5 text-base xs:text-lg font-bold text-white bg-white/5 border border-white/20 hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-md hover:scale-105 w-full sm:w-auto"
             >
               Ver Casos de Éxito
-            </Link>
+            </Link> */}
           </motion.div>
         </motion.div>
 
