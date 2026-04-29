@@ -60,7 +60,7 @@ const AnimatedInput = ({
   required,
   children,
 }: {
-  icon: React.ElementType;
+  icon: any;
   label: string;
   name: string;
   type?: string;

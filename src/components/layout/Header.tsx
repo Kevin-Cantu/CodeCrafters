@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Code2, Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -27,113 +28,70 @@ export function Header() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Estado visual: blanco si hay scroll o menú abierto; transparente si no hay scroll y menú cerrado
-  const isLightBg = scrolled || mobileMenuOpen;
-
-  // Overlay transparente y por debajo del header (solo click-catcher)
-  const overlayClass = "bg-transparent";
-
-  // Panel del menú móvil: siempre claro
-  const panelClass = "border-none bg-white";
-
-  const linkBase =
-    "group relative mx-2 my-1 inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-base font-semibold transition-colors";
-
-  const linkActive =
-    "bg-gradient-to-r from-violet-50 to-purple-50 text-purple-700 border border-purple-200";
-
-  const linkInactive =
-    "text-slate-700 hover:bg-slate-50 border border-transparent";
-
-  // Estilos del contenedor del navbar
-  // Ancho: expandir a full-width SOLO en mobile cuando no hay scroll y el menú está abierto; en md+ mantener el ancho original
-  const headerContainerWidth =
-    !scrolled && mobileMenuOpen
-      ? "w-full mx-0 md:max-w-4xl md:w-full md:mx-4"
-      : "max-w-4xl w-full mx-4";
-
-  // Fondo del header: transparente cuando no hay scroll ni menú; blanco en el resto
-  const headerContainerBase = isLightBg
-    ? "bg-white rounded-t-sm shadow-lg rounded-b-sm"
-    : "bg-transparent rounded-xl";
-
-  // Sin overrides adicionales
-  const headerContainerOverride = "";
-
   return (
     <header
-      className={`fixed left-0 right-0 z-[40] flex justify-center pointer-events-none transition-all duration-300 ease-in-out top-0 ${
-        scrolled ? "translate-y-6" : "translate-y-0"
-      }`}
+      className={`fixed left-0 right-0 z-[40] flex justify-center pointer-events-none transition-all duration-500 ease-in-out ${scrolled ? "top-0 md:top-4" : "top-0"
+        }`}
     >
       <div
-        className={`pointer-events-auto ${headerContainerWidth} transition-all duration-300 ease-in-out relative isolate ${headerContainerBase} ${headerContainerOverride}`}
+        className={`pointer-events-auto transition-all duration-500 ease-in-out relative isolate w-full ${scrolled
+          ? "md:max-w-5xl md:mx-4 md:rounded-full bg-black/60 backdrop-blur-xl border-b md:border border-white/10 shadow-2xl shadow-purple-900/10"
+          : "bg-transparent border-transparent md:max-w-[100vw] rounded-none py-2"
+          }`}
       >
-        {/* Underlay: pinta el fondo del navbar solo en mobile cuando no hay scroll y el menú está abierto. No bloquea clics */}
-        {!scrolled && mobileMenuOpen && (
-          <div className="absolute inset-0 z-0 bg-white border-none md:hidden pointer-events-none" />
-        )}
-
-        <nav className="relative z-10 flex items-center justify-between px-6 -my-1 sm:py-1">
-          {" "}
+        <nav className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 ">
-            <img
-              src={isLightBg ? "/logo/ccwhite.svg" : "/logo/ccdark.svg"}
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo/ccdark.svg"
               alt="CodeCrafters"
-              className="sm:h-18 h-20 w-auto transition-all duration-300"
+              width={160}
+              height={72}
+              className="sm:h-[4.5rem] h-16 w-auto transition-transform hover:scale-105 duration-300 "
+              priority
             />
           </Link>
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-12">
+          <div className="hidden md:flex items-center gap-10">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-lg font-semibold transition-colors duration-300 ${
-                  pathname === item.href
-                    ? isLightBg
-                      ? "text-purple-600"
-                      : "text-gray-200"
-                    : isLightBg
-                    ? "text-gray-700 hover:text-purple-700"
-                    : "text-gray-200 hover:text-purple-400"
-                }`}
+                className={`text-sm tracking-widest uppercase font-bold transition-colors duration-300 ${pathname === item.href
+                  ? "text-white"
+                  : "text-white/50 hover:text-white"
+                  }`}
               >
                 {item.name}
               </Link>
             ))}
 
-            {/* CTA Button - full clickable area */}
+            {/* CTA Button */}
             <Link
               href="/contacto"
-              className="group relative w-auto cursor-pointer overflow-hidden rounded-full border bg-background px-6 py-2 text-center font-semibold"
+              className="group relative cursor-pointer overflow-hidden rounded-full border border-purple-500/50 bg-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.4)] px-6 py-2.5 text-xs tracking-widest uppercase font-black text-white hover:bg-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all duration-300"
               aria-label="Contáctanos"
             >
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary transition-all duration-300 group-hover:scale-[100.8]"></div>
-                <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
-                  Contáctanos
+                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-8">
+                  CONSTRUYAMOS
                 </span>
               </div>
-              <div className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 text-primary-foreground opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
-                <span>Contáctanos</span>
-                <ArrowRight />
+              <div className="absolute inset-0 flex h-full w-full items-center justify-center gap-2 translate-y-8 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <span>INICIAR</span>
+                <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
           </div>
+
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               type="button"
-              className={`transition-colors duration-300 ${
-                isLightBg
-                  ? "text-gray-700 hover:text-purple-600"
-                  : "text-white hover:text-purple-200"
-              }`}
+              className="text-white/80 hover:text-purple-400 transition-colors duration-300"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               {mobileMenuOpen ? (
@@ -149,60 +107,42 @@ export function Header() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <>
-              {/* Backdrop (click-catcher) por debajo del header y transparente */}
-              <motion.div
-                key="backdrop"
-                className={`fixed inset-0 z-10 md:hidden ${overlayClass}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setMobileMenuOpen(false)}
-              />
-
-              {/* Dropdown: limitado al contenedor (PC sin cambios) y top-full para no tapar el header */}
+              {/* Dropdown */}
               <motion.div
                 key="sheet"
                 id="mobile-menu"
-                className="absolute inset-x-0 top-full z-[100] md:hidden"
+                className="absolute inset-x-0 top-full z-[100] md:hidden mt-"
                 initial={{ y: -8, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -8, opacity: 0 }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
               >
-                <div
-                  className={`w-full rounded-b-xl rounded-t-none overflow-hidden border shadow-lg ${
-                    !scrolled ? "border-t-0" : ""
-                  } ${panelClass}`}
-                >
-                  <div className="flex flex-col px-2 pb-3 pt-2">
+                <div className="w-full bg-black/95 backdrop-blur-xl border-y border-purple-500/20 shadow-2xl">
+                  <div className="flex flex-col px-4 py-6 gap-2">
                     {navigation.map((item) => {
                       const active = pathname === item.href;
                       return (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className={`${linkBase} ${
-                            active ? linkActive : linkInactive
-                          }`}
+                          className={`flex items-center justify-between px-4 py-4 rounded-xl text-sm tracking-widest uppercase font-bold transition-all ${active ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-white/60 hover:bg-white/5 hover:text-white"
+                            }`}
+
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{item.name}</span>
-                          <ArrowRight
-                            className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${
-                              active ? "text-purple-600" : "text-slate-400"
-                            }`}
-                          />
+                          <ArrowRight className={`h-4 w-4 ${active ? "opacity-100 text-purple-400" : "opacity-0"}`} />
                         </Link>
                       );
                     })}
 
-                    <div className="mt-2 px-2 pb-4">
+                    <div className="mt-4 px-2 pb-4">
                       <Link
                         href="/contacto"
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold shadow-md active:scale-[0.99] transition-colors bg-gradient-to-r from-blue-600 to-purple-600 text-white border border-blue-500/20`}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-4 text-sm font-black tracking-widest uppercase border border-purple-500/50 bg-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.3)] text-white hover:bg-purple-500 transition-all"
                       >
-                        Contáctanos
+                        Iniciar Ahora
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </div>

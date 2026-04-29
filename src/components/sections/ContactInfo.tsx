@@ -61,7 +61,7 @@ const socialLinks = [
 export function ContactInfo() {
   return (
     <motion.div
-      className="relative group max-w-lg mx-auto"
+      className="relative group w-full"
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2, ease: easeOutExpo }}
@@ -73,7 +73,7 @@ export function ContactInfo() {
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
       {/* Card */}
-      <div className="relative rounded-3xl border border-slate-800/50 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8 backdrop-blur-xl shadow-2xl overflow-hidden">
+      <div className="relative rounded-3xl border border-slate-800/50 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-10 backdrop-blur-xl shadow-2xl overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
@@ -130,33 +130,33 @@ export function ContactInfo() {
               {item.link !== "#" ? (
                 <a
                   href={item.link}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30 hover:border-slate-600/50 hover:bg-slate-800/50 transition-all duration-300"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30 hover:border-slate-600/50 hover:bg-slate-800/50 transition-all duration-300 overflow-hidden"
                 >
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
                   >
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-medium text-slate-400">
                       {item.title}
                     </h3>
-                    <p className="text-white font-medium">{item.content}</p>
+                    <p className="text-white font-medium truncate">{item.content}</p>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover/item:text-white group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-all duration-300" />
+                  <ArrowUpRight className="w-5 h-5 shrink-0 text-slate-500 group-hover/item:text-white group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-all duration-300" />
                 </a>
               ) : (
-                <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-800/30 border border-slate-700/30 overflow-hidden">
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient} text-white shadow-lg`}
                   >
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-medium text-slate-400">
                       {item.title}
                     </h3>
-                    <p className="text-white font-medium">{item.content}</p>
+                    <p className="text-white font-medium truncate">{item.content}</p>
                   </div>
                 </div>
               )}
@@ -167,7 +167,7 @@ export function ContactInfo() {
         {/* Social links */}
         <div className="relative mt-8 pt-8 border-t border-slate-800/50">
           <h3 className="text-lg font-semibold text-white mb-4">Síguenos</h3>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             {socialLinks.map((social, index) => (
               <motion.div
                 key={social.name}
@@ -180,9 +180,9 @@ export function ContactInfo() {
                   target="_blank"
                   className={`group/social flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/30 border border-slate-700/30 text-white ${social.hoverColor} hover:border-slate-600/50 hover:bg-slate-800/50 transition-all duration-300`}
                 >
-                  <social.icon className="h-5 w-5" />
-                  <span className="text-sm font-medium">{social.name}</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover/social:opacity-100 transition-opacity" />
+                  <social.icon className="h-5 w-5 shrink-0" />
+                  <span className="text-sm font-medium whitespace-nowrap">{social.name}</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-0 group-hover/social:opacity-100 transition-opacity shrink-0" />
                 </Link>
               </motion.div>
             ))}

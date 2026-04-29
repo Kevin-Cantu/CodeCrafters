@@ -5,7 +5,6 @@ import {
   Facebook,
   Instagram,
   Twitter,
-  Linkedin,
   Mail,
   MapPin,
   Phone,
@@ -39,16 +38,7 @@ const navigation = {
       href: "https://www.facebook.com/profile.php?id=61580625784898",
       icon: Facebook,
     },
-    {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/",
-      icon: Linkedin,
-    },
-    {
-      name: "Twitter",
-      href: "https://twitter.com/",
-      icon: Twitter,
-    },
+
   ],
 };
 

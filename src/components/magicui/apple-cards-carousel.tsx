@@ -390,7 +390,7 @@ export const Card = ({
                 ref={containerRef}
                 layoutId={layout ? `card-${card.title}` : undefined}
                 className={cn(
-                  "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-white dark:bg-neutral-900 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
+                  "w-full h-full md:h-auto md:max-w-5xl rounded-none md:rounded-3xl bg-black border border-white/10 shadow-2xl flex flex-col overflow-y-auto overflow-x-hidden",
                   shortScreen ? "md:max-h-[98vh]" : "md:max-h-[96vh]"
                 )}
               >
@@ -466,7 +466,7 @@ export const Card = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={() => setOpen(true)}
-        className="relative z-10 flex h-64 w-full md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
+        className="relative z-10 flex h-64 w-full md:h-96 md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-black border border-white/10 hover:border-white/20 transition-colors"
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
         <div className="relative z-40 p-6 md:p-8">
