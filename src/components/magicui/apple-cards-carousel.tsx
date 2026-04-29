@@ -15,7 +15,7 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 const easeOutCubic = [0.16, 1, 0.3, 1] as const;
 
 interface CarouselProps {
-  items: JSX.Element[];
+  items: React.JSX.Element[];
   initialScroll?: number;
 }
 
