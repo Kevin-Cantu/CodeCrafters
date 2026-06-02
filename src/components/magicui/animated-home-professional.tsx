@@ -33,7 +33,7 @@ export function AnimatedHomeProfessional() {
       {/* 3D Background */}
 
       {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-12 pointer-events-none">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-12 pointer-events-none">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -44,7 +44,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[20vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
+              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
             >
               CREANDO
             </motion.h1>
@@ -53,7 +53,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[20vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase text-transparent"
+              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase text-transparent"
               style={{ WebkitTextStroke: "1.2px rgba(255,255,255,0.8)" }}
             >
               FUTUROS
@@ -63,7 +63,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-8">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[20vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
+              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
             >
               DIGITALES.
             </motion.h1>
@@ -78,7 +78,7 @@ export function AnimatedHomeProfessional() {
           {/* Action Buttons */}
           <motion.div
             variants={fadeInVariants}
-            className="flex  sm:flex-row gap-4 xs:gap-6 pointer-events-auto w-full sm:w-auto px-6 xs:px-0"
+            className="flex flex-col sm:flex-row gap-4 pointer-events-auto w-full sm:w-auto px-4 sm:px-0"
           >
             <Link
               href="/contacto"
@@ -89,16 +89,14 @@ export function AnimatedHomeProfessional() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            {/* <Link
+            <Link
               href="/proyectos"
               className="group relative inline-flex items-center justify-center px-6 py-4 xs:px-10 xs:py-5 text-base xs:text-lg font-bold text-white bg-white/5 border border-white/20 hover:bg-white/10 rounded-full transition-all duration-300 backdrop-blur-md hover:scale-105 w-full sm:w-auto"
             >
               Ver Casos de Éxito
-            </Link> */}
+            </Link>
           </motion.div>
         </motion.div>
-
-
       </div>
     </section>
   );

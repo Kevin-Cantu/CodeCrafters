@@ -34,83 +34,54 @@ export const getTechItems = (techNames: string[]) => {
   }));
 };
 
-// Dummy content: replace with real projects easily following the same pattern
+// Real Projects data
 export const projects: ProjectItem[] = [
   {
     id: 1,
-    title: "Plataforma E‑commerce Headless",
+    title: "Smart Glass - Privacidad Inteligente",
     description:
-      "E‑commerce moderno con arquitectura headless, checkout optimizado y CMS para gestión de catálogo.",
-    platforms: ["Web"],
-    technologies: ["Next.js", "TypeScript", "Tailwind", "Node.js", "PostgreSQL"],
-    image:
-      "/assets/web-landing-dark.svg",
+      "Landing page de alta gama para sistemas de vidrio inteligente. Enfocada en la exclusividad y el control de privacidad automatizado para espacios arquitectónicos modernos con un diseño minimalista y cinematográfico.",
+    platforms: ["Web", "IoT"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    image: "/assets/smart.png",
     actions: {
-      demo: "https://demo.tu-ecommerce.com",
-      github: "https://github.com/tu-org/tu-ecommerce",
+      demo: "https://smart-glass.mx",
     },
   },
   {
     id: 2,
-    title: "App Móvil de Reservas",
+    title: "Soy Pilao - Gastronomía Venezolana",
     description:
-      "Aplicación móvil para reservas con notificaciones push, modo offline y pagos integrados.",
-    platforms: ["Mobile", "Android"],
-    technologies: ["Android", "Kotlin", "Jetpack Compose", "Firebase"],
-    image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600&auto=format&fit=crop",
+      "Experiencia digital inmersiva para una marca de comida venezolana artesanal. El proyecto destaca la tradición y calidad de los ingredientes mediante una interfaz visualmente rica y un menú interactivo elegante.",
+    platforms: ["Web"],
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "Next.js"],
+    image: "/assets/pilao.png",
     actions: {
-      demo: "https://play.google.com/",
+      demo: "https://pilao.netlify.app",
     },
   },
   {
     id: 3,
-    title: "Dashboard de Analítica",
+    title: "Grupo Crateck - Ingeniería y Maquinaria",
     description:
-      "Panel interactivo para métricas en tiempo real con gráficos avanzados y autenticación SSO.",
-    platforms: ["Web", "Desktop"],
-    technologies: ["React", "TypeScript", "Tailwind", "Node.js", "MongoDB"],
-    image:
-      "https://images.unsplash.com/photo-1551281044-8b89a09c3d59?q=80&w=1600&auto=format&fit=crop",
+      "Plataforma corporativa robusta para servicios de ingeniería y renta de maquinaria pesada. Implementa un catálogo de soluciones con flujo de conversión directo hacia asesoría personalizada vía WhatsApp.",
+    platforms: ["Web", "B2B"],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "WhatsApp API"],
+    image: "/assets/cratek.png",
     actions: {
-      github: "https://github.com/tu-org/analytics-dashboard",
+      demo: "https://vghdfrhdhdfhd.netlify.app",
     },
   },
   {
     id: 4,
-    title: "API de Contenidos",
+    title: "Chocolate Drop - Brigadeiros Gourmet",
     description:
-      "Microservicio GraphQL para contenidos con caching y rate limiting.",
-    platforms: ["API"],
-    technologies: ["Node.js", "GraphQL", "PostgreSQL", "Redis", "Docker"],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop",
+      "Landing page y e-commerce de brigadeiros gourmet en Monterrey. Permite personalizar cajas de dulces y ofrece servicios de catering con un diseño moderno y artesanal.",
+    platforms: ["Web", "E-commerce"],
+    technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
+    image: "/assets/chocolatedrop.png",
     actions: {
-      docs: "https://docs.api.com",
-      github: "https://github.com/tu-org/content-api",
-    },
-  },
-  {
-    id: 5,
-    title: "App iOS de Productividad",
-    description:
-      "Aplicación nativa iOS con sincronización en iCloud y widgets.",
-    platforms: ["iOS", "Mobile"],
-    technologies: ["Swift", "Xcode", "Firebase"],
-    image:
-      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1600&auto=format&fit=crop",
-  },
-  {
-    id: 6,
-    title: "Landing Multi‑idioma SaaS",
-    description:
-      "Landing page performante con SEO técnico, i18n y formularios integrados.",
-    platforms: ["Web"],
-    technologies: ["Next.js", "TypeScript", "Tailwind"],
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
-    actions: {
-      demo: "https://saas-demo.dev",
+      demo: "https://chocolatedrop.store",
     },
   },
 ];

@@ -228,7 +228,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
       {/* Container */}
-      <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 rounded-3xl border border-slate-800/50 shadow-2xl backdrop-blur-xl p-8 sm:p-10 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 rounded-3xl border border-slate-800/50 shadow-2xl backdrop-blur-xl p-5 xs:p-8 sm:p-10 overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div

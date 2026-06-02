@@ -43,7 +43,7 @@ export const SponsorsSection = () => {
         <div className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
           <motion.h2
             id="sponsors-title"
-            className="text-5xl xs:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]"
+            className="text-[12vw] xs:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeOutExpo }}
@@ -75,8 +75,8 @@ export const SponsorsSection = () => {
            viewport={{ once: true }}
         >
           {/* Gradient masks on sides for black background */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
           <div role="region" aria-label="Patrocinadores y clientes">
             <Marquee

@@ -63,7 +63,7 @@ export function CTASection() {
 
           {/* Title */}
           <motion.h2
-            className="text-6xl xs:text-7xl sm:text-8xl md:text-[8rem] lg:text-[10rem] font-black tracking-tighter uppercase leading-[0.85] mb-8"
+            className="text-[12vw] xs:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8"
             variants={fadeInUp(0.1)}
           >
             CONSTRUYE <br />
@@ -94,7 +94,7 @@ export function CTASection() {
           </motion.div>
 
           <motion.div
-            className="mt-12 md:mt-16 flex  xs:flex-row items-center justify-center gap-4 md:gap-8 text-white/30 text-[10px] xs:text-xs md:text-sm font-bold tracking-widest uppercase"
+            className="mt-12 md:mt-16 flex flex-col xs:flex-row items-center justify-center gap-3 xs:gap-4 md:gap-8 text-white/30 text-[10px] xs:text-xs md:text-sm font-bold tracking-widest uppercase"
             variants={fadeInUp(0.4)}
           >
             <span>Respuesta en 24h</span>

@@ -68,7 +68,7 @@ export function WhatWeDoCarousel() {
 
 
           <motion.h2
-            className="text-5xl xs:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-none"
+            className="text-[12vw] xs:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]"
             variants={fadeInUp(0.05)}
             initial="hidden"
             whileInView="show"
@@ -81,7 +81,7 @@ export function WhatWeDoCarousel() {
           </motion.h2>
 
           <motion.p
-            className="mt-6 md:mt-8 text-lg md:text-2xl text-white/50 leading-relaxed max-w-2xl mx-auto font-light"
+            className="mt-6 md:mt-8 text-lg md:text-2xl text-white/50 leading-relaxed max-w-2xl mx-auto font-light px-4"
             variants={fadeInUp(0.1)}
             initial="hidden"
             whileInView="show"

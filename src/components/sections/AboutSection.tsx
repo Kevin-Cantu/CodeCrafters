@@ -117,7 +117,7 @@ export function AboutSection() {
             </motion.div>
 
             <motion.h2
-              className="text-5xl xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]"
+              className="text-[12vw] xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: easeOutExpo }}
@@ -155,7 +155,9 @@ export function AboutSection() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.id}
-              className={`py-10 md:py-16 px-6 ${i !== stats.length - 1 ? 'border-r border-white/10' : ''} group flex flex-col justify-between`}
+              className={`py-10 md:py-16 px-4 xs:px-6 ${
+                i % 2 === 0 ? 'border-r border-white/10' : ''
+              } md:border-r md:last:border-r-0 border-white/10 group flex flex-col justify-between`}
               variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             >
               <div className="flex items-center justify-between opacity-50 group-hover:opacity-100 transition-opacity mb-8">
@@ -179,7 +181,7 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-5xl xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase">
+            <h3 className="text-[12vw] xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
               CAPACIDADES <br />
               <span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(168,85,247,0.8)" }}>
                 TECH.

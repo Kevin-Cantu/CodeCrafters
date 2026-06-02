@@ -249,7 +249,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           {/* Show ~2.25 cards on mobile, full cards on md+ */}
           <div
             ref={listRef}
-            className="flex w-full flex-row justify-start 2xl:justify-center gap-0 md:gap-8 pl-0 md:pl-8 pr-0 md:pr-8"
+            className="flex w-full flex-row justify-start 2xl:justify-center gap-0 md:gap-8 pl-4 sm:pl-6 md:pl-8 pr-4 sm:pr-6 md:pr-8"
           >
             {items.map((item, index) => (
               <motion.div
@@ -264,7 +264,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                   },
                 }}
                 key={"card" + index}
-                className="rovocard-item flex-none basis-[calc(100%/2.25)] sm:basis-[calc(100%/2.25)] md:basis-auto px-2 md:px-0 first:pl-0 last:pr-0"
+                className="rovocard-item flex-none basis-[82%] sm:basis-[55%] md:basis-auto px-3 md:px-0"
               >
                 {item}
               </motion.div>
