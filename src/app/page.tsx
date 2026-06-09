@@ -15,7 +15,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section (Carrusel existente) */}
-      <section className="">
+      <section id="experiencia" className="">
         <WhatWeDoCarousel />
       </section>
 
