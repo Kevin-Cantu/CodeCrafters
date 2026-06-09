@@ -1,14 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { HeroProjectsBackground } from "@/components/common/HeroProjectsBackground";
 
-const fadeInUp = (delay = 0) => ({
+const fadeInUp = (delay = 0): Variants => ({
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] } },
 });
 
-const textRevealVariants = {
+const textRevealVariants: Variants = {
   hidden: { opacity: 0, y: 80, rotateX: -20 },
   show: {
     opacity: 1,
