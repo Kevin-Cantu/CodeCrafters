@@ -63,8 +63,9 @@ export function ContactInfo() {
     <motion.div
       className="relative group w-full"
       initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2, ease: easeOutExpo }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.7, delay: 0.1, ease: easeOutExpo }}
     >
       {/* Animated border gradient */}
       <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-50 group-hover:opacity-80 transition-opacity duration-700 blur-sm" />

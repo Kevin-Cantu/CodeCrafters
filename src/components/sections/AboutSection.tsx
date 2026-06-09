@@ -94,7 +94,7 @@ const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 export function AboutSection() {
   return (
-    <section className="relative py-16 md:py-32 bg-black overflow-hidden">
+    <section id="nosotros" className="relative py-16 md:py-32 bg-black overflow-hidden">
       {/* Structural Minimal Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none" />
 
@@ -155,9 +155,11 @@ export function AboutSection() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.id}
-              className={`py-10 md:py-16 px-4 xs:px-6 ${
+              className={`py-10 md:py-16 px-4 xs:px-6 group flex flex-col justify-between ${
                 i % 2 === 0 ? 'border-r border-white/10' : ''
-              } md:border-r md:last:border-r-0 border-white/10 group flex flex-col justify-between`}
+              } ${
+                i < 2 ? 'border-b border-white/10 md:border-b-0' : ''
+              } md:border-r md:last:border-r-0 border-white/10`}
               variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             >
               <div className="flex items-center justify-between opacity-50 group-hover:opacity-100 transition-opacity mb-8">
@@ -173,7 +175,7 @@ export function AboutSection() {
         </motion.div>
 
         {/* Services / Solutions Sections */}
-        <div className="mt-20 md:mt-40">
+        <div id="capacidades" className="mt-20 md:mt-40">
           <motion.div
             className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8"
             initial={{ opacity: 0, y: 20 }}
@@ -181,9 +183,9 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-[12vw] xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              CAPACIDADES <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(168,85,247,0.8)" }}>
+            <h3 className="text-[12vw] xs:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9] flex flex-col w-full">
+              <span>CAPACIDADES</span>
+              <span className="text-transparent text-right self-end md:self-start md:text-left" style={{ WebkitTextStroke: "2px rgba(168,85,247,0.8)" }}>
                 TECH.
               </span>
             </h3>
@@ -193,7 +195,7 @@ export function AboutSection() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3 md:gap-y-12 justify-items-end md:justify-items-start"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
@@ -205,25 +207,33 @@ export function AboutSection() {
             {services.map(({ title, description, Icon }) => (
               <motion.div
                 key={title}
-                className="group relative border-b border-purple-500/20 pb-8"
+                className="group relative w-full flex flex-row items-center justify-between gap-3 border border-white/10 bg-white/[0.02] rounded-2xl p-3 md:block md:border-t-0 md:border-x-0 md:border-b md:border-purple-500/20 md:bg-transparent md:rounded-none md:p-0 md:pb-8 md:gap-0"
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   show: { opacity: 1, y: 0 },
                 }}
               >
-                <div className="flex justify-between items-center mb-6">
-                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-white group-hover:text-black transition-colors duration-500">
-                    <Icon className="w-5 h-5 text-inherit transition-colors" />
+                <div className="flex-1 md:block">
+                  <div className="hidden md:flex justify-between items-center mb-6">
+                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-white group-hover:text-black transition-colors duration-500">
+                      <Icon className="w-5 h-5 text-inherit transition-colors" />
+                    </div>
+                    <div className="text-xs font-bold uppercase tracking-widest text-white/30 group-hover:text-white transition-colors duration-500">Service</div>
                   </div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-white/30 group-hover:text-white transition-colors duration-500">Service</div>
+
+                  <h4 className="text-lg md:text-2xl font-bold text-white mb-1 md:mb-4 uppercase tracking-wide group-hover:ml-4 transition-all duration-500">
+                    {title}
+                  </h4>
+                  <p className="text-sm md:text-base text-white/50 font-light leading-relaxed group-hover:text-white/80 transition-colors duration-500">
+                    {description}
+                  </p>
                 </div>
 
-                <h4 className="text-2xl font-bold text-white mb-4 uppercase tracking-wide group-hover:ml-4 transition-all duration-500">
-                  {title}
-                </h4>
-                <p className="text-base text-white/50 font-light leading-relaxed group-hover:text-white/80 transition-colors duration-500">
-                  {description}
-                </p>
+                <div className="flex-shrink-0 md:hidden">
+                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 text-purple-400">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </motion.div>

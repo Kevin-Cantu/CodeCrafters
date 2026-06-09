@@ -442,7 +442,7 @@ export const Card = ({
                   <div
                     ref={contentInnerRef}
                     className={cn(
-                      "mx-auto w-full px-4 py-5",
+                      "mx-auto w-full px-4 py-3 md:py-5",
                       shortScreen
                         ? "md:max-w-6xl md:px-4 md:py-4"
                         : "md:max-w-6xl md:px-6 md:py-6"

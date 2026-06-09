@@ -87,54 +87,52 @@ export function ContactHero() {
 
           {/* CTA Button */}
           <motion.div className="mt-10" variants={fadeInUp(0.15)}>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <a
-                href="#contacto-form"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("contacto-form");
-                  if (!el) return;
-                  const offset = 160;
-                  const y =
-                    el.getBoundingClientRect().top +
-                    window.pageYOffset -
-                    offset;
-                  window.scrollTo({ top: y, behavior: "smooth" });
-                }}
-                className="group relative inline-flex items-center justify-center rounded-2xl px-8 py-4 text-base font-semibold text-white overflow-hidden"
-              >
-                {/* Button background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300" />
+            <a
+              href="#contacto-form"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("contacto-form");
+                if (!el) return;
+                const offset = 160;
+                const y =
+                  el.getBoundingClientRect().top +
+                  window.pageYOffset -
+                  offset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+              }}
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold text-white overflow-hidden"
+            >
+              {/* Button background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600" />
 
-                {/* Shimmer effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
-                />
+              {/* Shimmer */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.55 }}
+              />
 
-                {/* Glow effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 blur-xl" />
-                </div>
+              {/* Glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 blur-xl" />
+              </div>
 
-                <span className="relative z-10 flex items-center gap-2">
-                  Cotiza tu proyecto
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.span>
-                </span>
-              </a>
-            </motion.div>
+              <span className="relative z-10 flex items-center gap-2">
+                Cotiza tu proyecto
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.span>
+              </span>
+            </a>
           </motion.div>
 
-          {/* Trust indicators */}
+          {/* Trust indicators — visible tags */}
           <motion.div
-            className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+            className="mt-10 flex flex-wrap items-center justify-center gap-3"
             variants={fadeInUp(0.2)}
           >
             {[
@@ -145,17 +143,9 @@ export function ContactHero() {
               <motion.div
                 key={index}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                }}
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
               >
-                <motion.div
-
-                  transition={{ duration: 8, ease: "linear" }}
-                >
-                  <item.icon className="w-4 h-4 text-emerald-400" />
-                </motion.div>
+                <item.icon className="w-4 h-4 text-emerald-400" />
                 <span className="text-sm font-medium text-white/80">
                   {item.text}
                 </span>

@@ -74,27 +74,27 @@ export const SponsorsSection = () => {
            transition={{ duration: 1, delay: 0.4 }}
            viewport={{ once: true }}
         >
-          {/* Gradient masks on sides for black background */}
-          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          {/* Gradient masks — wider on mobile too */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
           <div role="region" aria-label="Patrocinadores y clientes">
             <Marquee
-              className="gap-8 md:gap-16 py-4 md:py-8"
+              className="gap-4 md:gap-16 py-4 md:py-8"
               fade
-              innerClassName="gap-8 md:gap-16"
+              innerClassName="gap-4 md:gap-16"
             >
               {sponsors.map(({ logo, alt }, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-center p-4 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-500 min-w-[120px] md:min-w-[200px]"
+                  className="flex items-center justify-center p-5 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-500 min-w-[150px] md:min-w-[200px]"
                 >
                   <Image
                     src={logo}
                     alt={alt}
-                    width={100}
-                    height={50}
-                    className="object-contain opacity-50 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] md:w-[140px] md:h-[70px]"
+                    width={110}
+                    height={55}
+                    className="object-contain opacity-100 md:opacity-50 md:grayscale md:hover:opacity-100 md:hover:grayscale-0 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] md:w-[140px] md:h-[70px]"
                   />
                 </div>
               ))}

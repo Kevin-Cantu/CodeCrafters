@@ -20,7 +20,7 @@ export default function CarouselTech({
   items,
 }: CarouselWithMultipleSlidesProps) {
   return (
-    <div className="w-full mx-auto py-4 px-2 sm:px-10 relative">
+    <div className="w-full mx-auto pt-2 pb-4 sm:px-10 relative">
       <div className="relative group overflow-x-hidden">
         <Carousel
           opts={{
@@ -32,7 +32,7 @@ export default function CarouselTech({
           <CarouselContent className="-ml-4">
             {items?.map((item, index) => (
               <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                <div className="h-full bg-black/50 shadow-[0_0_15px_rgba(168,85,247,0.1)] rounded-xl border border-purple-500/20 transition-all duration-300 flex flex-col items-center justify-center p-6 hover:border-purple-500/50 hover:bg-purple-900/20 active:scale-95 group/item cursor-grab active:cursor-grabbing">
+                <div className="h-full bg-transparent rounded-xl border border-white/10 transition-all duration-300 flex flex-col items-center justify-center p-5 hover:border-purple-500/40 hover:bg-purple-900/10 active:scale-95 group/item cursor-grab active:cursor-grabbing">
                   <div className="flex flex-col items-center justify-center gap-4">
                     <div className="transform transition-transform duration-300 group-hover/item:scale-110">
                       {item.icon}

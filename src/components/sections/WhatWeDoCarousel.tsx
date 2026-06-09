@@ -143,14 +143,8 @@ const DummyContent = ({
   features?: string[];
 }) => {
   return (
-    <div className="relative overflow-hidden bg-black p-6 md:p-12 rounded-3xl border border-white/10 shadow-2xl">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
-      </div>
-
-      <div className="relative">
+    <div className="w-full p-0">
+      <div>
         {/* Header */}
         <div className="mb-8">
           <motion.h2
@@ -215,7 +209,7 @@ const DummyContent = ({
         {/* Technology Carousel */}
         {carousel && (
           <motion.div
-            className="rounded-3xl bg-black/50 backdrop-blur-xl p-6 md:p-8 border border-white/10 mt-8"
+            className="mt-8 py-4 px-0 w-full"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}

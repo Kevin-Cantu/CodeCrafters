@@ -41,29 +41,29 @@ export function AnimatedHomeProfessional() {
           className="flex flex-col items-center justify-center text-center mt-12 md:mt-20"
         >
           {/* Radical Huge Headlines */}
-          <div className="overflow-hidden mb-2">
+          <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
+              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               CREANDO
             </motion.h1>
           </div>
 
-          <div className="overflow-hidden mb-2">
+          <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase text-transparent"
+              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase text-transparent py-1"
               style={{ WebkitTextStroke: "1.2px rgba(255,255,255,0.8)" }}
             >
               FUTUROS
             </motion.h1>
           </div>
 
-          <div className="overflow-hidden mb-8">
+          <div className="overflow-hidden mb-8 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[16vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.8] uppercase"
+              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               DIGITALES.
             </motion.h1>

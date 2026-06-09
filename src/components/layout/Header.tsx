@@ -8,7 +8,9 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const navigation = [
   { name: "Inicio", href: "/" },
-  // Proyectos eliminado para ocultar enlaces a /proyectos
+  { name: "Experiencia", href: "/#experiencia" },
+  { name: "Nosotros", href: "/#nosotros" },
+  { name: "Capacidades", href: "/#capacidades" },
 ];
 
 export function Header() {
@@ -47,7 +49,7 @@ export function Header() {
               alt="CodeCrafters"
               width={160}
               height={72}
-              className="sm:h-[4.5rem] h-16 w-auto transition-transform hover:scale-105 duration-300 "
+              className="h-14 sm:h-[4.5rem] w-auto transition-transform hover:scale-105 duration-300"
               priority
             />
           </Link>
@@ -107,11 +109,22 @@ export function Header() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <>
+              {/* Backdrop overlay */}
+              <motion.div
+                key="backdrop"
+                className="fixed inset-0 z-[-1] h-screen w-screen bg-black/60 backdrop-blur-md md:hidden pointer-events-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setMobileMenuOpen(false)}
+              />
+
               {/* Dropdown */}
               <motion.div
                 key="sheet"
                 id="mobile-menu"
-                className="absolute inset-x-0 top-full z-[100] md:hidden mt-"
+                className="absolute inset-x-0 top-full z-[100] md:hidden"
                 initial={{ y: -8, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -8, opacity: 0 }}
@@ -127,7 +140,6 @@ export function Header() {
                           href={item.href}
                           className={`flex items-center justify-between px-4 py-4 rounded-xl text-sm tracking-widest uppercase font-bold transition-all ${active ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-white/60 hover:bg-white/5 hover:text-white"
                             }`}
-
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <span>{item.name}</span>

@@ -84,24 +84,43 @@ export function CTASection() {
           <motion.div variants={fadeInUp(0.3)} className="w-full xs:w-auto px-6 xs:px-0">
             <Link
               href="/contacto"
-              className="group relative inline-flex items-center justify-center gap-4 rounded-full bg-white px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-black text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 uppercase tracking-widest overflow-hidden w-full xs:w-auto"
+              className="group relative inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-4 xs:px-10 xs:py-5 text-base xs:text-lg font-black text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 uppercase tracking-widest overflow-hidden w-full xs:w-auto"
             >
-              <span className="relative z-10 flex items-center gap-3">
+              <span className="relative z-10 flex items-center gap-2">
                 Hablar con un experto
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </span>
             </Link>
           </motion.div>
 
+          {/* Trust tags */}
           <motion.div
-            className="mt-12 md:mt-16 flex flex-col xs:flex-row items-center justify-center gap-3 xs:gap-4 md:gap-8 text-white/30 text-[10px] xs:text-xs md:text-sm font-bold tracking-widest uppercase"
+            className="mt-10 flex flex-wrap items-center justify-center gap-3"
             variants={fadeInUp(0.4)}
           >
-            <span>Respuesta en 24h</span>
-            <div className="hidden xs:block w-1 h-1 rounded-full bg-white/30" />
-            <span>Alcance Global</span>
-            <div className="hidden xs:block w-1 h-1 rounded-full bg-white/30" />
-            <span>Calidad Premium</span>
+            <motion.div
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+            >
+              <Zap className="w-4 h-4 text-emerald-400" />
+              <span className="text-sm font-medium text-white/80">Respuesta en 24h</span>
+            </motion.div>
+
+            <motion.div
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-400" />
+              <span className="text-sm font-medium text-white/80">Sin compromiso</span>
+            </motion.div>
+
+            <motion.div
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+            >
+              <Rocket className="w-4 h-4 text-emerald-400" />
+              <span className="text-sm font-medium text-white/80">Calidad Premium</span>
+            </motion.div>
           </motion.div>
         </motion.div>
       </motion.div>
