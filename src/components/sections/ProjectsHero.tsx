@@ -20,7 +20,7 @@ const textRevealVariants: Variants = {
 
 export function ProjectsHero() {
   return (
-    <section className="relative isolate pt-32 pb-14 sm:pt-40 sm:pb-20 overflow-x-clip">
+    <section className="relative isolate pt-32 pb-16 md:pt-40 md:pb-24 overflow-x-clip">
       {/* Background unificado */}
       <HeroProjectsBackground />
 

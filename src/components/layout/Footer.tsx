@@ -14,6 +14,7 @@ import {
   Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { siteConfig } from "@/config/site";
 
 const navigation = {
   main: [
@@ -121,13 +122,13 @@ export function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
-                <span className="text-sm">contacto@codecrafters.mx</span>
+                <span className="text-sm">{siteConfig.links.email}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group">
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
                   <Phone className="w-4 h-4" />
                 </div>
-                <span className="text-sm">+52 (81) 1234-5678</span>
+                <span className="text-sm">{siteConfig.links.phone}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group">
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">

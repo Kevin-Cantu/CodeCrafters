@@ -55,19 +55,25 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm tracking-widest uppercase font-bold transition-colors duration-300 ${pathname === item.href
-                  ? "text-white"
-                  : "text-white/50 hover:text-white"
-                  }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="hidden lg:flex items-center gap-10">
+            {navigation.map((item) => {
+              const isHashLink = item.href.startsWith('/#');
+              const useAnchor = isHashLink && pathname !== '/';
+              const LinkComponent = useAnchor ? 'a' : Link;
+              
+              return (
+                <LinkComponent
+                  key={item.name}
+                  href={item.href}
+                  className={`text-sm tracking-widest uppercase font-bold transition-colors duration-300 ${pathname === item.href || (pathname === '/' && item.href === '/')
+                    ? "text-white"
+                    : "text-white/50 hover:text-white"
+                    }`}
+                >
+                  {item.name}
+                </LinkComponent>
+              );
+            })}
 
             {/* CTA Button */}
             <Link
@@ -88,7 +94,7 @@ export function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               type="button"
               className="text-white/80 hover:text-purple-400 transition-colors duration-300"
@@ -112,7 +118,7 @@ export function Header() {
               {/* Backdrop overlay */}
               <motion.div
                 key="backdrop"
-                className="fixed inset-0 z-[-1] h-screen w-screen bg-black/60 backdrop-blur-md md:hidden pointer-events-auto"
+                className="fixed inset-0 z-[-1] h-screen w-screen bg-black/60 backdrop-blur-md lg:hidden pointer-events-auto"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -124,7 +130,7 @@ export function Header() {
               <motion.div
                 key="sheet"
                 id="mobile-menu"
-                className="absolute inset-x-0 top-full z-[100] md:hidden"
+                className="absolute inset-x-0 top-full z-[100] lg:hidden"
                 initial={{ y: -8, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -8, opacity: 0 }}
@@ -133,9 +139,13 @@ export function Header() {
                 <div className="w-full bg-black/95 backdrop-blur-xl border-y border-purple-500/20 shadow-2xl">
                   <div className="flex flex-col px-4 py-6 gap-2">
                     {navigation.map((item) => {
-                      const active = pathname === item.href;
+                      const active = pathname === item.href || (pathname === '/' && item.href === '/');
+                      const isHashLink = item.href.startsWith('/#');
+                      const useAnchor = isHashLink && pathname !== '/';
+                      const LinkComponent = useAnchor ? 'a' : Link;
+                      
                       return (
-                        <Link
+                        <LinkComponent
                           key={item.name}
                           href={item.href}
                           className={`flex items-center justify-between px-4 py-4 rounded-xl text-sm tracking-widest uppercase font-bold transition-all ${active ? "bg-purple-500/20 text-purple-300 border border-purple-500/30" : "text-white/60 hover:bg-white/5 hover:text-white"
@@ -144,7 +154,7 @@ export function Header() {
                         >
                           <span>{item.name}</span>
                           <ArrowRight className={`h-4 w-4 ${active ? "opacity-100 text-purple-400" : "opacity-0"}`} />
-                        </Link>
+                        </LinkComponent>
                       );
                     })}
 

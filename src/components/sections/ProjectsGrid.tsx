@@ -30,7 +30,7 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 md:auto-rows-[220px]">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:auto-rows-[220px]">
         {projects.map((project, index) => {
           // Logic for Bento spans
           const isLarge = index === 0; // Solo el primero es grande para que los otros quepan mejor
@@ -43,8 +43,8 @@ export function ProjectsGrid({ projects }: ProjectsGridProps) {
               onOpen={() => setActive(project)} 
               isSmall={!isLarge}
               className={cn(
-                isLarge ? "md:col-span-4 md:row-span-2" : "md:col-span-2 md:row-span-1",
-                index === 1 ? "md:col-span-2 md:row-span-2" : "" // Crateck o Pilao mediano
+                isLarge ? "lg:col-span-4 lg:row-span-2" : "lg:col-span-2 lg:row-span-1",
+                index === 1 ? "lg:col-span-2 lg:row-span-2" : "" // Crateck o Pilao mediano
               )}
             />
           );

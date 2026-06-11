@@ -34,7 +34,7 @@ export function CTASection() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={containerRef} className="relative overflow-hidden bg-black text-white py-20 md:py-48">
+    <section ref={containerRef} className="relative overflow-hidden bg-black text-white py-16 md:py-24">
       {/* Structural Minimal Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none" />
 

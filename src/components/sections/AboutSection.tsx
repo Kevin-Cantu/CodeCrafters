@@ -94,7 +94,7 @@ const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
 export function AboutSection() {
   return (
-    <section id="nosotros" className="relative py-16 md:py-32 bg-black overflow-hidden">
+    <section id="nosotros" className="relative py-16 md:py-24 bg-black overflow-hidden scroll-mt-32">
       {/* Structural Minimal Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none" />
 
@@ -175,7 +175,7 @@ export function AboutSection() {
         </motion.div>
 
         {/* Services / Solutions Sections */}
-        <div id="capacidades" className="mt-20 md:mt-40">
+        <div id="capacidades" className="mt-16 md:mt-24 scroll-mt-32">
           <motion.div
             className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8"
             initial={{ opacity: 0, y: 20 }}

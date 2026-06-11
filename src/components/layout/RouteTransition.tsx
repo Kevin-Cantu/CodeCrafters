@@ -19,6 +19,9 @@ export function RouteTransition({ children }: { children: React.ReactNode }) {
 
   // Forzar scroll al tope al cambiar de ruta (antes del primer paint)
   useLayoutEffect(() => {
+    // Si hay un hash en la URL, no forzamos el scroll al top para permitir que el navegador vaya a la sección
+    if (window.location.hash) return
+
     try {
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
     } catch {

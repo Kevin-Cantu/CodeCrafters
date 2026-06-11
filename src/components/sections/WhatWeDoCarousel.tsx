@@ -59,7 +59,7 @@ export function WhatWeDoCarousel() {
       </div>
 
       {/* Header Section */}
-      <div className="container-custom relative pt-8 md:pt-16">
+      <div className="container-custom relative py-16 md:py-24">
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
 

@@ -44,7 +44,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
+              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               CREANDO
             </motion.h1>
@@ -53,7 +53,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase text-transparent py-1"
+              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase text-transparent py-1"
               style={{ WebkitTextStroke: "1.2px rgba(255,255,255,0.8)" }}
             >
               FUTUROS
@@ -63,7 +63,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-8 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[14vw] xs:text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
+              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               DIGITALES.
             </motion.h1>

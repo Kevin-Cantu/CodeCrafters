@@ -32,7 +32,7 @@ const stagger = {
 
 export function ContactHero() {
   return (
-    <section className="relative isolate pt-24 pb-16 sm:pt-28 sm:pb-20 md:pt-32 md:pb-24 overflow-hidden">
+    <section className="relative isolate pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
       {/* Fondo unificado tipo Proyectos */}
       <HeroProjectsBackground />
 

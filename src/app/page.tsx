@@ -15,7 +15,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section (Carrusel existente) */}
-      <section id="experiencia" className="">
+      <section id="experiencia" className="scroll-mt-32">
         <WhatWeDoCarousel />
       </section>
 
