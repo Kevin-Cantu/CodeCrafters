@@ -44,7 +44,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
+              className="text-[15vw] sm:text-[13vw] md:text-[13vw] lg:text-[12vw] xl:text-[11vw] 2xl:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               CREANDO
             </motion.h1>
@@ -53,7 +53,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-2 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase text-transparent py-1"
+              className="text-[15vw] sm:text-[13vw] md:text-[13vw] lg:text-[12vw] xl:text-[11vw] 2xl:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase text-transparent py-1"
               style={{ WebkitTextStroke: "1.2px rgba(255,255,255,0.8)" }}
             >
               FUTUROS
@@ -63,7 +63,7 @@ export function AnimatedHomeProfessional() {
           <div className="overflow-hidden mb-8 px-4">
             <motion.h1
               variants={textRevealVariants}
-              className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] xl:text-[8vw] 2xl:text-[9rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
+              className="text-[15vw] sm:text-[13vw] md:text-[13vw] lg:text-[12vw] xl:text-[11vw] 2xl:text-[12rem] font-black tracking-tighter leading-[0.95] uppercase py-1"
             >
               DIGITALES.
             </motion.h1>
@@ -78,7 +78,7 @@ export function AnimatedHomeProfessional() {
           {/* Action Buttons */}
           <motion.div
             variants={fadeInVariants}
-            className="flex flex-col sm:flex-row gap-4 pointer-events-auto w-full sm:w-auto px-4 sm:px-0"
+            className="flex flex-row flex-wrap items-center justify-center gap-4 md:gap-6 pointer-events-auto w-full px-4"
           >
             <Link
               href="/contacto"

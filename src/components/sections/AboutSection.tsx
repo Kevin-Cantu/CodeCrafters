@@ -155,11 +155,9 @@ export function AboutSection() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.id}
-              className={`py-10 md:py-16 px-4 xs:px-6 group flex flex-col justify-between ${
-                i % 2 === 0 ? 'border-r border-white/10' : ''
-              } ${
-                i < 2 ? 'border-b border-white/10 md:border-b-0' : ''
-              } md:border-r md:last:border-r-0 border-white/10`}
+              className={`py-10 md:py-16 px-4 xs:px-6 group flex flex-col justify-between ${i % 2 === 0 ? 'border-r border-white/10' : ''
+                } ${i < 2 ? 'border-b border-white/10 md:border-b-0' : ''
+                } md:border-r md:last:border-r-0 border-white/10`}
               variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             >
               <div className="flex items-center justify-between opacity-50 group-hover:opacity-100 transition-opacity mb-8">
